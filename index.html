@@ -5,199 +5,277 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>まちのえほんやさん りさこっこ</title>
 <meta name="description" content="日々のなかにあるやさしい物語を、イラストと絵本でお届けしています。">
+<meta property="og:title" content="まちのえほんやさん りさこっこ">
+<meta property="og:description" content="日々のなかにあるやさしい物語を、イラストと絵本でお届けしています。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://risakokko.jp">
+<meta property="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <script src="posts.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --cream: #F7F3EC;
-  --cream-dark: #EDE7DC;
-  --ink: #2C2620;
-  --ink-mid: #6B6057;
-  --ink-light: #A89E94;
-  --accent: #B87333;
-  --accent-light: #EEE0CE;
-  --font-serif: 'Shippori Mincho', serif;
-  --font-sans: 'Zen Kaku Gothic New', sans-serif;
+  --white: #FFFFFF;
+  --bg: #FDFCFA;
+  --bg2: #F7F4F0;
+  --ink: #1A1714;
+  --ink-mid: #5C5650;
+  --ink-light: #A09890;
+  --line: #E8E2DA;
+  --accent: #7BAF8A;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-main: 'Zen Maru Gothic', sans-serif;
 }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--cream);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-sans);
+  font-family: var(--font-main);
   font-weight: 300;
   line-height: 1.8;
 }
 
-/* NAV */
+/* ===================== NAV ===================== */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(247,243,236,0.9);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(184,115,51,0.14);
-  height: 56px;
-  padding: 0 48px;
+  background: rgba(253,252,250,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 40px;
+  height: 60px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
+  padding-bottom: 10px;
+}
+.nav-left { display: flex; flex-direction: column; gap: 1px; }
+.nav-kicker {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--ink-light);
 }
 .nav-logo {
-  font-family: var(--font-serif);
+  font-family: var(--font-main);
   font-size: 14px;
-  letter-spacing: 0.1em;
+  font-weight: 400;
+  letter-spacing: 0.18em;
   color: var(--ink);
   text-decoration: none;
 }
-.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
 .nav-links a {
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-size: 12px;
+  letter-spacing: 0.2em;
   color: var(--ink-mid);
   text-decoration: none;
   transition: color 0.2s;
 }
-.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover { color: var(--ink); }
 
-/* HERO */
+/* ===================== HERO ===================== */
 #top {
-  min-height: 100vh;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-img-wrap {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto 0;
+  padding: 0 40px;
+}
+.hero-img-wrap img {
+  width: 100%;
+  display: block;
+}
+.hero-img-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--bg2);
+  border: 1px dashed var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ink-light);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+.hero-img-placeholder span { font-size: 11px; }
+
+/* ===================== LINKS ===================== */
+#links {
+  padding: 48px 40px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+}
+.link-item {
   display: flex;
   align-items: center;
-  padding: 80px 48px 60px;
-  max-width: 1000px;
-  margin: 0 auto;
+  gap: 8px;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s;
 }
-.hero-inner {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 80px;
-  align-items: center;
-  width: 100%;
+.link-item:hover { color: var(--ink); }
+.link-icon {
+  width: 18px;
+  height: 18px;
+  opacity: 0.6;
+  flex-shrink: 0;
 }
-.hero-kicker {
-  font-size: 10px;
+
+/* ===================== SECTION COMMON ===================== */
+.section-wrap { padding: 80px 40px; }
+.section-inner { max-width: 1000px; margin: 0 auto; }
+.section-header { margin-bottom: 56px; text-align: center; }
+.section-title-jp {
+  font-size: 13px;
   letter-spacing: 0.28em;
   color: var(--ink-light);
-  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.section-title-en {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+/* ===================== EHON ===================== */
+#ehon { background: var(--bg); }
+.ehon-list { display: flex; flex-direction: column; gap: 80px; }
+.ehon-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 420px;
+  gap: 0 40px;
+  align-items: start;
+}
+.ehon-label {
+  writing-mode: vertical-rl;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.ehon-label::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 60px;
+  background: var(--line);
+  margin-top: 8px;
+}
+.ehon-label-sub {
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--ink-light);
+  margin-top: 8px;
+}
+.ehon-img-wrap {
+  position: relative;
+}
+.ehon-img-wrap img {
+  width: 100%;
+  display: block;
+}
+.ehon-img-placeholder {
+  aspect-ratio: 1 / 1.1;
+  background: var(--bg2);
+  border: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-light);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.ehon-text {
+  padding-top: 16px;
+}
+.ehon-title {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 1.7;
   margin-bottom: 20px;
 }
-.hero-title {
-  font-family: var(--font-serif);
-  font-size: clamp(28px, 4vw, 46px);
-  font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: 0.06em;
-  margin-bottom: 28px;
-}
-.hero-desc {
+.ehon-desc {
   font-size: 14px;
   color: var(--ink-mid);
-  line-height: 2.2;
+  line-height: 2.1;
   letter-spacing: 0.07em;
+  margin-bottom: 28px;
 }
-.hero-art {
-  display: flex;
+.ehon-cart {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-}
-.hero-circle-outer {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  border: 1px solid rgba(184,115,51,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: rotateSlow 40s linear infinite;
-}
-@keyframes rotateSlow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-.hero-circle-inner {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  background: var(--accent-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: rotateSlow 40s linear infinite reverse;
-}
-.hero-circle-text {
-  font-family: var(--font-serif);
-  font-size: 14px;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  text-align: center;
-  line-height: 2.2;
-}
-
-/* SECTION COMMON */
-.section-wrap { padding: 80px 48px; }
-.section-inner { max-width: 1000px; margin: 0 auto; }
-.section-header { margin-bottom: 48px; }
-.section-kicker {
-  font-size: 10px;
-  letter-spacing: 0.28em;
+  gap: 8px;
+  font-size: 20px;
   color: var(--ink-light);
-  text-transform: uppercase;
-  margin-bottom: 8px;
+  text-decoration: none;
+  transition: color 0.2s;
 }
-.section-title {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--cream-dark);
-}
+.ehon-cart:hover { color: var(--ink); }
 
-/* BLOG */
-#blog { background: var(--cream); }
+/* ===================== BLOG ===================== */
+#blog { background: var(--bg2); }
 .post-list { display: flex; flex-direction: column; }
 .post-item {
   display: grid;
   grid-template-columns: 96px 1fr;
   gap: 32px;
-  padding: 32px 0;
-  border-bottom: 1px solid var(--cream-dark);
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
   cursor: pointer;
   transition: opacity 0.2s;
   align-items: start;
 }
+.post-item:first-child { border-top: 1px solid var(--line); }
 .post-item:hover { opacity: 0.55; }
 .post-date {
   font-size: 11px;
   letter-spacing: 0.1em;
   color: var(--ink-light);
   padding-top: 4px;
-  line-height: 1.8;
 }
-.post-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.post-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 7px; }
 .post-tag {
   font-size: 10px;
   letter-spacing: 0.1em;
   color: var(--accent);
-  background: var(--accent-light);
-  padding: 2px 9px;
+  border: 1px solid var(--accent);
+  padding: 1px 8px;
   border-radius: 99px;
+  opacity: 0.8;
 }
 .post-title {
-  font-family: var(--font-serif);
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  line-height: 1.6;
-  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.65;
+  margin-bottom: 8px;
 }
 .post-excerpt {
   font-size: 13px;
   color: var(--ink-mid);
-  line-height: 1.95;
+  line-height: 1.9;
   letter-spacing: 0.04em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -205,13 +283,13 @@ nav {
   overflow: hidden;
 }
 
-/* ARTICLE OVERLAY */
+/* ===================== ARTICLE OVERLAY ===================== */
 .overlay {
   display: none;
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(44,38,32,0.45);
+  background: rgba(26,23,20,0.5);
   backdrop-filter: blur(6px);
   padding: 56px 20px 40px;
   overflow-y: auto;
@@ -219,206 +297,327 @@ nav {
 }
 .overlay.open { display: flex; }
 .article-modal {
-  background: var(--cream);
-  max-width: 660px;
+  background: var(--bg);
+  max-width: 640px;
   width: 100%;
   border-radius: 2px;
-  padding: 60px 64px;
+  padding: 56px 60px;
   position: relative;
   animation: fadeUp 0.3s ease;
   align-self: flex-start;
 }
 @keyframes fadeUp {
-  from { transform: translateY(16px); opacity: 0; }
+  from { transform: translateY(14px); opacity: 0; }
   to   { transform: translateY(0); opacity: 1; }
 }
 .modal-close {
   position: absolute;
-  top: 20px; right: 24px;
+  top: 18px; right: 22px;
   background: none; border: none;
   font-size: 24px; cursor: pointer;
-  color: var(--ink-light);
-  line-height: 1;
-  padding: 4px;
+  color: var(--ink-light); line-height: 1; padding: 4px;
 }
 .modal-close:hover { color: var(--ink); }
-.modal-kicker {
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  color: var(--ink-light);
-  margin-bottom: 16px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
+.modal-meta {
+  font-size: 11px; letter-spacing: 0.14em;
+  color: var(--ink-light); margin-bottom: 14px;
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
 }
 .modal-title {
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  line-height: 1.55;
-  margin-bottom: 36px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--cream-dark);
+  font-size: 22px; font-weight: 500;
+  letter-spacing: 0.06em; line-height: 1.6;
+  margin-bottom: 32px; padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
 }
 .modal-img {
-  width: 100%;
-  max-height: 380px;
-  object-fit: cover;
-  border-radius: 2px;
-  margin-bottom: 32px;
+  width: 100%; max-height: 360px;
+  object-fit: cover; border-radius: 2px; margin-bottom: 28px;
 }
 .modal-body {
-  font-size: 15px;
-  line-height: 2.2;
-  letter-spacing: 0.055em;
-  white-space: pre-wrap;
-  color: var(--ink);
+  font-size: 15px; line-height: 2.2;
+  letter-spacing: 0.055em; white-space: pre-wrap; color: var(--ink);
 }
 
-/* PROFILE */
-#profile { background: var(--cream-dark); }
+/* ===================== PROFILE ===================== */
+#profile { background: var(--bg); }
 .profile-grid {
   display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 60px;
+  grid-template-columns: 300px 1fr;
+  gap: 80px;
   align-items: start;
 }
+.profile-left { text-align: center; }
+.profile-title-label {
+  font-size: 28px;
+  letter-spacing: 0.22em;
+  color: var(--ink);
+  margin-bottom: 28px;
+  display: block;
+}
 .profile-avatar {
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background: var(--accent-light);
+  overflow: hidden;
+  margin: 0 auto;
+  background: var(--bg2);
+  border: 1px dashed var(--line);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-}
-.profile-avatar-text {
-  font-family: var(--font-serif);
-  font-size: 13px;
-  color: var(--accent);
+  color: var(--ink-light);
+  font-size: 12px;
   letter-spacing: 0.08em;
-  text-align: center;
-  line-height: 2;
+}
+.profile-avatar img {
+  width: 100%; height: 100%; object-fit: cover;
 }
 .profile-name {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: 0.07em;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
   margin-bottom: 4px;
+  margin-top: 4px;
 }
-.profile-name-en {
-  font-size: 11px;
-  letter-spacing: 0.22em;
+.profile-role {
+  font-size: 12px;
+  letter-spacing: 0.14em;
   color: var(--ink-light);
   margin-bottom: 24px;
 }
 .profile-text {
   font-size: 14px;
   color: var(--ink-mid);
-  line-height: 2.1;
+  line-height: 2.2;
   letter-spacing: 0.06em;
 }
 
-/* FOOTER */
+/* ===================== FOOTER ===================== */
 footer {
-  padding: 40px 48px;
+  padding: 40px;
   text-align: center;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+.footer-notice {
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.1em;
   color: var(--ink-light);
-  border-top: 1px solid var(--cream-dark);
+  line-height: 2;
+  margin-bottom: 8px;
+}
+.footer-copy {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  color: var(--ink-light);
+  letter-spacing: 0.12em;
 }
 
-/* MOBILE */
-@media (max-width: 680px) {
-  nav { padding: 0 24px; }
-  .nav-links { gap: 20px; }
-  #top { padding: 100px 24px 60px; min-height: auto; }
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-art { order: -1; }
-  .hero-circle-outer { width: 180px; height: 180px; }
-  .hero-circle-inner { width: 140px; height: 140px; }
-  .hero-circle-text { font-size: 12px; }
+/* ===================== MOBILE ===================== */
+@media (max-width: 720px) {
+  nav { padding: 0 20px 8px; }
+  .nav-links { gap: 16px; }
   .section-wrap { padding: 60px 24px; }
-  .post-item { grid-template-columns: 72px 1fr; gap: 16px; }
-  .profile-grid { grid-template-columns: 1fr; gap: 32px; }
+  #links { padding: 36px 24px; gap: 24px; }
+  .ehon-item { grid-template-columns: 1fr; gap: 24px; }
+  .ehon-label { writing-mode: horizontal-tb; flex-direction: row; }
+  .ehon-label::after { display: none; }
+  .profile-grid { grid-template-columns: 1fr; gap: 40px; }
+  .profile-left { text-align: left; }
   .article-modal { padding: 40px 24px; }
+  .post-item { grid-template-columns: 72px 1fr; gap: 16px; }
   footer { padding: 32px 24px; }
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="#top" class="nav-logo">まちのえほんやさん りさこっこ</a>
+  <div class="nav-left">
+    <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
+    <a href="#top" class="nav-logo">まちのえほんやさん　りさこっこ</a>
+  </div>
   <ul class="nav-links">
-    <li><a href="#blog">blog</a></li>
-    <li><a href="#profile">profile</a></li>
+    <li><a href="#ehon">えほん</a></li>
+    <li><a href="#blog">ぶろぐ</a></li>
+    <li><a href="#profile">ぷろふぃーる</a></li>
   </ul>
 </nav>
 
+<!-- HERO -->
 <section id="top">
-  <div class="hero-inner">
-    <div>
-      <p class="hero-kicker">risacocco</p>
-      <h1 class="hero-title">まちのえほんやさん<br>りさこっこ</h1>
-      <p class="hero-desc">日々のなかにあるやさしい物語を、<br>イラストと絵本でお届けしています。</p>
+  <div class="hero-img-wrap">
+    <!-- ヒーロー画像: images/hero.jpg に差し替えてください -->
+    <div class="hero-img-placeholder">
+      <span>🌿</span>
+      <span>images/hero.jpg</span>
+      <span>ヒーロー画像をここに</span>
     </div>
-    <div class="hero-art">
-      <div class="hero-circle-outer">
-        <div class="hero-circle-inner">
-          <div class="hero-circle-text">絵本<br>イラスト<br>日々のこと</div>
+    <!-- 画像を使う場合はこちらに切り替え:
+    <img src="images/hero.jpg" alt="まちのえほんやさん りさこっこ">
+    -->
+  </div>
+</section>
+
+<!-- LINKS -->
+<div id="links">
+  <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="link-item">
+    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+    </svg>
+    Instagram
+  </a>
+  <a href="https://www.ac-illust.com/" target="_blank" rel="noopener" class="link-item">
+    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+    </svg>
+    イラストAC
+  </a>
+  <a href="#blog" class="link-item">
+    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+    </svg>
+    blog
+  </a>
+  <a href="https://fanbox.cc/" target="_blank" rel="noopener" class="link-item">
+    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M4 4h16v16H4z M4 9h16 M9 4v16"/>
+    </svg>
+    pixiv fanbox
+  </a>
+</div>
+
+<!-- EHON -->
+<section id="ehon" class="section-wrap">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-title-jp">えほん</p>
+      <h2 class="section-title-en">books</h2>
+    </div>
+    <div class="ehon-list" id="ehonList">
+
+      <div class="ehon-item">
+        <div class="ehon-label">
+          えほん
+          <span class="ehon-label-sub">くらしのえほん</span>
+        </div>
+        <div class="ehon-img-wrap">
+          <!-- <img src="images/book1.jpg" alt="ちぃちゃんのおいしいぷりん"> -->
+          <div class="ehon-img-placeholder">images/book1.jpg</div>
+        </div>
+        <div class="ehon-text">
+          <p class="ehon-title">『ちぃちゃんの おいしい ぷりん』</p>
+          <p class="ehon-desc">ある ゆきのひ。<br>たいくつな ちぃちゃんは、ぷりんを つくってみることに。<br><br>おさとう、ぎゅうにゅう、たまごを まぜて、うつわも じっくり えらばなくっちゃ。<br><br>さあさあ、ぷりんづくりを はじめましょう！</p>
+          <a href="#" class="ehon-cart" title="購入する">🛒</a>
         </div>
       </div>
+
+      <div class="ehon-item">
+        <div class="ehon-label">
+          えほん
+          <span class="ehon-label-sub">ことばとえほん</span>
+        </div>
+        <div class="ehon-img-wrap">
+          <!-- <img src="images/book2.jpg" alt="いのちの理由"> -->
+          <div class="ehon-img-placeholder">images/book2.jpg</div>
+        </div>
+        <div class="ehon-text">
+          <p class="ehon-title">『いのちの 理由』</p>
+          <p class="ehon-desc">生きることの理不尽さと美しさ。そのなかで夢をもつことの大切さ。「いのち」に向き合う気持ちを、ことばと絵で綴りました。<br><br>夜寝る前に心を落ち着けたいとき、だれかを大切に思う気持ちにふれたいとき——静かな時間のおともに、そっと開いていただけたら嬉しいです。</p>
+          <a href="#" class="ehon-cart" title="購入する">🛒</a>
+        </div>
+      </div>
+
+      <div class="ehon-item">
+        <div class="ehon-label">
+          えほん
+          <span class="ehon-label-sub">まちのえほん</span>
+        </div>
+        <div class="ehon-img-wrap">
+          <!-- <img src="images/book3.jpg" alt="まこがもさんのしあわせじょさんいん"> -->
+          <div class="ehon-img-placeholder">images/book3.jpg</div>
+        </div>
+        <div class="ehon-text">
+          <p class="ehon-title">『まこがもさんの しあわせ じょさんいん』</p>
+          <p class="ehon-desc">育児に悩むかるがもママが出会ったのは、まこがもさんが営む、やさしい助産院。助け合いの輪の中で、少しずつ心がほどけていきます。<br><br>大阪・八尾市にある「さち助産院」さんをモデルに描いた、ほんわかやさしい『まちのえほん』です。</p>
+          <a href="#" class="ehon-cart" title="購入する">🛒</a>
+        </div>
+      </div>
+
+      <div class="ehon-item">
+        <div class="ehon-label">
+          えほん
+          <span class="ehon-label-sub">まちのえほん</span>
+        </div>
+        <div class="ehon-img-wrap">
+          <!-- <img src="images/book4.jpg" alt="ロイさんのあごひもテーラー"> -->
+          <div class="ehon-img-placeholder">images/book4.jpg</div>
+        </div>
+        <div class="ehon-text">
+          <p class="ehon-title">『ロイさんの あごひもテーラー』</p>
+          <p class="ehon-desc">ここは、ちょっとめずらしい"あごひも"専門の仕立て屋さん。あごひもべんぎんのロイさんが、おきゃくさまのお悩みにそっとよりそいながら、ぴったりのあごひもを作ってくれます。<br><br>大阪市城東区にある実在の注文服店「ROI'S TAILOR」さんをモデルにした「まちのえほん」です。</p>
+          <a href="#" class="ehon-cart" title="購入する">🛒</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
+<!-- BLOG -->
 <section id="blog" class="section-wrap">
   <div class="section-inner">
     <div class="section-header">
-      <p class="section-kicker">blog</p>
-      <h2 class="section-title">日々のこと</h2>
+      <p class="section-title-jp">ぶろぐ</p>
+      <h2 class="section-title-en">blog</h2>
     </div>
     <div class="post-list" id="postList"></div>
   </div>
 </section>
 
+<!-- PROFILE -->
 <section id="profile" class="section-wrap">
   <div class="section-inner">
     <div class="section-header">
-      <p class="section-kicker">profile</p>
-      <h2 class="section-title">りさこっこについて</h2>
+      <p class="section-title-jp">ぷろふぃーる</p>
+      <h2 class="section-title-en">profile</h2>
     </div>
     <div class="profile-grid">
-      <div class="profile-avatar">
-        <div class="profile-avatar-text">りさこっこ</div>
+      <div class="profile-left">
+        <span class="profile-title-label">ぷろふぃーる</span>
+        <div class="profile-avatar">
+          <!-- <img src="images/avatar.jpg" alt="りさこっこ"> -->
+          アイコン画像
+        </div>
       </div>
       <div>
         <p class="profile-name">りさこっこ</p>
-        <p class="profile-name-en">risacocco</p>
+        <p class="profile-role">イラストレーター・絵本作家</p>
         <p class="profile-text">
-          まちのなかにある小さなえほんやさんのような存在でいたいと思い、活動しています。<br><br>
-          日々のなかで見つけたやさしいものを、イラストや絵本、言葉にして届けています。<br>
-          どこかにいるあなたのそばに、こっそり寄り添えますように。
+          やさしい色と線で、動物たちのやさしい暮らしや絵本のような世界を描いています。<br>
+          日々の暮らしの中で出会う小さな幸せや、子育ての中で感じた気づきや想いを、やさしいタッチで届けられたらと思っています。<br><br>
+          最近は、実際にある場所やお店をモデルにした「まちのえほん」シリーズを描いています。人と人が支え合って生きるあたたかさを、絵の中でも感じてもらえたら嬉しいです。
         </p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <p>&copy; りさこっこ. All rights reserved.</p>
+  <p class="footer-notice">
+    作品の無断転載・AI学習はおやめください。<br>
+    Do not repost or use for AI training.
+  </p>
+  <p class="footer-copy">&copy; rishjuly</p>
 </footer>
 
+<!-- ARTICLE OVERLAY -->
 <div class="overlay" id="overlay">
   <div class="article-modal">
     <button class="modal-close" id="modalClose">&times;</button>
-    <div class="modal-kicker">
+    <div class="modal-meta">
       <span id="modalDate"></span>
       <span id="modalTags"></span>
     </div>
@@ -440,7 +639,7 @@ function formatDate(str) {
 function renderPosts() {
   const list = document.getElementById('postList');
   if (!posts.length) {
-    list.innerHTML = '<p style="color:var(--ink-light);font-size:14px;padding:32px 0;letter-spacing:0.08em;">まだ投稿がありません。</p>';
+    list.innerHTML = '<p style="color:var(--ink-light);font-size:13px;padding:32px 0;letter-spacing:0.1em;">まだ投稿がありません。</p>';
     return;
   }
   list.innerHTML = posts.map((p, i) => `
@@ -468,15 +667,17 @@ function openPost(i) {
   document.body.style.overflow = 'hidden';
 }
 
-document.getElementById('modalClose').addEventListener('click', function() {
+function closePost() {
   document.getElementById('overlay').classList.remove('open');
   document.body.style.overflow = '';
-});
+}
+
+document.getElementById('modalClose').addEventListener('click', closePost);
 document.getElementById('overlay').addEventListener('click', function(e) {
-  if (e.target === this) { this.classList.remove('open'); document.body.style.overflow = ''; }
+  if (e.target === this) closePost();
 });
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { document.getElementById('overlay').classList.remove('open'); document.body.style.overflow = ''; }
+  if (e.key === 'Escape') closePost();
 });
 
 renderPosts();
