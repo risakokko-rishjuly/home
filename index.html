@@ -413,6 +413,48 @@ footer {
   letter-spacing: 0.12em;
 }
 
+/* ===================== ANIMATIONS ===================== */
+
+/* ページ読み込み時 */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+nav {
+  animation: fadeInDown 0.7s ease both;
+}
+#top .hero-img-wrap {
+  animation: fadeInUp 1s ease 0.3s both;
+}
+#links {
+  animation: fadeIn 0.8s ease 0.6s both;
+}
+
+/* スクロール時 — 初期状態は非表示 */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* 少しずつ遅らせる */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
 /* ===================== MOBILE ===================== */
 @media (max-width: 720px) {
   nav { padding: 0 20px 8px; }
@@ -491,13 +533,13 @@ footer {
 <!-- EHON -->
 <section id="ehon" class="section-wrap">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header reveal">
       <p class="section-title-jp">えほん</p>
       <h2 class="section-title-en">books</h2>
     </div>
     <div class="ehon-list" id="ehonList">
 
-      <div class="ehon-item">
+      <div class="ehon-item reveal">
         <div class="ehon-label">
           えほん
           <span class="ehon-label-sub">くらしのえほん</span>
@@ -513,7 +555,7 @@ footer {
         </div>
       </div>
 
-      <div class="ehon-item">
+      <div class="ehon-item reveal reveal-delay-1">
         <div class="ehon-label">
           えほん
           <span class="ehon-label-sub">ことばとえほん</span>
@@ -529,7 +571,7 @@ footer {
         </div>
       </div>
 
-      <div class="ehon-item">
+      <div class="ehon-item reveal reveal-delay-2">
         <div class="ehon-label">
           えほん
           <span class="ehon-label-sub">まちのえほん</span>
@@ -545,7 +587,7 @@ footer {
         </div>
       </div>
 
-      <div class="ehon-item">
+      <div class="ehon-item reveal reveal-delay-3">
         <div class="ehon-label">
           えほん
           <span class="ehon-label-sub">まちのえほん</span>
@@ -568,7 +610,7 @@ footer {
 <!-- BLOG -->
 <section id="blog" class="section-wrap">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header reveal">
       <p class="section-title-jp">ぶろぐ</p>
       <h2 class="section-title-en">blog</h2>
     </div>
@@ -579,11 +621,11 @@ footer {
 <!-- PROFILE -->
 <section id="profile" class="section-wrap">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header reveal">
       <p class="section-title-jp">ぷろふぃーる</p>
       <h2 class="section-title-en">profile</h2>
     </div>
-    <div class="profile-grid">
+    <div class="profile-grid reveal reveal-delay-1">
       <div class="profile-left">
         <span class="profile-title-label">ぷろふぃーる</span>
         <div class="profile-avatar">
@@ -681,6 +723,24 @@ document.addEventListener('keydown', function(e) {
 });
 
 renderPosts();
+
+// ブログ記事にもrevealクラスを付与
+document.querySelectorAll('.post-item').forEach((el, i) => {
+  el.classList.add('reveal');
+  if (i < 4) el.classList.add('reveal-delay-' + (i % 4 + 1));
+});
+
+// スクロールアニメーション
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
