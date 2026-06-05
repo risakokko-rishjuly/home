@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>まちのえほんやさん りさこっこ</title>
+<meta name="description" content="日々のなかにあるやさしい物語を、イラストと絵本でお届けしています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
+<script src="posts.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #F7F3EC;
+  --cream-dark: #EDE7DC;
+  --ink: #2C2620;
+  --ink-mid: #6B6057;
+  --ink-light: #A89E94;
+  --accent: #B87333;
+  --accent-light: #EEE0CE;
+  --font-serif: 'Shippori Mincho', serif;
+  --font-sans: 'Zen Kaku Gothic New', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(247,243,236,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184,115,51,0.14);
+  height: 56px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* HERO */
+#top {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 48px 60px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+}
+.hero-kicker {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  margin-bottom: 28px;
+}
+.hero-desc {
+  font-size: 14px;
+  color: var(--ink-mid);
+  line-height: 2.2;
+  letter-spacing: 0.07em;
+}
+.hero-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-circle-outer {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 1px solid rgba(184,115,51,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: rotateSlow 40s linear infinite;
+}
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.hero-circle-inner {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: rotateSlow 40s linear infinite reverse;
+}
+.hero-circle-text {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 2.2;
+}
+
+/* SECTION COMMON */
+.section-wrap { padding: 80px 48px; }
+.section-inner { max-width: 1000px; margin: 0 auto; }
+.section-header { margin-bottom: 48px; }
+.section-kicker {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+/* BLOG */
+#blog { background: var(--cream); }
+.post-list { display: flex; flex-direction: column; }
+.post-item {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 32px;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--cream-dark);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  align-items: start;
+}
+.post-item:hover { opacity: 0.55; }
+.post-date {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-light);
+  padding-top: 4px;
+  line-height: 1.8;
+}
+.post-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.post-tag {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 2px 9px;
+  border-radius: 99px;
+}
+.post-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.post-excerpt {
+  font-size: 13px;
+  color: var(--ink-mid);
+  line-height: 1.95;
+  letter-spacing: 0.04em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ARTICLE OVERLAY */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(44,38,32,0.45);
+  backdrop-filter: blur(6px);
+  padding: 56px 20px 40px;
+  overflow-y: auto;
+  justify-content: center;
+}
+.overlay.open { display: flex; }
+.article-modal {
+  background: var(--cream);
+  max-width: 660px;
+  width: 100%;
+  border-radius: 2px;
+  padding: 60px 64px;
+  position: relative;
+  animation: fadeUp 0.3s ease;
+  align-self: flex-start;
+}
+@keyframes fadeUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+.modal-close {
+  position: absolute;
+  top: 20px; right: 24px;
+  background: none; border: none;
+  font-size: 24px; cursor: pointer;
+  color: var(--ink-light);
+  line-height: 1;
+  padding: 4px;
+}
+.modal-close:hover { color: var(--ink); }
+.modal-kicker {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.modal-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--cream-dark);
+}
+.modal-img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-bottom: 32px;
+}
+.modal-body {
+  font-size: 15px;
+  line-height: 2.2;
+  letter-spacing: 0.055em;
+  white-space: pre-wrap;
+  color: var(--ink);
+}
+
+/* PROFILE */
+#profile { background: var(--cream-dark); }
+.profile-grid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.profile-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.profile-avatar-text {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-align: center;
+  line-height: 2;
+}
+.profile-name {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  margin-bottom: 4px;
+}
+.profile-name-en {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--ink-light);
+  margin-bottom: 24px;
+}
+.profile-text {
+  font-size: 14px;
+  color: var(--ink-mid);
+  line-height: 2.1;
+  letter-spacing: 0.06em;
+}
+
+/* FOOTER */
+footer {
+  padding: 40px 48px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-light);
+  border-top: 1px solid var(--cream-dark);
+}
+
+/* MOBILE */
+@media (max-width: 680px) {
+  nav { padding: 0 24px; }
+  .nav-links { gap: 20px; }
+  #top { padding: 100px 24px 60px; min-height: auto; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-art { order: -1; }
+  .hero-circle-outer { width: 180px; height: 180px; }
+  .hero-circle-inner { width: 140px; height: 140px; }
+  .hero-circle-text { font-size: 12px; }
+  .section-wrap { padding: 60px 24px; }
+  .post-item { grid-template-columns: 72px 1fr; gap: 16px; }
+  .profile-grid { grid-template-columns: 1fr; gap: 32px; }
+  .article-modal { padding: 40px 24px; }
+  footer { padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#top" class="nav-logo">まちのえほんやさん りさこっこ</a>
+  <ul class="nav-links">
+    <li><a href="#blog">blog</a></li>
+    <li><a href="#profile">profile</a></li>
+  </ul>
+</nav>
+
+<section id="top">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-kicker">risacocco</p>
+      <h1 class="hero-title">まちのえほんやさん<br>りさこっこ</h1>
+      <p class="hero-desc">日々のなかにあるやさしい物語を、<br>イラストと絵本でお届けしています。</p>
+    </div>
+    <div class="hero-art">
+      <div class="hero-circle-outer">
+        <div class="hero-circle-inner">
+          <div class="hero-circle-text">絵本<br>イラスト<br>日々のこと</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="blog" class="section-wrap">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-kicker">blog</p>
+      <h2 class="section-title">日々のこと</h2>
+    </div>
+    <div class="post-list" id="postList"></div>
+  </div>
+</section>
+
+<section id="profile" class="section-wrap">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-kicker">profile</p>
+      <h2 class="section-title">りさこっこについて</h2>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-avatar">
+        <div class="profile-avatar-text">りさこっこ</div>
+      </div>
+      <div>
+        <p class="profile-name">りさこっこ</p>
+        <p class="profile-name-en">risacocco</p>
+        <p class="profile-text">
+          まちのなかにある小さなえほんやさんのような存在でいたいと思い、活動しています。<br><br>
+          日々のなかで見つけたやさしいものを、イラストや絵本、言葉にして届けています。<br>
+          どこかにいるあなたのそばに、こっそり寄り添えますように。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; りさこっこ. All rights reserved.</p>
+</footer>
+
+<div class="overlay" id="overlay">
+  <div class="article-modal">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div class="modal-kicker">
+      <span id="modalDate"></span>
+      <span id="modalTags"></span>
+    </div>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <img class="modal-img" id="modalImg" src="" alt="" style="display:none;">
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+if (typeof posts === 'undefined') { var posts = []; }
+
+function formatDate(str) {
+  if (!str) return '';
+  const d = new Date(str);
+  return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0');
+}
+
+function renderPosts() {
+  const list = document.getElementById('postList');
+  if (!posts.length) {
+    list.innerHTML = '<p style="color:var(--ink-light);font-size:14px;padding:32px 0;letter-spacing:0.08em;">まだ投稿がありません。</p>';
+    return;
+  }
+  list.innerHTML = posts.map((p, i) => `
+    <div class="post-item" onclick="openPost(${i})">
+      <div class="post-date">${formatDate(p.date)}</div>
+      <div>
+        <div class="post-tags">${(p.tags||[]).map(t=>'<span class="post-tag">'+t+'</span>').join('')}</div>
+        <div class="post-title">${p.title}</div>
+        <div class="post-excerpt">${p.content.replace(/\n/g,' ')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openPost(i) {
+  const p = posts[i];
+  document.getElementById('modalDate').textContent = formatDate(p.date);
+  document.getElementById('modalTags').innerHTML = (p.tags||[]).map(t=>'<span class="post-tag">'+t+'</span>').join(' ');
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalBody').textContent = p.content;
+  const img = document.getElementById('modalImg');
+  if (p.thumbnail) { img.src = p.thumbnail; img.style.display = 'block'; }
+  else { img.style.display = 'none'; }
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+document.getElementById('modalClose').addEventListener('click', function() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+});
+document.getElementById('overlay').addEventListener('click', function(e) {
+  if (e.target === this) { this.classList.remove('open'); document.body.style.overflow = ''; }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { document.getElementById('overlay').classList.remove('open'); document.body.style.overflow = ''; }
+});
+
+renderPosts();
+</script>
+</body>
+</html>
