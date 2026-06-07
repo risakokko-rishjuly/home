@@ -164,6 +164,26 @@ nav {
   gap: 0 40px;
   align-items: start;
 }
+.ehon-img-wrap {
+  max-width: 60%;
+}
+.ehon-img-wrap a {
+  display: block;
+  transition: opacity 0.2s;
+}
+.ehon-img-wrap a:hover { opacity: 0.75; }
+.ehon-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.ehon-cart, .ehon-ehon {
+  font-size: 22px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  display: inline-block;
+}
+.ehon-cart:hover, .ehon-ehon:hover { opacity: 0.6; }
 .ehon-label {
   writing-mode: vertical-rl;
   font-size: 11px;
@@ -459,8 +479,8 @@ footer {
   color: var(--ink);
 }
 @keyframes loaderPop {
-  from { opacity: 0; transform: translateX(-40px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ===================== ANIMATIONS ===================== */
@@ -588,56 +608,69 @@ nav {
 
       <div class="ehon-item reveal">
         <div class="ehon-img-wrap">
-          <img src="images/book5.png" alt="ちぃちゃんのおいしいぷりん">
+          <a href="https://ehon.alphapolis.co.jp/content/detail/8344" target="_blank" rel="noopener"><img src="images/book5.png" alt="ちぃちゃんのおいしいぷりん"></a>
         </div>
         <div class="ehon-text">
           <p class="ehon-title">『ちぃちゃんの おいしい ぷりん』</p>
           <p class="ehon-desc">ある ゆきのひ。<br>たいくつな ちぃちゃんは、ぷりんを つくってみることに。<br><br>おさとう、ぎゅうにゅう、たまごを まぜて、うつわも じっくり えらばなくっちゃ。<br><br>さあさあ、ぷりんづくりを はじめましょう！</p>
-          <a href="#" class="ehon-cart" title="購入する">🛒</a>
+          <div class="ehon-links">
+            <a href="https://checkout.square.site/merchant/QKZSKCT8S8GXP/checkout/LYOBJ5P5LILYUQDO5RYVM2MM?src=sheet" target="_blank" rel="noopener" class="ehon-cart" title="ショップ">🛒</a>
+            <a href="https://ehon.alphapolis.co.jp/content/detail/8344" target="_blank" rel="noopener" class="ehon-ehon" title="絵本ひろば">📖</a>
+          </div>
         </div>
       </div>
 
       <div class="ehon-item reveal reveal-delay-1">
         <div class="ehon-img-wrap">
-          <img src="images/book4.jpeg" alt="ぺんぎんたんけんたい！">
+          <a href="https://ehon.alphapolis.co.jp/content/detail/5653" target="_blank" rel="noopener"><img src="images/book4.jpeg" alt="ぺんぎんたんけんたい！"></a>
         </div>
         <div class="ehon-text">
           <p class="ehon-title">『ぺんぎん たんけんたい！』</p>
           <p class="ehon-desc">ぺんぎんが だいすきな ちぃこちゃん。<br>なかよしの ねこと いっしょに ほんものの ぺんぎんを さがしに でかけます。<br><br>どんな ぺんぎんたちに であえるかな？<br>ぺんぎん たんけんたい、 しゅっぱーつ！！</p>
-          <a href="#" class="ehon-cart" title="購入する">🛒</a>
+          <div class="ehon-links">
+            <a href="https://ehon.alphapolis.co.jp/content/detail/5653" target="_blank" rel="noopener" class="ehon-ehon" title="絵本ひろば">📖</a>
+          </div>
         </div>
       </div>
 
       <div class="ehon-item reveal reveal-delay-2">
         <div class="ehon-img-wrap">
-          <img src="images/book3.png" alt="いのちの理由">
+          <a href="https://ehon.alphapolis.co.jp/content/detail/813" target="_blank" rel="noopener"><img src="images/book3.png" alt="いのちの理由"></a>
         </div>
         <div class="ehon-text">
           <p class="ehon-title">『いのちの 理由』</p>
           <p class="ehon-desc">生きることの理不尽さと美しさ。そのなかで夢をもつことの大切さ。「いのち」に向き合う気持ちを、ことばと絵で綴りました。<br><br>夜寝る前に心を落ち着けたいとき、だれかを大切に思う気持ちにふれたいとき——静かな時間のおともに、そっと開いていただけたら嬉しいです。</p>
-          <a href="#" class="ehon-cart" title="購入する">🛒</a>
+          <div class="ehon-links">
+            <a href="https://checkout.square.site/merchant/QKZSKCT8S8GXP/checkout/UYRUKYT6EDRDU47CH74B7QRS" target="_blank" rel="noopener" class="ehon-cart" title="ショップ">🛒</a>
+            <a href="https://ehon.alphapolis.co.jp/content/detail/813" target="_blank" rel="noopener" class="ehon-ehon" title="絵本ひろば">📖</a>
+          </div>
         </div>
       </div>
 
       <div class="ehon-item reveal reveal-delay-3">
         <div class="ehon-img-wrap">
-          <img src="images/book2.jpeg" alt="まこがもさんのしあわせじょさんいん">
+          <a href="https://ehon.alphapolis.co.jp/content/detail/7471" target="_blank" rel="noopener"><img src="images/book2.jpeg" alt="まこがもさんのしあわせじょさんいん"></a>
         </div>
         <div class="ehon-text">
           <p class="ehon-title">『まこがもさんの しあわせ じょさんいん』</p>
           <p class="ehon-desc">育児に悩むかるがもママが出会ったのは、まこがもさんが営む、やさしい助産院。助け合いの輪の中で、少しずつ心がほどけていきます。<br><br>大阪・八尾市にある「さち助産院」さんをモデルに描いた、ほんわかやさしい『まちのえほん』です。</p>
-          <a href="#" class="ehon-cart" title="購入する">🛒</a>
+          <div class="ehon-links">
+            <a href="https://checkout.square.site/merchant/QKZSKCT8S8GXP/checkout/CZO7EHO54DA5LGC7CWFOZDEI" target="_blank" rel="noopener" class="ehon-cart" title="ショップ">🛒</a>
+            <a href="https://ehon.alphapolis.co.jp/content/detail/7471" target="_blank" rel="noopener" class="ehon-ehon" title="絵本ひろば">📖</a>
+          </div>
         </div>
       </div>
 
       <div class="ehon-item reveal reveal-delay-4">
         <div class="ehon-img-wrap">
-          <img src="images/book1.png" alt="ロイさんのあごひもテーラー">
+          <a href="https://ehon.alphapolis.co.jp/content/detail/7572" target="_blank" rel="noopener"><img src="images/book1.png" alt="ロイさんのあごひもテーラー"></a>
         </div>
         <div class="ehon-text">
           <p class="ehon-title">『ロイさんの あごひもテーラー』</p>
           <p class="ehon-desc">ここは、ちょっとめずらしい"あごひも"専門の仕立て屋さん。あごひもべんぎんのロイさんが、おきゃくさまのお悩みにそっとよりそいながら、ぴったりのあごひもを作ってくれます。<br><br>大阪市城東区にある実在の注文服店「ROI'S TAILOR」さんをモデルにした「まちのえほん」です。</p>
-          <a href="#" class="ehon-cart" title="購入する">🛒</a>
+          <div class="ehon-links">
+            <a href="https://ehon.alphapolis.co.jp/content/detail/7572" target="_blank" rel="noopener" class="ehon-ehon" title="絵本ひろば">📖</a>
+          </div>
         </div>
       </div>
 
