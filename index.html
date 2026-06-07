@@ -159,18 +159,24 @@ nav {
 #ehon { background: var(--bg); }
 .ehon-list { display: flex; flex-direction: column; gap: 80px; }
 .ehon-item {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 0 48px;
-  align-items: start;
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  align-items: flex-start;
 }
 .ehon-img-wrap {
-  width: 100%;
+  flex: 0 0 260px;
+  width: 260px;
 }
 .ehon-img-wrap img {
   width: 100%;
   height: auto;
   display: block;
+}
+.ehon-text {
+  flex: 1;
+  padding-top: 16px;
+  min-width: 0;
 }
 .ehon-img-wrap a {
   display: block;
