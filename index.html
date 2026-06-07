@@ -160,7 +160,7 @@ nav {
 .ehon-list { display: flex; flex-direction: column; gap: 80px; }
 .ehon-item {
   display: grid;
-  grid-template-columns: 80px 1fr 420px;
+  grid-template-columns: 1fr 420px;
   gap: 0 40px;
   align-items: start;
 }
@@ -415,6 +415,36 @@ footer {
   letter-spacing: 0.12em;
 }
 
+/* ===================== LOADER ===================== */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease;
+}
+#loader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.loader-icon {
+  width: 320px;
+  max-width: 80vw;
+  animation: loaderPop 0.8s ease both;
+}
+.loader-icon img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+@keyframes loaderPop {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
 /* ===================== ANIMATIONS ===================== */
 
 /* ページ読み込み時 */
@@ -476,6 +506,13 @@ nav {
 </head>
 <body>
 
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-icon">
+    <img src="images/hero.jpg" alt="まちのえほんやさん りさこっこ">
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-left">
@@ -492,15 +529,7 @@ nav {
 <!-- HERO -->
 <section id="top">
   <div class="hero-img-wrap">
-    <!-- ヒーロー画像: images/hero.jpg に差し替えてください -->
-    <div class="hero-img-placeholder">
-      <span>🌿</span>
-      <span>images/hero.jpg</span>
-      <span>ヒーロー画像をここに</span>
-    </div>
-    <!-- 画像を使う場合はこちらに切り替え:
     <img src="images/hero.jpg" alt="まちのえほんやさん りさこっこ">
-    -->
   </div>
 </section>
 
@@ -536,12 +565,8 @@ nav {
     <div class="ehon-list" id="ehonList">
 
       <div class="ehon-item reveal">
-        <div class="ehon-label">
-          えほん
-          <span class="ehon-label-sub">くらしのえほん</span>
-        </div>
         <div class="ehon-img-wrap">
-          <img src="images/book1.jpg" alt="ちぃちゃんのおいしいぷりん">
+          <img src="images/book5.png" alt="ちぃちゃんのおいしいぷりん">
         </div>
         <div class="ehon-text">
           <p class="ehon-title">『ちぃちゃんの おいしい ぷりん』</p>
@@ -551,12 +576,19 @@ nav {
       </div>
 
       <div class="ehon-item reveal reveal-delay-1">
-        <div class="ehon-label">
-          えほん
-          <span class="ehon-label-sub">ことばとえほん</span>
-        </div>
         <div class="ehon-img-wrap">
-          <img src="images/book2.jpg" alt="いのちの理由">
+          <img src="images/book4.jpeg" alt="ぺんぎんたんけんたい！">
+        </div>
+        <div class="ehon-text">
+          <p class="ehon-title">『ぺんぎん たんけんたい！』</p>
+          <p class="ehon-desc">ぺんぎんが だいすきな ちぃこちゃん。<br>なかよしの ねこと いっしょに ほんものの ぺんぎんを さがしに でかけます。<br><br>どんな ぺんぎんたちに であえるかな？<br>ぺんぎん たんけんたい、 しゅっぱーつ！！</p>
+          <a href="#" class="ehon-cart" title="購入する">🛒</a>
+        </div>
+      </div>
+
+      <div class="ehon-item reveal reveal-delay-2">
+        <div class="ehon-img-wrap">
+          <img src="images/book3.png" alt="いのちの理由">
         </div>
         <div class="ehon-text">
           <p class="ehon-title">『いのちの 理由』</p>
@@ -565,13 +597,9 @@ nav {
         </div>
       </div>
 
-      <div class="ehon-item reveal reveal-delay-2">
-        <div class="ehon-label">
-          えほん
-          <span class="ehon-label-sub">まちのえほん</span>
-        </div>
+      <div class="ehon-item reveal reveal-delay-3">
         <div class="ehon-img-wrap">
-          <img src="images/book3.jpg" alt="まこがもさんのしあわせじょさんいん">
+          <img src="images/book2.jpeg" alt="まこがもさんのしあわせじょさんいん">
         </div>
         <div class="ehon-text">
           <p class="ehon-title">『まこがもさんの しあわせ じょさんいん』</p>
@@ -580,13 +608,9 @@ nav {
         </div>
       </div>
 
-      <div class="ehon-item reveal reveal-delay-3">
-        <div class="ehon-label">
-          えほん
-          <span class="ehon-label-sub">まちのえほん</span>
-        </div>
+      <div class="ehon-item reveal reveal-delay-4">
         <div class="ehon-img-wrap">
-          <img src="images/book4.jpg" alt="ロイさんのあごひもテーラー">
+          <img src="images/book1.png" alt="ロイさんのあごひもテーラー">
         </div>
         <div class="ehon-text">
           <p class="ehon-title">『ロイさんの あごひもテーラー』</p>
@@ -711,6 +735,13 @@ document.getElementById('overlay').addEventListener('click', function(e) {
 });
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closePost();
+});
+
+// ローダー
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.getElementById('loader').classList.add('hide');
+  }, 1200);
 });
 
 renderPosts();
