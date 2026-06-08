@@ -66,6 +66,7 @@ nav {
   letter-spacing: 0.18em;
   color: var(--ink);
   text-decoration: none;
+  line-height: 1.5;
 }
 .nav-links { display: flex; gap: 28px; list-style: none; }
 .nav-links a {
@@ -539,12 +540,14 @@ nav {
 /* ===================== MOBILE ===================== */
 @media (max-width: 720px) {
   nav { padding: 0 20px 8px; }
-  .nav-links { gap: 16px; }
+  .nav-logo { font-size: 12px; letter-spacing: 0.1em; max-width: 160px; white-space: normal; line-height: 1.5; }
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 11px; letter-spacing: 0.12em; }
   .section-wrap { padding: 60px 24px; }
   #links { padding: 36px 24px; gap: 24px; }
-  .ehon-item { grid-template-columns: 1fr; gap: 24px; }
-  .ehon-label { writing-mode: horizontal-tb; flex-direction: row; }
-  .ehon-label::after { display: none; }
+  .ehon-item { flex-direction: column; gap: 16px; }
+  .ehon-img-wrap { width: 75%; max-width: 260px; }
+  .ehon-text { padding-top: 0; }
   .profile-grid { grid-template-columns: 1fr; gap: 40px; }
   .profile-left { text-align: left; }
   .article-modal { padding: 40px 24px; }
