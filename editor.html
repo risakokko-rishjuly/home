@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>editor — りさこっこ</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #FDFCFA;
+  --bg2: #F7F4F0;
+  --bg3: #EFE9E0;
+  --ink: #1A1714;
+  --ink-mid: #5C5650;
+  --ink-light: #A09890;
+  --line: #E8E2DA;
+  --accent: #7BAF8A;
+  --accent-dark: #5A9070;
+  --red: #C0624A;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-main: 'Zen Maru Gothic', sans-serif;
+}
+body {
+  background: var(--bg2);
+  color: var(--ink);
+  font-family: var(--font-main);
+  font-weight: 300;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 0 32px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.header-logo { font-family: var(--font-serif); font-size: 13px; color: var(--ink-light); letter-spacing: 0.1em; }
+.header-sep { color: var(--line); }
+.header-title { font-size: 13px; letter-spacing: 0.1em; color: var(--ink-mid); }
+.header-right { display: flex; gap: 10px; align-items: center; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  font-family: var(--font-main);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 7px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink-mid);
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:hover { background: var(--bg2); color: var(--ink); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+.btn-danger { border-color: var(--red); color: var(--red); }
+.btn-danger:hover { background: var(--red); color: #fff; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ===== LAYOUT ===== */
+.app { display: flex; height: calc(100vh - 56px); overflow: hidden; }
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--bg);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.sidebar-header {
+  padding: 14px 20px 12px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar-label { font-size: 10px; letter-spacing: 0.2em; color: var(--ink-light); text-transform: uppercase; }
+.post-list-wrap { flex: 1; overflow-y: auto; }
+.post-list-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.15s;
+  border-left: 3px solid transparent;
+}
+.post-list-item:hover { background: var(--bg2); }
+.post-list-item.active { background: var(--bg2); border-left-color: var(--accent); }
+.post-list-date { font-size: 10px; color: var(--ink-light); letter-spacing: 0.1em; margin-bottom: 4px; }
+.post-list-title { font-size: 13px; letter-spacing: 0.06em; color: var(--ink); line-height: 1.5; }
+
+/* ===== EDITOR ===== */
+.editor-wrap { flex: 1; overflow-y: auto; padding: 32px; }
+.editor-inner { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.field-group { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.field-label {
+  font-size: 10px; letter-spacing: 0.2em; color: var(--ink-light);
+  text-transform: uppercase; padding: 9px 16px 7px;
+  border-bottom: 1px solid var(--line); background: var(--bg2);
+}
+.field-input {
+  font-family: var(--font-main); font-size: 14px; font-weight: 400;
+  letter-spacing: 0.06em; color: var(--ink); background: var(--bg);
+  border: none; outline: none; width: 100%; padding: 12px 16px;
+  resize: none; line-height: 1.8;
+}
+.field-input::placeholder { color: var(--ink-light); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ===== IMAGE ===== */
+.img-drop-area { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.img-drop-zone {
+  border: 1.5px dashed var(--line); border-radius: 6px; padding: 24px;
+  text-align: center; cursor: pointer; transition: all 0.15s;
+  color: var(--ink-light); font-size: 13px; letter-spacing: 0.08em; line-height: 2;
+}
+.img-drop-zone:hover, .img-drop-zone.drag-over {
+  border-color: var(--accent); background: rgba(123,175,138,0.06); color: var(--accent);
+}
+.img-drop-zone input { display: none; }
+.img-preview-wrap { display: none; gap: 12px; align-items: flex-start; }
+.img-preview-wrap.show { display: flex; }
+.img-preview { width: 120px; height: 90px; object-fit: cover; border-radius: 4px; border: 1px solid var(--line); }
+.img-preview-name { font-size: 12px; color: var(--ink-mid); margin-bottom: 4px; letter-spacing: 0.06em; }
+.img-preview-path { font-size: 11px; color: var(--ink-light); font-family: monospace; margin-bottom: 8px; }
+
+/* ===== PREVIEW ===== */
+.preview-wrap {
+  width: 460px; flex-shrink: 0;
+  border-left: 1px solid var(--line); background: var(--bg);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.preview-wrap.hidden { display: none; }
+.preview-header {
+  padding: 12px 20px; border-bottom: 1px solid var(--line);
+  font-size: 10px; letter-spacing: 0.2em; color: var(--ink-light);
+  text-transform: uppercase; background: var(--bg2);
+}
+.preview-body { flex: 1; overflow-y: auto; padding: 40px; }
+.preview-body .p-meta {
+  font-size: 11px; letter-spacing: 0.14em; color: var(--ink-light);
+  margin-bottom: 14px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+}
+.preview-body .p-tag {
+  font-size: 10px; letter-spacing: 0.1em; color: var(--accent);
+  border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8;
+}
+.preview-body .p-title {
+  font-family: var(--font-serif); font-size: 20px; font-weight: 400;
+  letter-spacing: 0.04em; line-height: 1.6; margin-bottom: 28px;
+  padding-bottom: 20px; border-bottom: 1px solid var(--line); color: var(--ink);
+}
+.preview-body .p-img {
+  width: 100%; max-height: 260px; object-fit: cover;
+  border-radius: 2px; margin-bottom: 24px;
+}
+.preview-body .p-body {
+  font-size: 14px; line-height: 2.2; letter-spacing: 0.055em;
+  white-space: pre-wrap; color: var(--ink);
+}
+
+/* ===== MODAL ===== */
+.modal-bg {
+  display: none; position: fixed; inset: 0;
+  background: rgba(26,23,20,0.45); backdrop-filter: blur(4px);
+  z-index: 200; align-items: center; justify-content: center;
+}
+.modal-bg.open { display: flex; }
+.modal {
+  background: var(--bg); border-radius: 10px; padding: 36px 40px;
+  width: 480px; max-width: 90vw; animation: fadeUp 0.25s ease;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.modal-title { font-family: var(--font-serif); font-size: 18px; font-weight: 400; letter-spacing: 0.06em; margin-bottom: 6px; }
+.modal-desc { font-size: 12px; color: var(--ink-mid); letter-spacing: 0.06em; line-height: 1.8; margin-bottom: 24px; }
+.modal-field { margin-bottom: 16px; }
+.modal-field label { display: block; font-size: 10px; letter-spacing: 0.18em; color: var(--ink-light); text-transform: uppercase; margin-bottom: 6px; }
+.modal-field input {
+  font-family: var(--font-main); font-size: 13px; width: 100%;
+  padding: 9px 12px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg2); color: var(--ink); outline: none; letter-spacing: 0.06em;
+}
+.modal-field input:focus { border-color: var(--accent); }
+.modal-field .hint { font-size: 11px; color: var(--ink-light); margin-top: 4px; letter-spacing: 0.04em; line-height: 1.7; }
+.modal-footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; }
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed; bottom: 32px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: #fff; font-size: 13px;
+  letter-spacing: 0.08em; padding: 12px 24px; border-radius: 99px;
+  opacity: 0; transition: all 0.3s ease; pointer-events: none;
+  z-index: 300; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.success { background: var(--accent-dark); }
+.toast.error { background: var(--red); }
+
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); display: inline-block; }
+.status-dot.ok { background: var(--accent); }
+.status-dot.ng { background: var(--red); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <span class="header-logo">りさこっこ</span>
+    <span class="header-sep">/</span>
+    <span class="header-title">editor</span>
+  </div>
+  <div class="header-right">
+    <span id="statusDot" class="status-dot" title="GitHub接続状態"></span>
+    <button class="btn" onclick="openSettings()">⚙ 設定</button>
+    <button class="btn" onclick="togglePreview()">👁 プレビュー</button>
+    <button class="btn" onclick="newPost()">＋ 新規</button>
+    <button class="btn btn-primary" id="publishBtn" onclick="publish()">↑ GitHubへ公開</button>
+  </div>
+</header>
+
+<div class="app">
+
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-label">記事一覧</span>
+      <button class="btn btn-danger" onclick="deletePost()" style="padding:4px 10px;font-size:11px;">削除</button>
+    </div>
+    <div class="post-list-wrap" id="postListSidebar"></div>
+  </div>
+
+  <div class="editor-wrap">
+    <div class="editor-inner">
+
+      <div class="field-row">
+        <div class="field-group">
+          <div class="field-label">公開日</div>
+          <input class="field-input" type="date" id="postDate">
+        </div>
+        <div class="field-group">
+          <div class="field-label">タグ（カンマ区切り）</div>
+          <input class="field-input" type="text" id="postTags" placeholder="日常, 絵本">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">タイトル</div>
+        <input class="field-input" type="text" id="postTitle" placeholder="タイトルを入力" style="font-size:18px;font-weight:500;">
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">サムネイル画像</div>
+        <div class="img-drop-area">
+          <div class="img-drop-zone" id="dropZone" onclick="document.getElementById('imgInput').click()">
+            <input type="file" id="imgInput" accept="image/*" onchange="handleImageSelect(this.files[0])">
+            📷 クリックまたはドラッグ＆ドロップで画像を選択<br>
+            <span style="font-size:11px;">jpg / png — images/ フォルダにアップロードされます</span>
+          </div>
+          <div class="img-preview-wrap" id="imgPreviewWrap">
+            <img class="img-preview" id="imgPreviewImg" src="" alt="">
+            <div>
+              <div class="img-preview-name" id="imgPreviewName"></div>
+              <div class="img-preview-path" id="imgPreviewPath"></div>
+              <button class="btn btn-danger" style="font-size:11px;padding:4px 10px;" onclick="clearImage()">✕ 削除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">本文</div>
+        <textarea class="field-input" id="postContent" rows="20" placeholder="本文を入力&#10;&#10;空行で段落が分かれます"></textarea>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="preview-wrap hidden" id="previewWrap">
+    <div class="preview-header">プレビュー</div>
+    <div class="preview-body" id="previewBody"></div>
+  </div>
+
+</div>
+
+<div class="modal-bg" id="settingsModal">
+  <div class="modal">
+    <p class="modal-title">GitHub 設定</p>
+    <p class="modal-desc">初回のみ設定してください。情報はこのブラウザに保存されます。</p>
+    <div class="modal-field">
+      <label>GitHubユーザー名</label>
+      <input type="text" id="cfgUser" placeholder="risakokko-rishjuly">
+    </div>
+    <div class="modal-field">
+      <label>リポジトリ名</label>
+      <input type="text" id="cfgRepo" placeholder="your-repo-name">
+    </div>
+    <div class="modal-field">
+      <label>Personal Access Token (PAT)</label>
+      <input type="password" id="cfgToken" placeholder="ghp_xxxxxxxxxxxx">
+      <p class="hint">
+        GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens<br>
+        「Contents」の Read and Write 権限が必要です
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeSettings()">キャンセル</button>
+      <button class="btn btn-primary" onclick="saveSettings()">保存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let posts = [];
+let currentIndex = -1;
+let imgFile = null;
+let imgFileName = '';
+let previewVisible = false;
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
+  checkSettings();
+  setupDrop();
+  ['postTitle','postContent','postTags','postDate'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updatePreview);
+  });
+  loadPostsFromGitHub();
+});
+
+// SETTINGS
+function getSettings() {
+  return {
+    user: localStorage.getItem('gh_user') || '',
+    repo: localStorage.getItem('gh_repo') || '',
+    token: localStorage.getItem('gh_token') || '',
+  };
+}
+function checkSettings() {
+  const s = getSettings();
+  document.getElementById('statusDot').className = 'status-dot ' + (s.user && s.repo && s.token ? 'ok' : 'ng');
+  if (!s.user || !s.repo || !s.token) openSettings();
+}
+function openSettings() {
+  const s = getSettings();
+  document.getElementById('cfgUser').value = s.user;
+  document.getElementById('cfgRepo').value = s.repo;
+  document.getElementById('cfgToken').value = s.token;
+  document.getElementById('settingsModal').classList.add('open');
+}
+function closeSettings() { document.getElementById('settingsModal').classList.remove('open'); }
+async function saveSettings() {
+  const user = document.getElementById('cfgUser').value.trim();
+  const repo = document.getElementById('cfgRepo').value.trim();
+  const token = document.getElementById('cfgToken').value.trim();
+  if (!user || !repo || !token) { showToast('すべて入力してください', 'error'); return; }
+  localStorage.setItem('gh_user', user);
+  localStorage.setItem('gh_repo', repo);
+  localStorage.setItem('gh_token', token);
+  closeSettings();
+  checkSettings();
+  showToast('設定を保存しました');
+  await loadPostsFromGitHub();
+}
+
+// GITHUB API
+async function ghFetch(path, options = {}) {
+  const { user, repo, token } = getSettings();
+  return fetch(`https://api.github.com/repos/${user}/${repo}/contents/${path}`, {
+    ...options,
+    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', ...options.headers }
+  });
+}
+async function getFileSha(path) {
+  const res = await ghFetch(path);
+  if (!res.ok) return null;
+  const data = await res.json();
+  return data.sha;
+}
+async function pushFile(path, contentBase64, message) {
+  const sha = await getFileSha(path);
+  const body = { message, content: contentBase64 };
+  if (sha) body.sha = sha;
+  const res = await ghFetch(path, { method: 'PUT', body: JSON.stringify(body) });
+  return res.ok;
+}
+
+// LOAD POSTS
+async function loadPostsFromGitHub() {
+  const { user, repo, token } = getSettings();
+  if (!user || !repo || !token) return;
+  try {
+    const res = await ghFetch('posts.js');
+    if (!res.ok) { renderSidebar(); return; }
+    const data = await res.json();
+    const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+    const match = content.match(/const posts = (\[[\s\S]*?\]);/);
+    if (match) posts = JSON.parse(match[1]);
+    renderSidebar();
+    if (posts.length > 0) selectPost(0);
+  } catch(e) {
+    renderSidebar();
+  }
+}
+
+// SIDEBAR
+function renderSidebar() {
+  const el = document.getElementById('postListSidebar');
+  if (!posts.length) {
+    el.innerHTML = '<div style="padding:24px 20px;font-size:12px;color:var(--ink-light);letter-spacing:0.08em;">記事がありません</div>';
+    return;
+  }
+  el.innerHTML = posts.map((p, i) => `
+    <div class="post-list-item ${i === currentIndex ? 'active' : ''}" onclick="selectPost(${i})">
+      <div class="post-list-date">${p.date || ''}</div>
+      <div class="post-list-title">${p.title || '（タイトルなし）'}</div>
+    </div>
+  `).join('');
+}
+
+function selectPost(i) {
+  currentIndex = i;
+  const p = posts[i];
+  document.getElementById('postTitle').value = p.title || '';
+  document.getElementById('postDate').value = p.date || '';
+  document.getElementById('postTags').value = (p.tags || []).join(', ');
+  document.getElementById('postContent').value = p.content || '';
+  imgFile = null;
+  imgFileName = p.thumbnail || '';
+  if (p.thumbnail) {
+    document.getElementById('imgPreviewWrap').classList.add('show');
+    document.getElementById('imgPreviewImg').src = p.thumbnail;
+    document.getElementById('imgPreviewName').textContent = p.thumbnail.replace('images/', '');
+    document.getElementById('imgPreviewPath').textContent = p.thumbnail;
+    document.getElementById('dropZone').style.display = 'none';
+  } else {
+    clearImage();
+  }
+  renderSidebar();
+  updatePreview();
+}
+
+function newPost() {
+  currentIndex = -1;
+  document.getElementById('postTitle').value = '';
+  document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('postTags').value = '';
+  document.getElementById('postContent').value = '';
+  clearImage();
+  renderSidebar();
+  updatePreview();
+}
+
+function deletePost() {
+  if (currentIndex < 0) { showToast('記事が選択されていません', 'error'); return; }
+  if (!confirm('この記事を削除しますか？')) return;
+  posts.splice(currentIndex, 1);
+  currentIndex = posts.length > 0 ? 0 : -1;
+  if (currentIndex >= 0) selectPost(0); else newPost();
+  renderSidebar();
+}
+
+// IMAGE
+function handleImageSelect(file) {
+  if (!file) return;
+  imgFile = file;
+  imgFileName = 'images/' + file.name;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('imgPreviewImg').src = e.target.result;
+    document.getElementById('imgPreviewWrap').classList.add('show');
+    document.getElementById('imgPreviewName').textContent = file.name;
+    document.getElementById('imgPreviewPath').textContent = imgFileName;
+    document.getElementById('dropZone').style.display = 'none';
+    updatePreview();
+  };
+  reader.readAsDataURL(file);
+}
+function clearImage() {
+  imgFile = null; imgFileName = '';
+  document.getElementById('imgPreviewWrap').classList.remove('show');
+  document.getElementById('imgPreviewImg').src = '';
+  document.getElementById('dropZone').style.display = '';
+  document.getElementById('imgInput').value = '';
+  updatePreview();
+}
+function setupDrop() {
+  const zone = document.getElementById('dropZone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) handleImageSelect(file);
+  });
+}
+
+// PREVIEW
+function togglePreview() {
+  previewVisible = !previewVisible;
+  document.getElementById('previewWrap').classList.toggle('hidden', !previewVisible);
+  updatePreview();
+}
+function updatePreview() {
+  if (!previewVisible) return;
+  const title = document.getElementById('postTitle').value || '（タイトルなし）';
+  const date = document.getElementById('postDate').value || '';
+  const tags = document.getElementById('postTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const content = document.getElementById('postContent').value;
+  const imgEl = document.getElementById('imgPreviewImg');
+  const hasImg = imgEl.src && imgEl.src !== window.location.href;
+  const tagsHtml = tags.map(t=>`<span class="p-tag">${t}</span>`).join(' ');
+  const imgHtml = hasImg ? `<img class="p-img" src="${imgEl.src}" alt="">` : '';
+  const d = new Date(date);
+  const dateStr = date ? `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}` : '';
+  document.getElementById('previewBody').innerHTML = `
+    <div class="p-meta"><span>${dateStr}</span>${tagsHtml}</div>
+    <div class="p-title">${title}</div>
+    ${imgHtml}
+    <div class="p-body">${content}</div>
+  `;
+}
+
+// PUBLISH
+async function publish() {
+  const { user, repo, token } = getSettings();
+  if (!user || !repo || !token) { openSettings(); return; }
+  const title = document.getElementById('postTitle').value.trim();
+  if (!title) { showToast('タイトルを入力してください', 'error'); return; }
+  const btn = document.getElementById('publishBtn');
+  btn.disabled = true; btn.textContent = '公開中...';
+  try {
+    const date = document.getElementById('postDate').value;
+    const tags = document.getElementById('postTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+    const content = document.getElementById('postContent').value;
+    const id = (date||'').replace(/-/g,'') + '-' + Math.random().toString(36).slice(2,6);
+
+    // 画像アップロード
+    let thumbnail = imgFileName;
+    if (imgFile) {
+      const base64 = await fileToBase64(imgFile);
+      const ok = await pushFile(`images/${imgFile.name}`, base64, `Add image: ${imgFile.name}`);
+      if (!ok) { showToast('画像のアップロードに失敗しました', 'error'); return; }
+      thumbnail = `images/${imgFile.name}`;
+    }
+
+    const post = { id, title, date, tags, thumbnail, content };
+    if (currentIndex >= 0) {
+      post.id = posts[currentIndex].id || id;
+      posts[currentIndex] = post;
+    } else {
+      posts.unshift(post);
+      currentIndex = 0;
+    }
+
+    const postsJs = 'const posts = ' + JSON.stringify(posts, null, 2) + ';\n';
+    const postsBase64 = btoa(unescape(encodeURIComponent(postsJs)));
+    const ok = await pushFile('posts.js', postsBase64, `Update posts: ${title}`);
+    if (ok) {
+      showToast('GitHubに公開しました 🎉', 'success');
+      renderSidebar();
+    } else {
+      showToast('公開に失敗しました', 'error');
+    }
+  } catch(e) {
+    showToast('エラー: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = '↑ GitHubへ公開';
+  }
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// TOAST
+function showToast(msg, type = '') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show' + (type ? ' ' + type : '');
+  setTimeout(() => el.className = 'toast', 3000);
+}
+</script>
+</body>
+</html>
