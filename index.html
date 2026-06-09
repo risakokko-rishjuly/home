@@ -827,14 +827,9 @@ function hideLoader() {
   const loader = document.getElementById('loader');
   if (loader) loader.classList.add('hide');
 }
-// DOMが読み込まれたら即タイマーをセット
-document.addEventListener('DOMContentLoaded', function() {
-  // 最大2秒で強制的に消す
-  setTimeout(hideLoader, 2000);
-});
-// 全リソース読み込み完了後にも消す
+setTimeout(hideLoader, 1500);
 window.addEventListener('load', function() {
-  setTimeout(hideLoader, 500);
+  setTimeout(hideLoader, 300);
 });
 
 renderPosts();
