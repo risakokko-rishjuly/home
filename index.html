@@ -824,13 +824,18 @@ document.addEventListener('keydown', function(e) {
 
 // ローダー
 function hideLoader() {
-  document.getElementById('loader').classList.add('hide');
+  const loader = document.getElementById('loader');
+  if (loader) loader.classList.add('hide');
 }
-window.addEventListener('load', function() {
-  setTimeout(hideLoader, 800);
+// DOMが読み込まれたら即タイマーをセット
+document.addEventListener('DOMContentLoaded', function() {
+  // 最大2秒で強制的に消す
+  setTimeout(hideLoader, 2000);
 });
-// 画像が重くても最大3秒で消す
-setTimeout(hideLoader, 3000);
+// 全リソース読み込み完了後にも消す
+window.addEventListener('load', function() {
+  setTimeout(hideLoader, 500);
+});
 
 renderPosts();
 
