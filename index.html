@@ -371,6 +371,18 @@ nav {
   font-size: 15px; line-height: 2.2;
   letter-spacing: 0.055em; white-space: pre-wrap; color: var(--ink);
 }
+.modal-body h2 {
+  font-size: 18px; font-weight: 500; letter-spacing: 0.08em;
+  margin: 24px 0 10px; white-space: normal;
+}
+.modal-body h3 {
+  font-size: 15px; font-weight: 500; letter-spacing: 0.08em;
+  margin: 18px 0 8px; white-space: normal;
+}
+.modal-body p { margin-bottom: 8px; white-space: normal; }
+.modal-body img { max-width: 100%; border-radius: 2px; margin: 12px 0; display: block; }
+.modal-body ul, .modal-body ol { padding-left: 1.5em; margin-bottom: 8px; }
+.modal-body li { margin-bottom: 4px; }
 
 /* ===================== PROFILE ===================== */
 #profile { background: var(--bg); }
@@ -785,7 +797,11 @@ function openPost(i) {
   document.getElementById('modalDate').textContent = formatDate(p.date);
   document.getElementById('modalTags').innerHTML = (p.tags||[]).map(t=>'<span class="post-tag">'+t+'</span>').join(' ');
   document.getElementById('modalTitle').textContent = p.title;
-  document.getElementById('modalBody').textContent = p.content;
+  if (p.content_html) {
+    document.getElementById('modalBody').innerHTML = p.content_html;
+  } else {
+    document.getElementById('modalBody').textContent = p.content;
+  }
   const img = document.getElementById('modalImg');
   if (p.thumbnail) { img.src = p.thumbnail; img.style.display = 'block'; }
   else { img.style.display = 'none'; }
@@ -807,11 +823,14 @@ document.addEventListener('keydown', function(e) {
 });
 
 // ローダー
+function hideLoader() {
+  document.getElementById('loader').classList.add('hide');
+}
 window.addEventListener('load', function() {
-  setTimeout(function() {
-    document.getElementById('loader').classList.add('hide');
-  }, 1200);
+  setTimeout(hideLoader, 800);
 });
+// 画像が重くても最大3秒で消す
+setTimeout(hideLoader, 3000);
 
 renderPosts();
 
