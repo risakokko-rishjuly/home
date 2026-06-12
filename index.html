@@ -745,7 +745,7 @@ nav {
 </div>
 
 <script>
-if (typeof posts === 'undefined') { var posts = []; }
+if (typeof posts === 'undefined') { window.posts = []; }
 
 function formatDate(str) {
   if (!str) return '';
