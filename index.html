@@ -765,7 +765,7 @@ function renderPosts() {
       <div>
         <div class="post-tags">${(p.tags||[]).map(t=>'<span class="post-tag">'+t+'</span>').join('')}</div>
         <div class="post-title">${p.title}</div>
-        <div class="post-excerpt">${p.content.replace(/\n/g,' ')}</div>
+        <div class="post-excerpt">${(p.content||'').replace(/\n/g,' ')}</div>
       </div>
     </div>
   `).join('');
