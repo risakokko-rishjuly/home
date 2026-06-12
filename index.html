@@ -59,15 +59,8 @@ nav {
   letter-spacing: 0.22em;
   color: var(--ink-light);
 }
-.nav-logo {
-  font-family: var(--font-main);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  color: var(--ink);
-  text-decoration: none;
-  line-height: 1.5;
-}
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; line-height: 1.5; }
+.nav-logo br { display: none; }
 .nav-links { display: flex; gap: 28px; list-style: none; }
 .nav-links a {
   font-size: 12px;
@@ -539,10 +532,23 @@ nav {
 
 /* ===================== MOBILE ===================== */
 @media (max-width: 720px) {
-  nav { padding: 0 20px 8px; }
-  .nav-logo { font-size: 12px; letter-spacing: 0.1em; max-width: 160px; white-space: normal; line-height: 1.5; }
-  .nav-links { gap: 12px; }
-  .nav-links a { font-size: 11px; letter-spacing: 0.12em; }
+  nav {
+    padding: 0 16px 8px;
+    height: auto;
+    min-height: 56px;
+    padding-top: 8px;
+  }
+  .nav-kicker { font-size: 8px; letter-spacing: 0.15em; }
+  .nav-logo {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    white-space: normal;
+    line-height: 1.4;
+    max-width: 140px;
+  }
+  .nav-logo br { display: inline; }
+  .nav-links { gap: 10px; align-items: center; }
+  .nav-links a { font-size: 10px; letter-spacing: 0.08em; white-space: nowrap; }
   .section-wrap { padding: 60px 24px; }
   #links { padding: 36px 24px; gap: 24px; }
   .ehon-item { flex-direction: column; gap: 16px; }
@@ -564,7 +570,7 @@ nav {
 <nav>
   <div class="nav-left">
     <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
-    <a href="#top" class="nav-logo">まちのえほんやさん　りさこっこ</a>
+    <a href="#top" class="nav-logo">まちのえほんやさん<br>りさこっこ</a>
   </div>
   <ul class="nav-links">
     <li><a href="#ehon">えほん</a></li>
