@@ -534,21 +534,8 @@ nav {
   animation: fadeIn 0.8s ease 0.6s both;
 }
 
-/* スクロール時 — 初期状態は非表示 */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* 少しずつ遅らせる */
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+/* スクロール時アニメーション無効化 */
+.reveal { opacity: 1 !important; transform: none !important; }
 
 /* ===================== MOBILE ===================== */
 @media (max-width: 720px) {
@@ -816,23 +803,8 @@ document.addEventListener('keydown', function(e) {
 
 renderPosts();
 
-// ブログ記事にもrevealクラスを付与
-document.querySelectorAll('.post-item').forEach((el, i) => {
-  el.classList.add('reveal');
-  if (i < 4) el.classList.add('reveal-delay-' + (i % 4 + 1));
-});
+// アニメーション無効化中
 
-// スクロールアニメーション
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0, rootMargin: '0px 0px -20px 0px' });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
