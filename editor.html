@@ -569,7 +569,7 @@ async function loadPostsFromGitHub() {
     if (!res.ok) { renderSidebar(); return; }
     const data = await res.json();
     const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
-    const match = raw.match(/const posts = (\[[\s\S]*?\]);/);
+    const match = raw.match(/const posts = (\[[\s\S]*\]);/);
     if (match) posts = JSON.parse(match[1]);
     renderSidebar();
     if (posts.length > 0) selectPost(0);
