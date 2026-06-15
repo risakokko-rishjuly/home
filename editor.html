@@ -762,21 +762,28 @@ function setupThumbDrop() {
 }
 
 // INLINE IMAGE
-function insertBodyImage(file) {
+async function insertBodyImage(file) {
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    const base64 = e.target.result;
-    // カーソル位置に画像を挿入
+  const { user, repo } = getSettings();
+  document.getElementById('imgBodyInput').value = '';
+
+  showToast('画像をアップロード中...');
+  try {
+    const base64 = await fileToBase64(file);
+    const fileName = 'images/' + file.name;
+    const ok = await pushFile(fileName, base64, `Add image: ${file.name}`);
+    if (!ok) { showToast('画像のアップロードに失敗しました', 'error'); return; }
+
+    // GitHubのraw URLをQuillに挿入
+    const url = `https://raw.githubusercontent.com/${user}/${repo}/main/${fileName}`;
     const range = quill.getSelection(true);
-    quill.insertEmbed(range.index, 'image', base64);
+    quill.insertEmbed(range.index, 'image', url);
     quill.setSelection(range.index + 1);
-    // アップロード予定リストに追加
-    bodyImages.push({ file, fileName: 'images/' + file.name, base64: base64.split(',')[1] });
-    document.getElementById('imgBodyInput').value = '';
+    showToast('画像を挿入しました ✅', 'success');
     updatePreview();
-  };
-  reader.readAsDataURL(file);
+  } catch(e) {
+    showToast('エラー: ' + e.message, 'error');
+  }
 }
 
 // PREVIEW
@@ -832,18 +839,8 @@ async function publish() {
       thumbnail = `images/${thumbFile.name}`;
     }
 
-    // 本文中の画像をアップロードし、base64をURLに置換
-    let finalHtml = content_html;
-    for (const img of bodyImages) {
-      const ok = await pushFile(img.fileName, img.base64, `Add image: ${img.file.name}`);
-      if (ok) {
-        const { user, repo } = getSettings();
-        const url = `https://raw.githubusercontent.com/${user}/${repo}/main/${img.fileName}`;
-        finalHtml = finalHtml.replace(img.base64 ? `data:${img.file.type};base64,${img.base64}` : '', url);
-      }
-    }
-
-    const post = { id, title, date, tags, thumbnail, content, content_html: finalHtml };
+    // 本文HTMLをそのまま使用（画像は挿入時にアップロード済み）
+    const post = { id, title, date, tags, thumbnail, content, content_html };
     if (currentIndex >= 0) {
       post.id = posts[currentIndex].id || id;
       posts[currentIndex] = post;
