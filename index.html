@@ -14,7 +14,6 @@
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<script src="posts.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -265,6 +264,8 @@ nav {
 #blog { background: var(--bg2); }
 .post-list { display: flex; flex-direction: column; }
 .post-item {
+  text-decoration: none;
+  color: inherit;
   display: grid;
   grid-template-columns: 96px 1fr;
   gap: 32px;
@@ -376,6 +377,26 @@ nav {
 .modal-body img { max-width: 100%; border-radius: 2px; margin: 12px 0; display: block; }
 .modal-body ul, .modal-body ol { padding-left: 1.5em; margin-bottom: 8px; }
 .modal-body li { margin-bottom: 4px; }
+
+/* ===================== BLOG MORE ===================== */
+.blog-more-wrap {
+  text-align: center;
+  margin-top: 48px;
+}
+.blog-more-btn {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  color: var(--ink-mid);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 4px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.blog-more-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink-mid);
+}
 
 /* ===================== PROFILE ===================== */
 #profile { background: var(--bg); }
@@ -702,7 +723,36 @@ nav {
       <p class="section-title-jp">ぶろぐ</p>
       <h2 class="section-title-en">blog</h2>
     </div>
-    <div class="post-list" id="postList"></div>
+    <div class="post-list" id="postList">
+        <a class="post-item" href="post-20260616-13vy.html">
+          <div class="post-date">2026.06.16</div>
+          <div>
+            <div class="post-tags"><span class="post-tag">日常</span><span class="post-tag">絵本のある暮らし</span><span class="post-tag">手作り</span><span class="post-tag">裁縫</span></div>
+            <div class="post-title">「これ買って！」より「これ作って！」って言ってほしい⸻娘と私のてづくり記録</div>
+            <div class="post-excerpt">この記事は2026年4月のアーカイブです。  新年度が始まりましたね。 娘は初めてのクラス替えを経験し、緊張しながらもニ…</div>
+          </div>
+        </a>
+        <a class="post-item" href="post-20260616-kqzq.html">
+          <div class="post-date">2026.06.16</div>
+          <div>
+            <div class="post-tags"><span class="post-tag">日常</span><span class="post-tag">家庭菜園</span><span class="post-tag">絵本のある暮らし</span></div>
+            <div class="post-title">生きることは育てること──ラディッシュ収穫から感じたこと</div>
+            <div class="post-excerpt">この記事は2026年3月のアーカイブです。  春の芽吹きを感じる3月。 今日のnoteは、ラディッシュ収穫のお話です。 …</div>
+          </div>
+        </a>
+        <a class="post-item" href="post-20260616-37ps.html">
+          <div class="post-date">2026.06.16</div>
+          <div>
+            <div class="post-tags"><span class="post-tag">グラレコ</span><span class="post-tag">物語のグラレコ</span></div>
+            <div class="post-title">物語として記録する、りさこっこのグラフィックレコーディング</div>
+            <div class="post-excerpt">この記事は2026年1月のアーカイブです。  今回の記事では、 私が描いている「グラフィックレコーディング（グラレコ）」…</div>
+          </div>
+        </a>
+      </div>
+      
+    <div class="blog-more-wrap">
+      <a href="posts.html" class="blog-more-btn">もっと見る</a>
+    </div>
   </div>
 </section>
 
@@ -765,55 +815,7 @@ function formatDate(str) {
   return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0');
 }
 
-function renderPosts() {
-  const list = document.getElementById('postList');
-  if (!posts.length) {
-    list.innerHTML = '<p style="color:var(--ink-light);font-size:13px;padding:32px 0;letter-spacing:0.1em;">まだ投稿がありません。</p>';
-    return;
-  }
-  list.innerHTML = posts.map((p, i) => `
-    <div class="post-item" onclick="openPost(${i})">
-      <div class="post-date">${formatDate(p.date)}</div>
-      <div>
-        <div class="post-tags">${(p.tags||[]).map(t=>'<span class="post-tag">'+t+'</span>').join('')}</div>
-        <div class="post-title">${p.title}</div>
-        <div class="post-excerpt">${(p.content||'').replace(/\n/g,' ')}</div>
-      </div>
-    </div>
-  `).join('');
-}
 
-function openPost(i) {
-  const p = posts[i];
-  document.getElementById('modalDate').textContent = formatDate(p.date);
-  document.getElementById('modalTags').innerHTML = (p.tags||[]).map(t=>'<span class="post-tag">'+t+'</span>').join(' ');
-  document.getElementById('modalTitle').textContent = p.title;
-  if (p.content_html) {
-    document.getElementById('modalBody').innerHTML = p.content_html;
-  } else {
-    document.getElementById('modalBody').textContent = p.content;
-  }
-  const img = document.getElementById('modalImg');
-  if (p.thumbnail) { img.src = p.thumbnail; img.style.display = 'block'; }
-  else { img.style.display = 'none'; }
-  document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closePost() {
-  document.getElementById('overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.getElementById('modalClose').addEventListener('click', closePost);
-document.getElementById('overlay').addEventListener('click', function(e) {
-  if (e.target === this) closePost();
-});
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closePost();
-});
-
-renderPosts();
 
 // アニメーション無効化中
 

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>まちと人がやさしくつながる絵本をつくる〜『まこがもさんの しあわせ じょさんいん』制作のおはなし〜 — まちのえほんやさん りさこっこ</title>
+<meta name="description" content="この記事は2025年11月のアーカイブとなっています🙏  こんにちは✨ イラストレーター・絵本作家のりさこっこです。  今日は、私が描いている「まちのえほんシリ">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #FDFCFA; --bg2: #F7F4F0;
+  --ink: #1A1714; --ink-mid: #5C5650; --ink-light: #A09890;
+  --line: #E8E2DA; --accent: #7BAF8A;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-main: 'Zen Maru Gothic', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(253,252,250,0.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 40px 10px; height: 60px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  animation: fadeInDown 0.7s ease both;
+}
+.nav-left { display: flex; flex-direction: column; gap: 1px; }
+.nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; line-height: 1.5; }
+.nav-right { display: flex; gap: 20px; align-items: center; }
+.nav-link { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
+.nav-link:hover { color: var(--ink); }
+
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); background: var(--bg); }
+.footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
+.footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
+
+.post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
+
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn     { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 720px) {
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+}
+
+.article-wrap {
+  max-width: 680px; margin: 0 auto;
+  padding: 100px 40px 80px;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+.article-meta {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.article-date { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-light); }
+.article-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.article-title {
+  font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65;
+  margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--line);
+}
+.article-thumb {
+  width: 100%; max-height: 400px; object-fit: cover;
+  border-radius: 2px; display: block; margin-bottom: 40px;
+}
+.article-body {
+  font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; color: var(--ink);
+}
+.article-body h2 { font-size: 18px; font-weight: 500; letter-spacing: 0.08em; margin: 32px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; letter-spacing: 0.07em; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 0; }
+.article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
+.article-body ul, .article-body ol { padding-left: 1.5em; margin-bottom: 8px; }
+.article-body li { margin-bottom: 4px; }
+.article-body strong { font-weight: 500; }
+.article-body a { color: var(--ink-mid); }
+
+.pager {
+  max-width: 680px; margin: 0 auto;
+  padding: 40px 40px 80px;
+  display: flex; justify-content: space-between; gap: 20px;
+  border-top: 1px solid var(--line);
+}
+.pager-link {
+  font-size: 12px; letter-spacing: 0.1em; color: var(--ink-mid);
+  text-decoration: none; line-height: 1.6; transition: color 0.2s;
+  max-width: 45%;
+}
+.pager-link:hover { color: var(--ink); }
+.pager-prev { text-align: left; }
+.pager-next { text-align: right; }
+
+@media (max-width: 720px) {
+  .article-wrap { padding: 80px 20px 60px; }
+  .article-title { font-size: 20px; }
+  .pager { padding: 32px 20px 60px; }
+  footer { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
+    <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
+  </div>
+  <div class="nav-right">
+    <a href="posts.html" class="nav-link">← ぶろぐ一覧</a>
+  </div>
+</nav>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-date">2026.06.16</span>
+    <span class="article-tags"><span class="post-tag">絵本</span><span class="post-tag">まちのえほん</span><span class="post-tag">絵本制作</span></span>
+  </div>
+  <h1 class="article-title">まちと人がやさしくつながる絵本をつくる〜『まこがもさんの しあわせ じょさんいん』制作のおはなし〜</h1>
+  <img class="article-thumb" src="images/IMG_8098.PNG" alt="まちと人がやさしくつながる絵本をつくる〜『まこがもさんの しあわせ じょさんいん』制作のおはなし〜">
+  <div class="article-body">
+    <p>この記事は2025年11月のアーカイブとなっています🙏</p><p><br></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">こんにちは✨</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">イラストレーター・絵本作家のりさこっこです。</span></p><p><br></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">今日は、私が描いている「まちのえほんシリーズ」についてお話ししたいと思います。</span></p><p><br></p><h3><br></h3><h3>🌿 「まちのえほん」シリーズとは？</h3><p><br></p><p>「まちのえほん」シリーズは、実際にある町・お店・場所をモデルにした絵本です。</p><p><br></p><p>絵本を開いたときに、</p><p><br></p><p>「この町には、こんな素敵な場所があるんだ。」</p><p>「こんな人たちが、やさしい気持ちで暮らしているんだ。」</p><p><br></p><p>そんな 小さな発見とあたたかさ が感じられる本をつくりたい、</p><p>という思いから生まれたシリーズです。</p><p><br></p><p><br></p><h3>🦆 カルガモママが出会う、小さな助産院のおはなし</h3><p>今日はその「まちの えほん」シリーズの一冊、</p><p><strong>『まこがもさんの しあわせ じょさんいん』</strong></p><p>のご紹介です♪</p><p><a href="https://assets.st-note.com/production/uploads/images/227685588/picture_pc_cbc03dddadf137b2ac27f6901cdf88d2.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227685588/picture_pc_cbc03dddadf137b2ac27f6901cdf88d2.png?width=1200" alt="画像" height="465" width="620"></a></p><p>表紙は「たすけあいの輪」のイメージ</p><p><br></p><p><strong>〜あらすじ〜</strong></p><p>しんぱいごとが多くて、ちょっとつかれていたカルガモママ。</p><p>ある日、SNSで見つけた「しあわせ じょさんいん」が気になって、</p><p>思いきって訪ねてみることにします。</p><p><br></p><p>そこはまこがもさんが営む、まちの小さな助産院。</p><p><br></p><p>手作りサークルや、子どもたちへの「いのちのおはなし」を通して、</p><p>カルガモママの心は、少しずつ、ふわりとほぐれていきます。</p><p><br></p><p><br></p><h3>🏡 この絵本の舞台になった、やさしい助産院さん</h3><p><br></p><p>この絵本は 大阪府八尾市にある実在の助産院「さち助産院」さん をモデルにしています。</p><p><a href="https://assets.st-note.com/production/uploads/images/227687596/picture_pc_1680e895ff9f0748b4b88a3abac4f657.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227687596/picture_pc_1680e895ff9f0748b4b88a3abac4f657.png?width=1200" alt="画像" height="465" width="620"></a></p><p>カラフルなロゴがお出迎え</p><p><br></p><p><br></p><h3>📚 まずは絵本をゆっくりどうぞ</h3><p><br></p><p>HPの「えほん」の項目から、全文無料で試し読みできます♪</p><p><br></p><p><br></p><h3>🤱 どうして、この助産院を絵本にしたの？</h3><p><br></p><p>私が「さち助産院」さんを訪れたのは、娘が産まれたばかりのころ。</p><p>母乳ケアのために伺ったのが最初でした。</p><p><a href="https://assets.st-note.com/production/uploads/images/227687794/picture_pc_71caa5efc3121b972bc31df04e05eaa2.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227687794/picture_pc_71caa5efc3121b972bc31df04e05eaa2.png?width=1200" alt="画像" height="465" width="620"></a></p><p>院内はどこか懐かしく、ほっとする雰囲気</p><p><br></p><p>でもそのあと、助産院で開かれている お母さんたちの手作りサークル「はは部」 や、</p><p>赤ちゃん交流会に参加するようになって、</p><p>少しずつ、新しい友だちや繋がりが生まれました。</p><p><a href="https://assets.st-note.com/production/uploads/images/227688761/picture_pc_ae26167bdc426b9afee2a3acb21cd213.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227688761/picture_pc_ae26167bdc426b9afee2a3acb21cd213.png?width=1200" alt="画像" height="412" width="620"></a></p><p>毎週木曜開催の「はは部」</p><p><a href="https://assets.st-note.com/production/uploads/images/227689367/picture_pc_ce6119744dd023b9a05cefbc8201d9fb.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227689367/picture_pc_ce6119744dd023b9a05cefbc8201d9fb.png?width=1200" alt="画像" height="465" width="620"></a></p><p>お母さんたちが作品をつくるためのミシンも完備</p><p><a href="https://assets.st-note.com/production/uploads/images/227689408/picture_pc_ecc1c7a79258b1a6009f33cce77ef5dc.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227689408/picture_pc_ecc1c7a79258b1a6009f33cce77ef5dc.png?width=1200" alt="画像" height="465" width="620"></a></p><p>母目線の素敵な作品が日々生み出されている</p><p><br></p><p>最初は「体のケア」という目的で行っていた場所が、</p><p>気づけば 心がやわらぐ場所 になっていました。</p><p><br></p><p>「ここにいるだけで元気になれる。」</p><p>まさに、心のビタミン剤のような助産院。</p><p><br></p><p>少子化や孤独な育児が話題になる今、</p><p>こんな場所が、もっと多くの人に届いたらいいな…</p><p>そんな願いが、この絵本を描くきっかけでした。</p><p><a href="https://assets.st-note.com/production/uploads/images/227689468/picture_pc_2bf12e923ecea47439224964761f1e9e.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227689468/picture_pc_2bf12e923ecea47439224964761f1e9e.png?width=1200" alt="画像" height="827" width="620"></a></p><p>月一開催「おむすびの会」。親子の交流の場。</p><p><br></p><p><br></p><h3>👂絵本づくりのはじまりは「お話をきくこと」から</h3><p><br></p><p>「まちのえほん」シリーズは、まずモデルとなる方へのインタビューから始まります。</p><p>今回お話を伺ったのは、助産師の松村真帆子さん（まこっちゃん）。</p><p><a href="https://assets.st-note.com/production/uploads/images/227689866/picture_pc_7d8261b69b677b8f31c5ce8749853348.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227689866/picture_pc_7d8261b69b677b8f31c5ce8749853348.jpg?width=1200" alt="画像" height="559" width="620"></a></p><p>子供が大好き、ほっこり優しい雰囲気の助産師さん</p><p><br></p><p>助産師というお仕事を選んだきっかけや、これまで歩んできた道のり、「さち助産院」に込めた想い、大切にしていること、嬉しかったこと、そして、時には大変だったことまで…。</p><p>たくさんのことを、言葉を選びながら、ていねいに話してくださいました。</p><p><br></p><p>お話を聞くときは、内容だけでなく、その人の声のトーンや話すリズム、まなざしのあたたかさなど、「その人が持つ空気」も大切にしています。</p><p>インタビューを通じて、その方の雰囲気や人格から滲み出るものを、絵本の中にそっと落とし込めるように。</p><p><br></p><p>そうして聞いたお話を土台に、「絵本で何を伝えたいのか」をもう一度見つめ、登場キャラクターやストーリーの流れへと形にしていきます。</p><p><br></p><p><br></p><h3>🦆「まちのえほん」のこだわり ー 動物たちが暮らす、やさしい世界</h3><p><br></p><p>このシリーズでは、基本的に「人間」は登場しません。</p><p>助産師のまこっちゃんや、「はは部」に集うお母さんたちも、みんな動物の姿で描いています。</p><p><a href="https://assets.st-note.com/production/uploads/images/227691351/picture_pc_06e40e8978c858da770547bf6769d2f1.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227691351/picture_pc_06e40e8978c858da770547bf6769d2f1.png?width=1200" alt="画像" height="465" width="620"></a></p><p>「この人はなんの動物？」と考えるのが楽しい！</p><p><a href="https://assets.st-note.com/production/uploads/images/227691504/picture_pc_0f16270462ceaa33e09ff6af6ae6eb0c.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227691504/picture_pc_0f16270462ceaa33e09ff6af6ae6eb0c.png?width=1200" alt="画像" height="465" width="620"></a></p><p>カルガモやアイガモ、キーウィが登場</p><p><br></p><p>なぜかというと、人間のまま描いてしまうと、「お仕事紹介のための教育絵本」になってしまうように感じたから。</p><p>動物の世界に置きかえることで、年齢に関係なく、やさしく、ほっこりと読める絵本になると思いました。</p><p><br></p><p>今回、主人公の助産師・まこっちゃんは「まこがもさん」というカルガモにしました。</p><p>カルガモは渡りをせず、いつもまちの近くにいる鳥。</p><p>地域の中で、そっと寄り添い続けてくれる助産師さんのイメージに、ぴったりだと思ったからです。</p><p><a href="https://assets.st-note.com/production/uploads/images/227691663/picture_pc_832d32d88094f4cf4cf5fd36c8cf7fb2.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227691663/picture_pc_832d32d88094f4cf4cf5fd36c8cf7fb2.png?width=1200" alt="画像" height="430" width="620"></a></p><p>親子で並ぶ姿もかわいいカルガモはまさにぴったり</p><p><a href="https://assets.st-note.com/production/uploads/images/227692338/picture_pc_2dacb4e22db3224dd06bf6917524f31e.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227692338/picture_pc_2dacb4e22db3224dd06bf6917524f31e.png?width=1200" alt="画像" height="654" width="620"></a></p><p>絵本の中のじょさんいんの外観</p><p><br></p><p>「しあわせじょさんいん」の外観は、「ストローベイルハウス」という藁のブロックをモルタルで固めた建築様式の家がモデルです。</p><p>可愛い見た目でありながら、</p><p>サスティナブルな建築として注目されているそう。</p><p>藁や木の枝でお家を作るカルガモさんに</p><p>ぴったりな外観だと思いました。</p><p><a href="https://assets.st-note.com/production/uploads/images/227693328/picture_pc_f0c9bd1a29d5715ee64b7c30b429b251.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227693328/picture_pc_f0c9bd1a29d5715ee64b7c30b429b251.png?width=1200" alt="画像" height="413" width="620"></a></p><p>内装も、実際の助産院を参考にしている</p><p><a href="https://assets.st-note.com/production/uploads/images/227694295/picture_pc_0076cefa62f7f10d76f2ef91d5b2b464.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227694295/picture_pc_0076cefa62f7f10d76f2ef91d5b2b464.png?width=1200" alt="画像" height="380" width="620"></a></p><p>絵本の世界の地図。</p><p>実はこの地図は、さち助産院さんがある「大阪府八尾市」をもとに描いています。</p><p><a href="https://assets.st-note.com/production/uploads/images/227694631/picture_pc_5df0f18531d513c55cae0fe30e9a7f15.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227694631/picture_pc_5df0f18531d513c55cae0fe30e9a7f15.png?width=1200" alt="画像" height="928" width="620"></a></p><p>わかる人にはわかる、八尾のざっくり位置関係</p><p><a href="https://assets.st-note.com/production/uploads/images/227694676/picture_pc_13c6fba152cff6eac18135a98f67d0cc.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227694676/picture_pc_13c6fba152cff6eac18135a98f67d0cc.png?width=1200" alt="画像" height="759" width="620"></a></p><p>けっこう力作の地図、ぜひゆっくり見てください✨</p><p><br></p><p><br></p><h3>🌟「まちのえほん」に込めた願い</h3><p><br></p><p>この絵本を通して、</p><p>「こんな素敵な場所があったんだ！」</p><p>と知るきっかけになってくれたら嬉しいです。</p><p><br></p><p>チェーン店より、個人で営まれている場所に足を向けるのは、誰だって少し勇気がいること。</p><p>でも、「絵本で読んだことがある場所」だとしたら、ちょっと心のハードルが下がるかな？と思っています。</p><p><br></p><p>そして実際に足を運んでみたとき、</p><p>「このまちには、人とつながれる場所があるんだ」</p><p>そんな安心やあたたかさを感じてもらえたらと思っています。</p><p><br></p><p>また、これからの時代、子どもたちは “決められたことをこなす” のではなく、自分の視点で考え、新しい価値を生み出していくことが求められます。</p><p>身近に、こんな素敵な働き方をしている大人がいるんだよ、ということを伝えることは、子どもたちが「自分の生き方」を見つけるヒントにもなるはず。</p><p><br></p><p>「まちのえほん」がその小さなきっかけになれたら、とても嬉しいです。</p><p><a href="https://assets.st-note.com/production/uploads/images/227694997/picture_pc_92ad19ad2292df00cd861ad262be8d13.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227694997/picture_pc_92ad19ad2292df00cd861ad262be8d13.jpg?width=1200" alt="画像" height="465" width="620"></a></p><p>絵本のページをめくる、娘の小さな手に癒されます</p><p><br></p><p><br></p><h3>🤝絵本が そっと つなげてくれたご縁のこと</h3><p><br></p><p>『まこがもさんの しあわせ じょさんいん』を発売してから、数ヶ月が経ちました。</p><p>時間とともに、絵本を読んでくださった方や、その存在を知ってくださる方が、少しずつ増えてきているのを感じています。</p><p><br></p><p>最近とても嬉しかったのは、</p><p><br></p><p>「絵本を読んで、さち助産院さんを知りました！」</p><p><br></p><p>とお声をかけていただく機会が増えてきたこと。</p><p><br></p><p>そして、さらに嬉しい出来事があって…</p><p>絵本をきっかけにさち助産院さんを知ってくださっていた妊娠中のママさんが、なんと助産師・まこっちゃんと一緒に、コラボイベントを企画してくださいました✨</p><p><br></p><p>絵本を通じて、新しい場所や人に出会い、あたらしい繋がりが生まれていく。</p><p>まさに、私が「まちのえほん」に込めた願いが、現実としてひとつ芽を出したような出来事でした。</p><p><br></p><p>絵を描くことと同じで、最初は真っ白だった場所に、少しずつ線を引き、色を重ねていく。</p><p>気づいたときには、そこにあたたかい世界が広がっている。</p><p>絵本の中でも、現実の中でも、そんな瞬間が起こるのだな、と感じています。</p><p><a href="https://assets.st-note.com/production/uploads/images/227695301/picture_pc_73a3a95a1384cfc76e5e4f96c69d4765.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/227695301/picture_pc_73a3a95a1384cfc76e5e4f96c69d4765.png?width=1200" alt="画像" height="465" width="620"></a></p><p>これからもたくさんの人に読んでもらえますように</p><p><br></p><p>もちろん、これは絵本だけの力ではありません。</p><p>関わってくださる方、受けとってくださる方、それぞれの「やさしい循環」が重なって生まれたこと。</p><p>そのことをとても嬉しく思います。</p><p><br></p><p><br></p><h3>📖まちの中の絵本に会えるところ</h3><p><br></p><p>現在、八尾市内や東大阪のカフェ・助産院・民間図書室などに絵本を置かせていただいています。</p><p>見かけたら、どうぞ手に取って、ページをそっとめくってみてください☺️</p><p><br></p><p>今後も、少しずつ設置場所は増やしていけたらと思っています。</p><p>もし、</p><p><br></p><p>「うちにも置いていいよ」</p><p>「こんな場所があるよ」</p><p><br></p><p>という方がいらっしゃいましたら、公式LINEやInstagramよりお気軽にご連絡いただけたら、とても嬉しいです。</p><p><br></p><p><br></p><h3>🌱「まちのえほん」は、まちにまく「種」</h3><p><br></p><p>私は、「まちのえほん」を、まちの中にそっとまきおく種のような存在であってほしいと思います。</p><p>すぐに変化が見えるわけではないけれど、</p><p>ある日ふと気がついたら、小さな芽が出ていて、</p><p>いつのまにか、花が咲いている。</p><p><br></p><p>そんなふうに、</p><p>人と人、親と子、まちと人とが、</p><p>やさしくつながっていくきっかけになれたら。</p><p><br></p><p>これからも、ゆっくりと、大切に、育てていきたいと思っています。</p><p><br></p>
+  </div>
+</div>
+
+<div class="pager">
+  <a href="post-20260616-kgef.html" class="pager-link pager-prev">← すべての種には夢がある｜暮らしを育てると…</a>
+  <a href="post-20260616-wemn.html" class="pager-link pager-next">“数”を手放し、「作る」を取り戻す ——… →</a>
+</div>
+
+<footer>
+  <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
+  <p class="footer-copy">&copy; rishjuly</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ぶろぐ — まちのえほんやさん りさこっこ</title>
+<meta name="description" content="りさこっこのブログ。日々のこと、絵本のこと、暮らしのことを綴っています。">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #FDFCFA; --bg2: #F7F4F0;
+  --ink: #1A1714; --ink-mid: #5C5650; --ink-light: #A09890;
+  --line: #E8E2DA; --accent: #7BAF8A;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-main: 'Zen Maru Gothic', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(253,252,250,0.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 40px 10px; height: 60px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  animation: fadeInDown 0.7s ease both;
+}
+.nav-left { display: flex; flex-direction: column; gap: 1px; }
+.nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; line-height: 1.5; }
+.nav-right { display: flex; gap: 20px; align-items: center; }
+.nav-link { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
+.nav-link:hover { color: var(--ink); }
+
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); background: var(--bg); }
+.footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
+.footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
+
+.post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
+
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn     { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 720px) {
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+}
+
+.page-header {
+  padding: 100px 40px 56px; text-align: center;
+  border-bottom: 1px solid var(--line);
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+.page-header-kicker { font-size: 11px; letter-spacing: 0.28em; color: var(--ink-light); margin-bottom: 6px; }
+.page-header-title { font-family: var(--font-serif); font-size: 32px; font-weight: 400; letter-spacing: 0.08em; }
+
+.filter-wrap {
+  max-width: 900px; margin: 32px auto 0; padding: 0 40px;
+  display: flex; gap: 10px; flex-wrap: wrap;
+  animation: fadeIn 0.8s ease 0.4s both;
+}
+.filter-btn {
+  font-size: 11px; letter-spacing: 0.14em; color: var(--ink-mid);
+  border: 1px solid var(--line); background: none;
+  padding: 4px 14px; border-radius: 99px; cursor: pointer;
+  transition: all 0.2s; font-family: var(--font-main);
+}
+.filter-btn:hover, .filter-btn.active { color: var(--accent); border-color: var(--accent); }
+
+.posts-grid {
+  max-width: 900px; margin: 40px auto 80px; padding: 0 40px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+.post-card {
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+  border-bottom: 1px solid var(--line); padding-bottom: 32px;
+  transition: opacity 0.2s;
+}
+.post-card:hover { opacity: 0.65; }
+.card-thumb {
+  width: 100%; aspect-ratio: 3/2; object-fit: cover;
+  display: block; margin-bottom: 16px; border-radius: 2px;
+  background: var(--bg2);
+}
+.card-thumb-empty { width: 100%; aspect-ratio: 3/2; background: var(--bg2); margin-bottom: 16px; border-radius: 2px; border: 1px dashed var(--line); }
+.card-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.card-date { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); }
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.card-title { font-size: 15px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.7; margin-bottom: 8px; }
+.card-excerpt { font-size: 12px; color: var(--ink-mid); line-height: 1.9; letter-spacing: 0.04em; }
+.post-card.hidden { display: none; }
+
+@media (max-width: 720px) {
+  .posts-grid { grid-template-columns: 1fr; padding: 0 20px; gap: 32px; }
+  .filter-wrap { padding: 0 20px; }
+  .page-header { padding: 80px 20px 40px; }
+  footer { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
+    <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
+  </div>
+  <div class="nav-right">
+    <a href="index.html" class="nav-link">← トップへ</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <p class="page-header-kicker">ぶろぐ</p>
+  <h1 class="page-header-title">blog</h1>
+</div>
+
+<div class="filter-wrap" id="filterWrap">
+  <button class="filter-btn active" data-tag="all">すべて</button>
+    <button class="filter-btn" data-tag="まちのえほん">まちのえほん</button>
+    <button class="filter-btn" data-tag="イラスト">イラスト</button>
+    <button class="filter-btn" data-tag="グラレコ">グラレコ</button>
+    <button class="filter-btn" data-tag="シャッターアート">シャッターアート</button>
+    <button class="filter-btn" data-tag="余白">余白</button>
+    <button class="filter-btn" data-tag="家庭菜園">家庭菜園</button>
+    <button class="filter-btn" data-tag="手作り">手作り</button>
+    <button class="filter-btn" data-tag="振り返り">振り返り</button>
+    <button class="filter-btn" data-tag="日常">日常</button>
+    <button class="filter-btn" data-tag="物語のグラレコ">物語のグラレコ</button>
+    <button class="filter-btn" data-tag="絵本">絵本</button>
+    <button class="filter-btn" data-tag="絵本のある暮らし">絵本のある暮らし</button>
+    <button class="filter-btn" data-tag="絵本のような暮らし">絵本のような暮らし</button>
+    <button class="filter-btn" data-tag="絵本制作">絵本制作</button>
+    <button class="filter-btn" data-tag="自己紹介">自己紹介</button>
+    <button class="filter-btn" data-tag="裁縫">裁縫</button>
+</div>
+
+<div class="posts-grid" id="postsGrid">
+
+      <a class="post-card" href="post-20260616-13vy.html">
+        <img class="card-thumb" src="images/IMG_8717.PNG" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">日常</span><span class="post-tag">絵本のある暮らし</span><span class="post-tag">手作り</span><span class="post-tag">裁縫</span></span>
+          </div>
+          <p class="card-title">「これ買って！」より「これ作って！」って言ってほしい⸻娘と私のてづくり記録</p>
+          <p class="card-excerpt">この記事は2026年4月のアーカイブです。  新年度が始まりましたね。 娘は初めてのクラス替えを経験し、緊張しながらもニコニコと保育園に通っています。   4歳…</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260616-kqzq.html">
+        <img class="card-thumb" src="images/IMG_8713.PNG" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">日常</span><span class="post-tag">家庭菜園</span><span class="post-tag">絵本のある暮らし</span></span>
+          </div>
+          <p class="card-title">生きることは育てること──ラディッシュ収穫から感じたこと</p>
+          <p class="card-excerpt">この記事は2026年3月のアーカイブです。  春の芽吹きを感じる3月。 今日のnoteは、ラディッシュ収穫のお話です。 我が家のプランターは少し種まきが遅かった…</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260616-37ps.html">
+        <img class="card-thumb" src="images/IMG_8714.PNG" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">グラレコ</span><span class="post-tag">物語のグラレコ</span></span>
+          </div>
+          <p class="card-title">物語として記録する、りさこっこのグラフィックレコーディング</p>
+          <p class="card-excerpt">この記事は2026年1月のアーカイブです。  今回の記事では、 私が描いている「グラフィックレコーディング（グラレコ）」についてご紹介します。   グラフィック…</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260616-1pgx.html">
+        <img class="card-thumb" src="images/IMG_8715.PNG" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">日常</span><span class="post-tag">絵本のある暮らし</span><span class="post-tag">余白</span></span>
+          </div>
+          <p class="card-title">余白のあるアトリエにしたら、物語が息をしはじめた</p>
+          <p class="card-excerpt">この記事は2026年1月のアーカイブです。  2026年が始まりました。 2016年にイラストレーターとして活動を始めてから、この1月で10年を迎えます。  思…</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260616-wemn.html">
+        <img class="card-thumb" src="images/IMG_8716.PNG" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">日常</span><span class="post-tag">絵本のある暮らし</span><span class="post-tag">振り返り</span></span>
+          </div>
+          <p class="card-title">“数”を手放し、「作る」を取り戻す —— 創作と暮らしを見つめた2025年</p>
+          <p class="card-excerpt">この記事は2025年12月のアーカイブです。  今年も残すところ、あとわずかとなりました。 記憶が鮮明なうちに、あとから読み返して初心に戻れるよう、2025年の…</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260616-3921.html">
+        <img class="card-thumb" src="images/IMG_8098.PNG" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">絵本</span><span class="post-tag">まちのえほん</span><span class="post-tag">絵本制作</span></span>
+          </div>
+          <p class="card-title">まちと人がやさしくつながる絵本をつくる〜『まこがもさんの しあわせ じょさんいん』制作のおはなし〜</p>
+          <p class="card-excerpt">この記事は2025年11月のアーカイブとなっています🙏  こんにちは✨ イラストレーター・絵本作家のりさこっこです。  今日は、私が描いている「まちのえほんシリ…</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260616-kgef.html">
+        <img class="card-thumb" src="images/IMG_4063.jpg" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">家庭菜園</span><span class="post-tag">日常</span><span class="post-tag">絵本のような暮らし</span></span>
+          </div>
+          <p class="card-title">すべての種には夢がある｜暮らしを育てるということ</p>
+          <p class="card-excerpt">この記事は2025年10月のアーカイブとなっています🙏   お家で採れたバジルとミントを添えて。  新しいイラストが完成しました♪ サッと描くつもりだったのに、…</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260616-yo6s.html">
+        <img class="card-thumb" src="images/IMG_7038.JPG" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">シャッターアート</span></span>
+          </div>
+          <p class="card-title">シャッターアート＠平井製作所さん</p>
+          <p class="card-excerpt">この記事は2024年9月～10月のアーカイブとなっています🙏  2024年9月〜10月、大阪府八尾市の平井製作所さんのシャッターに絵を描かせていただきました。 …</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260616-6hy6.html">
+        <img class="card-thumb" src="images/IMG_2407.jpg" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">シャッターアート</span></span>
+          </div>
+          <p class="card-title">シャッターアート「わくわくする商店街」</p>
+          <p class="card-excerpt">この記事は2022年2月～4月のアーカイブとなっています🙏  2022年2月〜4月にかけて、阪神尼崎の三和本通商店街のシャッターに絵を描かせて頂きました！ かば…</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260616-snqa.html">
+        <img class="card-thumb" src="images/2019-06-19 12.12.32.jpg" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">シャッターアート</span></span>
+          </div>
+          <p class="card-title">シャッターアート「ペガサス」</p>
+          <p class="card-excerpt">この記事は2019年6月のアーカイブとなっています🙏  昨年、大阪城東区・南鴫野商店街で描かせて頂いたシャッターアート。  今年も鴫野でシャッターにペイントさせ…</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260616-dncs.html">
+        <img class="card-thumb" src="images/親ペンギン仕上げ3.jpg" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.16</span>
+            <span class="card-tags"><span class="post-tag">シャッターアート</span></span>
+          </div>
+          <p class="card-title">シャッターアート「太陽が似合う町、太陽が似合う家族」</p>
+          <p class="card-excerpt">この記事は2018年5月のアーカイブとなっています🙏  大阪城東区、南鴫野商店街でシャッターアート🐧🎨 描かせて頂きました😊😊！！ 人生で一番大きい絵だったので…</p>
+        </div>
+      </a>
+
+      <a class="post-card" href="post-20260608-99yv.html">
+        <img class="card-thumb" src="images/IMG_8712.PNG" alt="">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">2026.06.08</span>
+            <span class="card-tags"><span class="post-tag">自己紹介</span><span class="post-tag">日常</span><span class="post-tag">イラスト</span><span class="post-tag">絵本</span></span>
+          </div>
+          <p class="card-title">はじめまして 〜 about me 〜</p>
+          <p class="card-excerpt">大阪府八尾市在住の、イラストレーター・絵本作家です。 やさしい色と線で、動物たちの暮らしや、絵本のような世界を描いています。   日々の暮らしの中で出会う小さな…</p>
+        </div>
+      </a>
+</div>
+
+<footer>
+  <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
+  <p class="footer-copy">&copy; rishjuly</p>
+</footer>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const tag = btn.dataset.tag;
+    document.querySelectorAll('.post-card').forEach(card => {
+      if (tag === 'all') { card.classList.remove('hidden'); return; }
+      const tags = [...card.querySelectorAll('.post-tag')].map(t => t.textContent);
+      card.classList.toggle('hidden', !tags.includes(tag));
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>シャッターアート「わくわくする商店街」 — まちのえほんやさん りさこっこ</title>
+<meta name="description" content="この記事は2022年2月～4月のアーカイブとなっています🙏  2022年2月〜4月にかけて、阪神尼崎の三和本通商店街のシャッターに絵を描かせて頂きました！ かば">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #FDFCFA; --bg2: #F7F4F0;
+  --ink: #1A1714; --ink-mid: #5C5650; --ink-light: #A09890;
+  --line: #E8E2DA; --accent: #7BAF8A;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-main: 'Zen Maru Gothic', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(253,252,250,0.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  padding: 0 40px 10px; height: 60px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  animation: fadeInDown 0.7s ease both;
+}
+.nav-left { display: flex; flex-direction: column; gap: 1px; }
+.nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; line-height: 1.5; }
+.nav-right { display: flex; gap: 20px; align-items: center; }
+.nav-link { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
+.nav-link:hover { color: var(--ink); }
+
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); background: var(--bg); }
+.footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
+.footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
+
+.post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
+
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn     { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 720px) {
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+}
+
+.article-wrap {
+  max-width: 680px; margin: 0 auto;
+  padding: 100px 40px 80px;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+.article-meta {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.article-date { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-light); }
+.article-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.article-title {
+  font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65;
+  margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--line);
+}
+.article-thumb {
+  width: 100%; max-height: 400px; object-fit: cover;
+  border-radius: 2px; display: block; margin-bottom: 40px;
+}
+.article-body {
+  font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; color: var(--ink);
+}
+.article-body h2 { font-size: 18px; font-weight: 500; letter-spacing: 0.08em; margin: 32px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; letter-spacing: 0.07em; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 0; }
+.article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
+.article-body ul, .article-body ol { padding-left: 1.5em; margin-bottom: 8px; }
+.article-body li { margin-bottom: 4px; }
+.article-body strong { font-weight: 500; }
+.article-body a { color: var(--ink-mid); }
+
+.pager {
+  max-width: 680px; margin: 0 auto;
+  padding: 40px 40px 80px;
+  display: flex; justify-content: space-between; gap: 20px;
+  border-top: 1px solid var(--line);
+}
+.pager-link {
+  font-size: 12px; letter-spacing: 0.1em; color: var(--ink-mid);
+  text-decoration: none; line-height: 1.6; transition: color 0.2s;
+  max-width: 45%;
+}
+.pager-link:hover { color: var(--ink); }
+.pager-prev { text-align: left; }
+.pager-next { text-align: right; }
+
+@media (max-width: 720px) {
+  .article-wrap { padding: 80px 20px 60px; }
+  .article-title { font-size: 20px; }
+  .pager { padding: 32px 20px 60px; }
+  footer { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
+    <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
+  </div>
+  <div class="nav-right">
+    <a href="posts.html" class="nav-link">← ぶろぐ一覧</a>
+  </div>
+</nav>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="article-date">2026.06.16</span>
+    <span class="article-tags"><span class="post-tag">シャッターアート</span></span>
+  </div>
+  <h1 class="article-title">シャッターアート「わくわくする商店街」</h1>
+  <img class="article-thumb" src="images/IMG_2407.jpg" alt="シャッターアート「わくわくする商店街」">
+  <div class="article-body">
+    <p>この記事は2022年2月～4月のアーカイブとなっています🙏</p><p><br></p><p>2022年2月〜4月にかけて、阪神尼崎の三和本通商店街のシャッターに絵を描かせて頂きました！</p><p>かばん店「ます屋」さんというお店の大きいシャッターです。</p><p><br></p><p>「わくわくする商店街」をテーマに、楽しんで描かせて頂きました。</p><p>今回は「ゆりんぐ」さん、きりん燈さんという作家さん2名様との共作でした。</p><p><a href="https://assets.st-note.com/img/1761231229-MTt1rpL7KUOgfdncoEZPAbJj.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1761231229-MTt1rpL7KUOgfdncoEZPAbJj.jpg?width=1200" alt="画像" height="465" width="620"></a></p><p><br></p><p>当日はたくさんのペンキを使って絵を描きました。</p><p>商店街を通る人たちに声をかけていただいたり、差し入れのコーヒーなどもいただいてしまいました！</p><p><a href="https://assets.st-note.com/img/1761231673-I64LN2fsVlhiZODypjKEctgF.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1761231673-I64LN2fsVlhiZODypjKEctgF.png?width=1200" alt="画像" height="880" width="620"></a></p><p><a href="https://assets.st-note.com/img/1761231690-54h1NEv0Se9LPqztQuswpMJW.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1761231690-54h1NEv0Se9LPqztQuswpMJW.jpg?width=1200" alt="画像" height="826" width="620"></a></p><p>神戸新聞でも大きく記事にしていただきました！</p><p>3人で描いたシャッターは、 とっても華やかになりました。</p><p><a href="https://assets.st-note.com/img/1761231908-TN6OXQ5pg3xAZlCWVF9Us1rz.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1761231908-TN6OXQ5pg3xAZlCWVF9Us1rz.png?width=1200" alt="画像" height="182" width="620"></a></p><p>お近くを通られたらぜひ、見にいっていただけると嬉しいです！</p><p><br></p><p>シャッターアートが見られるのは、こちらのお店がお休みの木曜日か、閉店後の19時以降からになりますので、ご注意ください。</p><p><br></p><p>一緒に描いてくださった作家のゆりんぐさんときりん燈さん、協力していただいた商店街の皆さん、ありがとうございました！</p><p><a href="https://assets.st-note.com/img/1761231941-I4xZfByCKnbAV5JYtsXDRP21.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1761231941-I4xZfByCKnbAV5JYtsXDRP21.png?width=1200" alt="画像" height="827" width="620"></a></p><p>今回は暖かい日だったので、娘ちゃんも着いてきてもらいました！一緒に写真を撮れて大感激です。</p><p><br></p><p>【シャッターの場所】</p><p>兵庫県尼崎市神田中通５丁目１９３</p><p>三和本通商店街のかばん店「ます屋」さん</p><p>（毎日朝9時30分頃までと夜7時頃以降、定休日木曜日の終日見られます）</p>
+  </div>
+</div>
+
+<div class="pager">
+  <a href="post-20260616-snqa.html" class="pager-link pager-prev">← シャッターアート「ペガサス」…</a>
+  <a href="post-20260616-yo6s.html" class="pager-link pager-next">シャッターアート＠平井製作所さん… →</a>
+</div>
+
+<footer>
+  <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
+  <p class="footer-copy">&copy; rishjuly</p>
+</footer>
+</body>
+</html>

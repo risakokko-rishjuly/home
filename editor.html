@@ -560,20 +560,49 @@ async function pushFile(path, contentBase64, message) {
   return res.ok;
 }
 
-// LOAD POSTS
+// LOAD POSTS — posts.html の data-* 属性から記事リストを復元
 async function loadPostsFromGitHub() {
   const { user, repo, token } = getSettings();
   if (!user || !repo || !token) return;
   try {
-    const res = await ghFetch('posts.js');
+    const res = await ghFetch('posts.html');
     if (!res.ok) { renderSidebar(); return; }
     const data = await res.json();
     const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
-    const match = raw.match(/const posts = (\[[\s\S]*\]);/);
-    if (match) posts = JSON.parse(match[1]);
+    // <a class="post-item" data-id="..." data-title="..." data-date="..." data-tags="..." data-thumbnail="...">
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(raw, 'text/html');
+    const items = doc.querySelectorAll('.post-item[data-id]');
+    posts = Array.from(items).map(el => ({
+      id:        el.dataset.id,
+      title:     el.dataset.title,
+      date:      el.dataset.date,
+      tags:      el.dataset.tags ? el.dataset.tags.split(',').filter(Boolean) : [],
+      thumbnail: el.dataset.thumbnail || '',
+      content:   '',
+      content_html: ''
+    }));
     renderSidebar();
     if (posts.length > 0) selectPost(0);
   } catch(e) { renderSidebar(); }
+}
+
+// 個別記事ページを GitHub から読み込んでエディタに展開
+async function loadPostContent(post) {
+  const filename = `post-${post.id}.html`;
+  try {
+    const res = await ghFetch(filename);
+    if (!res.ok) return;
+    const data = await res.json();
+    const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(raw, 'text/html');
+    const bodyEl = doc.querySelector('.article-body');
+    if (bodyEl) {
+      post.content_html = bodyEl.innerHTML;
+      post.content = bodyEl.textContent;
+    }
+  } catch(e) { /* 読み込み失敗は無視 */ }
 }
 
 // DRAFT
@@ -669,24 +698,28 @@ function renderSidebar() {
   `).join('');
 }
 
-function selectPost(i) {
+async function selectPost(i) {
   currentIndex = i;
   const p = posts[i];
   document.getElementById('postTitle').value = p.title || '';
   document.getElementById('postDate').value = p.date || '';
   document.getElementById('postTags').value = (p.tags||[]).join(', ');
+  // 本文がまだ読み込まれていなければGitHubから取得
+  if (!p.content_html) {
+    quill.setText('読み込み中...');
+    await loadPostContent(p);
+  }
   if (p.content_html) {
     quill.root.innerHTML = p.content_html;
-  } else if (p.content) {
-    quill.setText(p.content);
   } else {
-    quill.setText('');
+    quill.setText(p.content || '');
   }
   thumbFile = null;
   thumbFileName = p.thumbnail || '';
   if (p.thumbnail) {
+    const { user, repo } = getSettings();
     document.getElementById('thumbPreview').classList.add('show');
-    document.getElementById('thumbImg').src = p.thumbnail;
+    document.getElementById('thumbImg').src = `https://raw.githubusercontent.com/${user}/${repo}/main/${p.thumbnail}`;
     document.getElementById('thumbName').textContent = p.thumbnail.replace('images/','');
     document.getElementById('thumbPath').textContent = p.thumbnail;
     document.getElementById('thumbDrop').style.display = 'none';
@@ -710,7 +743,7 @@ function newPost() {
   updatePreview();
 }
 
-function deletePost() {
+async function deletePost() {
   if (currentTab === 'drafts') {
     if (currentDraftIndex < 0) { showToast('下書きが選択されていません', 'error'); return; }
     if (!confirm('この下書きを削除しますか？')) return;
@@ -720,10 +753,32 @@ function deletePost() {
     currentDraftIndex = -1; newPost(); renderSidebar(); return;
   }
   if (currentIndex < 0) { showToast('記事が選択されていません', 'error'); return; }
-  if (!confirm('この記事を削除しますか？')) return;
-  posts.splice(currentIndex, 1);
-  currentIndex = posts.length > 0 ? 0 : -1;
-  if (currentIndex >= 0) selectPost(0); else newPost();
+  if (!confirm('この記事を削除しますか？（GitHubからも削除されます）')) return;
+
+  const post = posts[currentIndex];
+  try {
+    // 個別記事HTMLをGitHubから削除
+    const sha = await getFileSha(`post-${post.id}.html`);
+    if (sha) {
+      await ghFetch(`post-${post.id}.html`, {
+        method: 'DELETE',
+        body: JSON.stringify({ message: `Delete post: ${post.title}`, sha })
+      });
+    }
+    posts.splice(currentIndex, 1);
+    currentIndex = posts.length > 0 ? 0 : -1;
+
+    // posts.html を更新
+    const postsHtml = buildPostsHtml(posts);
+    const postsBase64 = btoa(unescape(encodeURIComponent(postsHtml)));
+    await pushFile('posts.html', postsBase64, `Delete post: ${post.title}`);
+    await updateIndexBlog(posts);
+
+    showToast('削除しました', 'success');
+    if (currentIndex >= 0) selectPost(0); else newPost();
+  } catch(e) {
+    showToast('削除エラー: ' + e.message, 'error');
+  }
 }
 
 // THUMBNAIL
@@ -826,9 +881,12 @@ async function publish() {
     const date = document.getElementById('postDate').value;
     const tags = document.getElementById('postTags').value.split(',').map(t=>t.trim()).filter(Boolean);
     const content_html = quill.root.innerHTML;
-    // 本文テキストも保持（後方互換）
     const content = quill.getText().trim();
-    const id = (date||'').replace(/-/g,'') + '-' + Math.random().toString(36).slice(2,6);
+
+    // ID確定（新規 or 既存）
+    const id = (currentIndex >= 0 && posts[currentIndex]?.id)
+      ? posts[currentIndex].id
+      : (date||'').replace(/-/g,'') + '-' + Math.random().toString(36).slice(2,6);
 
     // サムネイルアップロード
     let thumbnail = thumbFileName;
@@ -839,31 +897,287 @@ async function publish() {
       thumbnail = `images/${thumbFile.name}`;
     }
 
-    // 本文HTMLをそのまま使用（画像は挿入時にアップロード済み）
     const post = { id, title, date, tags, thumbnail, content, content_html };
+
+    // posts 配列を更新
     if (currentIndex >= 0) {
-      post.id = posts[currentIndex].id || id;
       posts[currentIndex] = post;
     } else {
       posts.unshift(post);
       currentIndex = 0;
     }
 
-    const postsJs = 'const posts = ' + JSON.stringify(posts, null, 2) + ';\n';
-    const postsBase64 = btoa(unescape(encodeURIComponent(postsJs)));
-    const ok = await pushFile('posts.js', postsBase64, `Update posts: ${title}`);
-    if (ok) {
-      bodyImages = [];
-      showToast('GitHubに公開しました 🎉', 'success');
-      renderSidebar();
-    } else {
-      showToast('公開に失敗しました', 'error');
-    }
+    // ① 個別記事HTML を生成してpush
+    const articleHtml = buildArticleHtml(post, posts);
+    const articleBase64 = btoa(unescape(encodeURIComponent(articleHtml)));
+    const okArticle = await pushFile(`post-${id}.html`, articleBase64, `Post: ${title}`);
+    if (!okArticle) { showToast('記事ページの公開に失敗しました', 'error'); return; }
+
+    // ② posts.html を再生成してpush
+    const postsHtml = buildPostsHtml(posts);
+    const postsBase64 = btoa(unescape(encodeURIComponent(postsHtml)));
+    const okPosts = await pushFile('posts.html', postsBase64, `Update posts list: ${title}`);
+    if (!okPosts) { showToast('一覧ページの更新に失敗しました', 'error'); return; }
+
+    // ③ index.html のブログ最新3件を更新
+    await updateIndexBlog(posts);
+
+    bodyImages = [];
+    showToast('GitHubに公開しました 🎉', 'success');
+    renderSidebar();
   } catch(e) {
     showToast('エラー: ' + e.message, 'error');
   } finally {
     btn.disabled = false; btn.textContent = '↑ GitHubへ公開';
   }
+}
+
+// ── HTML ビルダー ──────────────────────────────────
+
+const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">`;
+
+const COMMON_CSS = `
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #FDFCFA; --bg2: #F7F4F0; --ink: #1A1714;
+  --ink-mid: #5C5650; --ink-light: #A09890; --line: #E8E2DA;
+  --accent: #7BAF8A;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-main: 'Zen Maru Gothic', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
+nav { position: fixed; top:0; left:0; right:0; z-index:100; background: rgba(253,252,250,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 40px 10px; height: 60px; display: flex; align-items: flex-end; justify-content: space-between; animation: fadeInDown 0.7s ease both; }
+.nav-left { display: flex; flex-direction: column; gap: 1px; }
+.nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: var(--ink); }
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); }
+.footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
+.footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
+.post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
+@keyframes fadeInDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }`;
+
+const NAV_HTML = `<nav>
+  <div class="nav-left">
+    <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
+    <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
+  </div>
+  <a href="posts.html" class="nav-back">← ぶろぐ一覧</a>
+</nav>`;
+
+const FOOTER_HTML = `<footer>
+  <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
+  <p class="footer-copy">&copy; rishjuly</p>
+</footer>`;
+
+function fmtDate(s) {
+  if (!s) return '';
+  const [y,m,d] = s.split('-');
+  return `${y}.${m}.${d}`;
+}
+
+function buildArticleHtml(post, allPosts) {
+  const idx = allPosts.findIndex(p => p.id === post.id);
+  const prev = allPosts[idx + 1];
+  const next = allPosts[idx - 1];
+  const prevHtml = prev ? `<a href="post-${prev.id}.html" class="prev">${prev.title}</a>` : '<span></span>';
+  const nextHtml = next ? `<a href="post-${next.id}.html" class="next">${next.title}</a>` : '<span></span>';
+  const tagsHtml = (post.tags||[]).map(t=>`<span class="post-tag">${t}</span>`).join(' ');
+  const thumbHtml = post.thumbnail ? `<img class="article-thumbnail" src="${post.thumbnail}" alt="">` : '';
+
+  return `<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${post.title} — まちのえほんやさん りさこっこ</title>
+<link rel="icon" type="image/png" href="favicon.png">
+${FONTS}
+<style>
+${COMMON_CSS}
+.article-wrap { padding-top: 60px; }
+.article-inner { max-width: 680px; margin: 0 auto; padding: 60px 40px 100px; animation: fadeInUp 0.7s ease 0.2s both; }
+.article-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.article-date { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-light); }
+.article-title { font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.article-thumbnail { width: 100%; max-height: 420px; object-fit: cover; border-radius: 2px; margin-bottom: 40px; display: block; }
+.article-body { font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; }
+.article-body h2 { font-size: 19px; font-weight: 500; margin: 36px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 10px; }
+.article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
+.article-body ul, .article-body ol { padding-left: 1.6em; margin-bottom: 10px; }
+.article-body li { margin-bottom: 4px; }
+.article-body strong { font-weight: 500; }
+.article-body a { color: var(--ink-mid); }
+.article-nav { display: flex; justify-content: space-between; gap: 20px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+.article-nav a { font-size: 12px; letter-spacing: 0.14em; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; max-width: 45%; line-height: 1.7; }
+.article-nav a:hover { color: var(--ink); }
+.article-nav .prev::before { content: '← '; }
+.article-nav .next::after  { content: ' →'; }
+.article-nav .next { text-align: right; }
+@media (max-width: 720px) {
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+  .article-inner { padding: 40px 20px 80px; }
+  .article-title { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+${NAV_HTML}
+<div class="article-wrap">
+  <div class="article-inner">
+    <div class="article-meta">
+      <span class="article-date">${fmtDate(post.date)}</span>
+      ${tagsHtml}
+    </div>
+    <h1 class="article-title">${post.title}</h1>
+    ${thumbHtml}
+    <div class="article-body">
+${post.content_html}
+    </div>
+    <nav class="article-nav">
+      ${prevHtml}
+      ${nextHtml}
+    </nav>
+  </div>
+</div>
+${FOOTER_HTML}
+</body>
+</html>`;
+}
+
+function buildPostsHtml(allPosts) {
+  const allTags = [...new Set(allPosts.flatMap(p => p.tags||[]))];
+  const filterBtns = ['<button class="filter-btn active" data-tag="all">すべて</button>',
+    ...allTags.map(t=>`<button class="filter-btn" data-tag="${t}">${t}</button>`)].join('\n  ');
+
+  const items = allPosts.map(p => {
+    const tagsStr = (p.tags||[]).join(',');
+    const tagsHtml = (p.tags||[]).map(t=>`<span class="post-tag">${t}</span>`).join(' ');
+    const excerpt = (p.content||'').replace(/\n/g,' ').slice(0,80) + ((p.content||'').length>80?'…':'');
+    return `  <a class="post-item" href="post-${p.id}.html" data-id="${p.id}" data-title="${p.title.replace(/"/g,'&quot;')}" data-date="${p.date||''}" data-tags="${tagsStr}" data-thumbnail="${p.thumbnail||''}">
+    <div class="post-date">${fmtDate(p.date)}</div>
+    <div>
+      <div class="post-tags">${tagsHtml}</div>
+      <div class="post-title">${p.title}</div>
+      <div class="post-excerpt">${excerpt}</div>
+    </div>
+  </a>`;
+  }).join('\n');
+
+  return `<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ぶろぐ — まちのえほんやさん りさこっこ</title>
+<link rel="icon" type="image/png" href="favicon.png">
+${FONTS}
+<style>
+${COMMON_CSS}
+.page-header { padding-top: 60px; padding-bottom: 48px; text-align: center; border-bottom: 1px solid var(--line); animation: fadeInUp 0.8s ease 0.2s both; }
+.page-header-kicker { font-size: 11px; letter-spacing: 0.28em; color: var(--ink-light); margin-bottom: 6px; padding-top: 40px; }
+.page-header-title { font-family: var(--font-serif); font-size: 32px; font-weight: 400; letter-spacing: 0.08em; }
+.filter-wrap { max-width: 760px; margin: 0 auto; padding: 28px 40px 0; display: flex; gap: 10px; flex-wrap: wrap; animation: fadeIn 0.8s ease 0.4s both; }
+.filter-btn { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-mid); border: 1px solid var(--line); background: none; padding: 4px 14px; border-radius: 99px; cursor: pointer; transition: all 0.2s; font-family: var(--font-main); }
+.filter-btn:hover, .filter-btn.active { color: var(--accent); border-color: var(--accent); }
+.posts-wrap { max-width: 760px; margin: 0 auto; padding: 0 40px 100px; animation: fadeInUp 0.8s ease 0.3s both; }
+.post-list { display: flex; flex-direction: column; }
+.post-item { display: grid; grid-template-columns: 96px 1fr; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; transition: opacity 0.2s; align-items: start; }
+.post-item:first-child { border-top: 1px solid var(--line); }
+.post-item:hover { opacity: 0.55; }
+.post-date { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); padding-top: 4px; }
+.post-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 7px; }
+.post-title { font-size: 16px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.65; margin-bottom: 8px; }
+.post-excerpt { font-size: 13px; color: var(--ink-mid); line-height: 1.9; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+@media (max-width: 720px) {
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+  .page-header-title { font-size: 24px; }
+  .filter-wrap, .posts-wrap { padding-left: 20px; padding-right: 20px; }
+  .post-item { grid-template-columns: 72px 1fr; gap: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
+    <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
+  </div>
+  <a href="index.html" class="nav-back">← トップへ</a>
+</nav>
+<div class="page-header">
+  <p class="page-header-kicker">ぶろぐ</p>
+  <h1 class="page-header-title">blog</h1>
+</div>
+<div class="filter-wrap" id="filterWrap">
+  ${filterBtns}
+</div>
+<div class="posts-wrap">
+  <div class="post-list" id="postList">
+${items}
+  </div>
+</div>
+${FOOTER_HTML}
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const tag = btn.dataset.tag;
+    document.querySelectorAll('.post-item').forEach(item => {
+      item.style.display = (tag === 'all' || item.dataset.tags.split(',').includes(tag)) ? '' : 'none';
+    });
+  });
+});
+<\/script>
+</body>
+</html>`;
+}
+
+// index.html のブログ最新3件を更新
+async function updateIndexBlog(allPosts) {
+  try {
+    const res = await ghFetch('index.html');
+    if (!res.ok) return;
+    const data = await res.json();
+    const sha = data.sha;
+    let raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+
+    const recent = allPosts.slice(0, 3);
+    const itemsHtml = recent.map(p => {
+      const tagsHtml = (p.tags||[]).map(t=>`<span class="post-tag">${t}</span>`).join('');
+      const excerpt = (p.content||'').replace(/\n/g,' ').slice(0,60) + ((p.content||'').length>60?'…':'');
+      return `        <a class="post-item" href="post-${p.id}.html">
+          <div class="post-date">${fmtDate(p.date)}</div>
+          <div>
+            <div class="post-tags">${tagsHtml}</div>
+            <div class="post-title">${p.title}</div>
+            <div class="post-excerpt">${excerpt}</div>
+          </div>
+        </a>`;
+    }).join('\n');
+
+    // post-list div の中身を差し替え
+    const updated = raw.replace(
+      /(<div class="post-list"[^>]*>)([\s\S]*?)(<\/div>\s*<div class="blog-more-wrap")/,
+      `$1\n${itemsHtml}\n      $3`
+    );
+    if (updated === raw) return; // パターンが見つからなければスキップ
+    const b64 = btoa(unescape(encodeURIComponent(updated)));
+    await ghFetch('index.html', {
+      method: 'PUT',
+      body: JSON.stringify({ message: 'Update blog preview', content: b64, sha })
+    });
+  } catch(e) { /* index.html更新失敗は無視 */ }
 }
 
 function fileToBase64(file) {
