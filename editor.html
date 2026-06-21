@@ -560,28 +560,37 @@ async function pushFile(path, contentBase64, message) {
   return res.ok;
 }
 
-// LOAD POSTS — posts.html の data-* 属性から記事リストを復元
+// LOAD POSTS — posts.html から記事リストを復元
+// data-id属性方式 と post-card方式 の両方に対応
 async function loadPostsFromGitHub() {
   const { user, repo, token } = getSettings();
   if (!user || !repo || !token) return;
   try {
-    const res = await ghFetch('posts.html');
+    const res = await ghFetch("posts.html");
     if (!res.ok) { renderSidebar(); return; }
     const data = await res.json();
-    const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
-    // <a class="post-item" data-id="..." data-title="..." data-date="..." data-tags="..." data-thumbnail="...">
+    const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,""))));
     const parser = new DOMParser();
-    const doc = parser.parseFromString(raw, 'text/html');
-    const items = doc.querySelectorAll('.post-item[data-id]');
-    posts = Array.from(items).map(el => ({
-      id:        el.dataset.id,
-      title:     el.dataset.title,
-      date:      el.dataset.date,
-      tags:      el.dataset.tags ? el.dataset.tags.split(',').filter(Boolean) : [],
-      thumbnail: el.dataset.thumbnail || '',
-      content:   '',
-      content_html: ''
-    }));
+    const doc = parser.parseFromString(raw, "text/html");
+    const itemsA = doc.querySelectorAll(".post-item[data-id]");
+    if (itemsA.length > 0) {
+      posts = Array.from(itemsA).map(el => ({
+        id: el.dataset.id, title: el.dataset.title, date: el.dataset.date,
+        tags: el.dataset.tags ? el.dataset.tags.split(",").filter(Boolean) : [],
+        thumbnail: el.dataset.thumbnail || "", content: "", content_html: ""
+      }));
+    } else {
+      const itemsB = doc.querySelectorAll("a.post-card[href]");
+      posts = Array.from(itemsB).map(el => {
+        const id = (el.getAttribute("href") || "").replace("post-", "").replace(".html", "");
+        const title = el.querySelector(".card-title")?.textContent.trim() || "";
+        const dateRaw = el.querySelector(".card-date")?.textContent.trim() || "";
+        const date = dateRaw.replace(/\./g, "-");
+        const tags = Array.from(el.querySelectorAll(".post-tag")).map(t => t.textContent.trim());
+        const thumbnail = el.querySelector("img.card-thumb")?.getAttribute("src") || "";
+        return { id, title, date, tags, thumbnail, content: "", content_html: "" };
+      });
+    }
     renderSidebar();
     if (posts.length > 0) selectPost(0);
   } catch(e) { renderSidebar(); }
@@ -1056,20 +1065,25 @@ ${FOOTER_HTML}
 function buildPostsHtml(allPosts) {
   const allTags = [...new Set(allPosts.flatMap(p => p.tags||[]))];
   const filterBtns = ['<button class="filter-btn active" data-tag="all">すべて</button>',
-    ...allTags.map(t=>`<button class="filter-btn" data-tag="${t}">${t}</button>`)].join('\n  ');
+    ...allTags.map(t=>`<button class="filter-btn" data-tag="${t}">${t}</button>`)].join('\n    ');
 
-  const items = allPosts.map(p => {
-    const tagsStr = (p.tags||[]).join(',');
-    const tagsHtml = (p.tags||[]).map(t=>`<span class="post-tag">${t}</span>`).join(' ');
+  const cards = allPosts.map(p => {
+    const tagsHtml = (p.tags||[]).map(t=>`<span class="post-tag">${t}</span>`).join('');
     const excerpt = (p.content||'').replace(/\n/g,' ').slice(0,80) + ((p.content||'').length>80?'…':'');
-    return `  <a class="post-item" href="post-${p.id}.html" data-id="${p.id}" data-title="${p.title.replace(/"/g,'&quot;')}" data-date="${p.date||''}" data-tags="${tagsStr}" data-thumbnail="${p.thumbnail||''}">
-    <div class="post-date">${fmtDate(p.date)}</div>
-    <div>
-      <div class="post-tags">${tagsHtml}</div>
-      <div class="post-title">${p.title}</div>
-      <div class="post-excerpt">${excerpt}</div>
-    </div>
-  </a>`;
+    const thumbHtml = p.thumbnail
+      ? `<img class="card-thumb" src="${p.thumbnail}" alt="">`
+      : `<div class="card-thumb-empty"></div>`;
+    return `      <a class="post-card" href="post-${p.id}.html">
+        ${thumbHtml}
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-date">${fmtDate(p.date)}</span>
+            <span class="card-tags">${tagsHtml}</span>
+          </div>
+          <p class="card-title">${p.title}</p>
+          <p class="card-excerpt">${excerpt}</p>
+        </div>
+      </a>`;
   }).join('\n');
 
   return `<!DOCTYPE html>
@@ -1082,27 +1096,33 @@ function buildPostsHtml(allPosts) {
 ${FONTS}
 <style>
 ${COMMON_CSS}
-.page-header { padding-top: 60px; padding-bottom: 48px; text-align: center; border-bottom: 1px solid var(--line); animation: fadeInUp 0.8s ease 0.2s both; }
-.page-header-kicker { font-size: 11px; letter-spacing: 0.28em; color: var(--ink-light); margin-bottom: 6px; padding-top: 40px; }
+.nav-right { display: flex; gap: 20px; align-items: center; }
+.nav-link { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
+.nav-link:hover { color: var(--ink); }
+.page-header { padding: 100px 40px 56px; text-align: center; border-bottom: 1px solid var(--line); animation: fadeInUp 0.8s ease 0.2s both; }
+.page-header-kicker { font-size: 11px; letter-spacing: 0.28em; color: var(--ink-light); margin-bottom: 6px; }
 .page-header-title { font-family: var(--font-serif); font-size: 32px; font-weight: 400; letter-spacing: 0.08em; }
-.filter-wrap { max-width: 760px; margin: 0 auto; padding: 28px 40px 0; display: flex; gap: 10px; flex-wrap: wrap; animation: fadeIn 0.8s ease 0.4s both; }
+.filter-wrap { max-width: 900px; margin: 32px auto 0; padding: 0 40px; display: flex; gap: 10px; flex-wrap: wrap; animation: fadeIn 0.8s ease 0.4s both; }
 .filter-btn { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-mid); border: 1px solid var(--line); background: none; padding: 4px 14px; border-radius: 99px; cursor: pointer; transition: all 0.2s; font-family: var(--font-main); }
 .filter-btn:hover, .filter-btn.active { color: var(--accent); border-color: var(--accent); }
-.posts-wrap { max-width: 760px; margin: 0 auto; padding: 0 40px 100px; animation: fadeInUp 0.8s ease 0.3s both; }
-.post-list { display: flex; flex-direction: column; }
-.post-item { display: grid; grid-template-columns: 96px 1fr; gap: 32px; padding: 28px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; transition: opacity 0.2s; align-items: start; }
-.post-item:first-child { border-top: 1px solid var(--line); }
-.post-item:hover { opacity: 0.55; }
-.post-date { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); padding-top: 4px; }
-.post-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 7px; }
-.post-title { font-size: 16px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.65; margin-bottom: 8px; }
-.post-excerpt { font-size: 13px; color: var(--ink-mid); line-height: 1.9; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.posts-grid { max-width: 900px; margin: 40px auto 80px; padding: 0 40px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; animation: fadeInUp 0.8s ease 0.3s both; }
+.post-card { display: flex; flex-direction: column; text-decoration: none; color: inherit; border-bottom: 1px solid var(--line); padding-bottom: 32px; transition: opacity 0.2s; }
+.post-card:hover { opacity: 0.65; }
+.card-thumb { width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; margin-bottom: 16px; border-radius: 2px; background: var(--bg2); }
+.card-thumb-empty { width: 100%; aspect-ratio: 3/2; background: var(--bg2); margin-bottom: 16px; border-radius: 2px; border: 1px dashed var(--line); }
+.card-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.card-date { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); }
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.card-title { font-size: 15px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.7; margin-bottom: 8px; }
+.card-excerpt { font-size: 12px; color: var(--ink-mid); line-height: 1.9; letter-spacing: 0.04em; }
+.post-card.hidden { display: none; }
 @media (max-width: 720px) {
   nav { padding: 8px 16px; height: auto; min-height: 56px; }
   .nav-logo { font-size: 12px; }
-  .page-header-title { font-size: 24px; }
-  .filter-wrap, .posts-wrap { padding-left: 20px; padding-right: 20px; }
-  .post-item { grid-template-columns: 72px 1fr; gap: 16px; }
+  .posts-grid { grid-template-columns: 1fr; padding: 0 20px; gap: 32px; }
+  .filter-wrap { padding: 0 20px; }
+  .page-header { padding: 80px 20px 40px; }
+  footer { padding: 32px 20px; }
 }
 </style>
 </head>
@@ -1112,19 +1132,19 @@ ${COMMON_CSS}
     <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
     <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
   </div>
-  <a href="index.html" class="nav-back">← トップへ</a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-link">← トップへ</a>
+  </div>
 </nav>
 <div class="page-header">
   <p class="page-header-kicker">ぶろぐ</p>
   <h1 class="page-header-title">blog</h1>
 </div>
 <div class="filter-wrap" id="filterWrap">
-  ${filterBtns}
+    ${filterBtns}
 </div>
-<div class="posts-wrap">
-  <div class="post-list" id="postList">
-${items}
-  </div>
+<div class="posts-grid" id="postsGrid">
+${cards}
 </div>
 ${FOOTER_HTML}
 <script>
@@ -1133,8 +1153,10 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const tag = btn.dataset.tag;
-    document.querySelectorAll('.post-item').forEach(item => {
-      item.style.display = (tag === 'all' || item.dataset.tags.split(',').includes(tag)) ? '' : 'none';
+    document.querySelectorAll('.post-card').forEach(card => {
+      if (tag === 'all') { card.classList.remove('hidden'); return; }
+      const tags = [...card.querySelectorAll('.post-tag')].map(t => t.textContent);
+      card.classList.toggle('hidden', !tags.includes(tag));
     });
   });
 });
