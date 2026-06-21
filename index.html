@@ -262,26 +262,31 @@ nav {
 
 /* ===================== BLOG ===================== */
 #blog { background: var(--bg2); }
-.post-list { display: flex; flex-direction: column; }
+.post-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .post-item {
   text-decoration: none;
   color: inherit;
-  display: grid;
-  grid-template-columns: 96px 1fr;
-  gap: 32px;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--line);
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
   transition: opacity 0.2s;
-  align-items: start;
 }
-.post-item:first-child { border-top: 1px solid var(--line); }
-.post-item:hover { opacity: 0.55; }
+.post-item:hover { opacity: 0.65; }
+.post-thumb {
+  width: 100%; aspect-ratio: 3/2; object-fit: cover;
+  display: block; border-radius: 2px; margin-bottom: 14px;
+  background: var(--bg2);
+}
+.post-thumb-empty {
+  width: 100%; aspect-ratio: 3/2;
+  background: var(--bg2); border-radius: 2px;
+  border: 1px dashed var(--line); margin-bottom: 14px;
+}
+.post-item-body { display: flex; flex-direction: column; }
 .post-date {
   font-size: 11px;
   letter-spacing: 0.1em;
   color: var(--ink-light);
-  padding-top: 4px;
+  margin-bottom: 6px;
 }
 .post-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 7px; }
 .post-tag {
@@ -294,14 +299,14 @@ nav {
   opacity: 0.8;
 }
 .post-title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   line-height: 1.65;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .post-excerpt {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--ink-mid);
   line-height: 1.9;
   letter-spacing: 0.04em;
@@ -578,7 +583,7 @@ nav {
   .profile-grid { grid-template-columns: 1fr; gap: 40px; }
   .profile-left { text-align: left; }
   .article-modal { padding: 40px 24px; }
-  .post-item { grid-template-columns: 72px 1fr; gap: 16px; }
+  .post-list { grid-template-columns: 1fr; gap: 20px; }
   footer { padding: 32px 24px; }
 }
 </style>
@@ -725,24 +730,27 @@ nav {
     </div>
     <div class="post-list" id="postList">
         <a class="post-item" href="post-20260616-13vy.html">
-          <div class="post-date">2026.06.16</div>
-          <div>
+          <img class="post-thumb" src="images/IMG_8717.PNG" alt="">
+          <div class="post-item-body">
+            <div class="post-date">2026.06.16</div>
             <div class="post-tags"><span class="post-tag">日常</span><span class="post-tag">絵本のある暮らし</span><span class="post-tag">手作り</span><span class="post-tag">裁縫</span></div>
             <div class="post-title">「これ買って！」より「これ作って！」って言ってほしい⸻娘と私のてづくり記録</div>
             <div class="post-excerpt">この記事は2026年4月のアーカイブです。  新年度が始まりましたね。 娘は初めてのクラス替えを経験し、緊張しながらもニ…</div>
           </div>
         </a>
         <a class="post-item" href="post-20260616-kqzq.html">
-          <div class="post-date">2026.06.16</div>
-          <div>
+          <img class="post-thumb" src="images/IMG_8713.PNG" alt="">
+          <div class="post-item-body">
+            <div class="post-date">2026.06.16</div>
             <div class="post-tags"><span class="post-tag">日常</span><span class="post-tag">家庭菜園</span><span class="post-tag">絵本のある暮らし</span></div>
             <div class="post-title">生きることは育てること──ラディッシュ収穫から感じたこと</div>
             <div class="post-excerpt">この記事は2026年3月のアーカイブです。  春の芽吹きを感じる3月。 今日のnoteは、ラディッシュ収穫のお話です。 …</div>
           </div>
         </a>
         <a class="post-item" href="post-20260616-37ps.html">
-          <div class="post-date">2026.06.16</div>
-          <div>
+          <img class="post-thumb" src="images/IMG_8714.PNG" alt="">
+          <div class="post-item-body">
+            <div class="post-date">2026.06.16</div>
             <div class="post-tags"><span class="post-tag">グラレコ</span><span class="post-tag">物語のグラレコ</span></div>
             <div class="post-title">物語として記録する、りさこっこのグラフィックレコーディング</div>
             <div class="post-excerpt">この記事は2026年1月のアーカイブです。  今回の記事では、 私が描いている「グラフィックレコーディング（グラレコ）」…</div>

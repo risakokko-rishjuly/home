@@ -1178,9 +1178,13 @@ async function updateIndexBlog(allPosts) {
     const itemsHtml = recent.map(p => {
       const tagsHtml = (p.tags||[]).map(t=>`<span class="post-tag">${t}</span>`).join('');
       const excerpt = (p.content||'').replace(/\n/g,' ').slice(0,60) + ((p.content||'').length>60?'…':'');
+      const thumbHtml = p.thumbnail
+        ? `<img class="post-thumb" src="${p.thumbnail}" alt="">`
+        : `<div class="post-thumb post-thumb-empty"></div>`;
       return `        <a class="post-item" href="post-${p.id}.html">
-          <div class="post-date">${fmtDate(p.date)}</div>
-          <div>
+          ${thumbHtml}
+          <div class="post-item-body">
+            <div class="post-date">${fmtDate(p.date)}</div>
             <div class="post-tags">${tagsHtml}</div>
             <div class="post-title">${p.title}</div>
             <div class="post-excerpt">${excerpt}</div>
