@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>すべての種には夢がある｜暮らしを育てるということ — まちのえほんやさん りさこっこ</title>
-<meta name="description" content="この記事は2025年10月のアーカイブとなっています🙏   お家で採れたバジルとミントを添えて。  新しいイラストが完成しました♪ サッと描くつもりだったのに、">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -12,96 +11,53 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #FDFCFA; --bg2: #F7F4F0;
-  --ink: #1A1714; --ink-mid: #5C5650; --ink-light: #A09890;
-  --line: #E8E2DA; --accent: #7BAF8A;
+  --bg: #FDFCFA; --bg2: #F7F4F0; --ink: #1A1714;
+  --ink-mid: #5C5650; --ink-light: #A09890; --line: #E8E2DA;
+  --accent: #7BAF8A;
   --font-serif: 'Libre Baskerville', serif;
   --font-main: 'Zen Maru Gothic', sans-serif;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
-
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(253,252,250,0.92); backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
-  padding: 0 40px 10px; height: 60px;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  animation: fadeInDown 0.7s ease both;
-}
+nav { position: fixed; top:0; left:0; right:0; z-index:100; background: rgba(253,252,250,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 40px 10px; height: 60px; display: flex; align-items: flex-end; justify-content: space-between; animation: fadeInDown 0.7s ease both; }
 .nav-left { display: flex; flex-direction: column; gap: 1px; }
 .nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
-.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; line-height: 1.5; }
-.nav-right { display: flex; gap: 20px; align-items: center; }
-.nav-link { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
-.nav-link:hover { color: var(--ink); }
-
-footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); background: var(--bg); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: var(--ink); }
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); }
 .footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
 .footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
-
 .post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
-
-@keyframes fadeInDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeInUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn     { from { opacity: 0; } to { opacity: 1; } }
-
-@media (max-width: 720px) {
-  nav { padding: 8px 16px; height: auto; min-height: 56px; }
-  .nav-logo { font-size: 12px; }
-}
-
-.article-wrap {
-  max-width: 680px; margin: 0 auto;
-  padding: 100px 40px 80px;
-  animation: fadeInUp 0.8s ease 0.1s both;
-}
-.article-meta {
-  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-.article-date { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-light); }
-.article-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.article-title {
-  font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65;
-  margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--line);
-}
-.article-thumb {
-  width: 100%; max-height: 400px; object-fit: cover;
-  border-radius: 2px; display: block; margin-bottom: 40px;
-}
-.article-body {
-  font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; color: var(--ink);
-}
-.article-body h2 { font-size: 18px; font-weight: 500; letter-spacing: 0.08em; margin: 32px 0 12px; }
-.article-body h3 { font-size: 16px; font-weight: 500; letter-spacing: 0.07em; margin: 28px 0 10px; }
-.article-body p { margin-bottom: 0; }
+@keyframes fadeInDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
+.article-wrap { padding-top: 60px; }
+.article-inner { max-width: 680px; margin: 0 auto; padding: 60px 40px 100px; animation: fadeInUp 0.7s ease 0.2s both; }
+.article-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.article-date { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-light); }
+.article-title { font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.article-thumbnail { width: 100%; max-height: 420px; object-fit: cover; border-radius: 2px; margin-bottom: 40px; display: block; }
+.article-body { font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; }
+.article-body h2 { font-size: 19px; font-weight: 500; margin: 36px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 10px; }
 .article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
-.article-body ul, .article-body ol { padding-left: 1.5em; margin-bottom: 8px; }
+.article-body ul, .article-body ol { padding-left: 1.6em; margin-bottom: 10px; }
 .article-body li { margin-bottom: 4px; }
 .article-body strong { font-weight: 500; }
 .article-body a { color: var(--ink-mid); }
-
-.pager {
-  max-width: 680px; margin: 0 auto;
-  padding: 40px 40px 80px;
-  display: flex; justify-content: space-between; gap: 20px;
-  border-top: 1px solid var(--line);
-}
-.pager-link {
-  font-size: 12px; letter-spacing: 0.1em; color: var(--ink-mid);
-  text-decoration: none; line-height: 1.6; transition: color 0.2s;
-  max-width: 45%;
-}
-.pager-link:hover { color: var(--ink); }
-.pager-prev { text-align: left; }
-.pager-next { text-align: right; }
-
+.article-nav { display: flex; justify-content: space-between; gap: 20px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+.article-nav a { font-size: 12px; letter-spacing: 0.14em; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; max-width: 45%; line-height: 1.7; }
+.article-nav a:hover { color: var(--ink); }
+.article-nav .prev::before { content: '← '; }
+.article-nav .next::after  { content: ' →'; }
+.article-nav .next { text-align: right; }
 @media (max-width: 720px) {
-  .article-wrap { padding: 80px 20px 60px; }
-  .article-title { font-size: 20px; }
-  .pager { padding: 32px 20px 60px; }
-  footer { padding: 32px 20px; }
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+  .article-inner { padding: 40px 20px 80px; }
+  .article-title { font-size: 19px; }
 }
 </style>
 </head>
@@ -111,28 +67,27 @@ footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); b
     <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
     <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
   </div>
-  <div class="nav-right">
-    <a href="posts.html" class="nav-link">← ぶろぐ一覧</a>
-  </div>
+  <a href="posts.html" class="nav-back">← ぶろぐ一覧</a>
 </nav>
-
 <div class="article-wrap">
-  <div class="article-meta">
-    <span class="article-date">2026.06.16</span>
-    <span class="article-tags"><span class="post-tag">家庭菜園</span><span class="post-tag">日常</span><span class="post-tag">絵本のような暮らし</span></span>
-  </div>
-  <h1 class="article-title">すべての種には夢がある｜暮らしを育てるということ</h1>
-  <img class="article-thumb" src="images/IMG_4063.jpg" alt="すべての種には夢がある｜暮らしを育てるということ">
-  <div class="article-body">
-    <p>この記事は2025年10月のアーカイブとなっています🙏</p><p><br></p><p><a href="https://assets.st-note.com/production/uploads/images/225547127/picture_pc_3de186af5276bd583d78de973f39244c.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225547127/picture_pc_3de186af5276bd583d78de973f39244c.jpg?width=1200" alt="画像" height="465" width="620"></a></p><p>お家で採れたバジルとミントを添えて。</p><p><br></p><p>新しいイラストが完成しました♪</p><p>サッと描くつもりだったのに、意外と時間がかかってしまった一枚でした💦</p><p><br></p><p><a href="https://assets.st-note.com/production/uploads/images/225547324/picture_pc_a87ad03bea570ffbc9384286b3ba7ef4.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225547324/picture_pc_a87ad03bea570ffbc9384286b3ba7ef4.jpg?width=1200" alt="画像" height="465" width="620"></a></p><p>顔彩で新しく描いたこの絵は、「ガーデニング」や「家庭菜園」をテーマにしています。</p><p><br></p><p>いろんな食べ物の値段が上がってきたことがきっかけで、</p><p>「食べ物を育てる」ということに、あらためて興味を持ちました。</p><p><a href="https://assets.st-note.com/production/uploads/images/225547525/picture_pc_cb7aefb731c21a66ecbdb9bd511efd46.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225547525/picture_pc_cb7aefb731c21a66ecbdb9bd511efd46.jpg?width=1200" alt="画像" height="826" width="620"></a></p><p>バジルとローズマリー。ハーブは強いので、初心者でも育てやすくて安心✨</p><p><br></p><p>最初は小さなプランターにタネをまいただけ。</p><p>でもなかなか芽が出なかったり、やっと花が咲いたと思ったら実がつかなかったり、</p><p>虫がびっくりするほど集まってきたり…</p><p>失敗して、ちょっとだけ成功して、</p><p>また失敗して...のくりかえし。</p><p><a href="https://assets.st-note.com/production/uploads/images/225547809/picture_pc_7fa0885ad5b302a443756e8da6e68bfb.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225547809/picture_pc_7fa0885ad5b302a443756e8da6e68bfb.jpg?width=1200" alt="画像" height="826" width="620"></a></p><p>夏に育てたなすび。花はいっぱい咲いたけど、実は二つしかならなかった💦</p><p><br></p><p>それでも、自分で育てたものを食べる瞬間は、なんとも言えない嬉しさがあります。</p><p>たとえ小さな一株でも、「自分で自分の暮らしを作っているんだ」という実感。</p><p>植物を育てることは、大変だけど、やっぱり楽しい。</p><p><a href="https://assets.st-note.com/production/uploads/images/225548596/picture_pc_4c7c814ed98336c31da7b468073f7f9f.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225548596/picture_pc_4c7c814ed98336c31da7b468073f7f9f.png?width=1200" alt="画像" height="826" width="620"></a></p><p>梅シロップを炭酸水で割り、家で採れたローズマリーとミントを浮かべる。簡単だけどめちゃくちゃ美味しい。</p><p><br></p><p>絵を描くことも、日々の暮らしも、きっと同じだなと思います。</p><p><br></p><p>真っ白な紙に、最初の線を引くとき。</p><p>何もないところから、少しずつ形をつくっていく。</p><p>色を重ね、線を描き足し、夢中になって筆を動かしているうちに、</p><p>気づけば一輪の花のような作品がそこに咲いている。</p><p><br></p><p>「うまくいかないかも」「失敗したら無駄になっちゃう」——</p><p>そんな不安は、いつもどこかにあります。</p><p>それでも、希望を持ってタネを植えなければ、夢は始まらない。</p><p><a href="https://assets.st-note.com/production/uploads/images/225556914/picture_pc_9fee5cf656fe7370559afcbcf52b8510.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225556914/picture_pc_9fee5cf656fe7370559afcbcf52b8510.png?width=1200" alt="画像" height="624" width="620"></a></p><p>だからこの絵には、</p><p>“in every seed, there is a dream.”</p><p>——すべての種には夢がある、という言葉を添えました。</p><p><br></p><p>最近は、物価の高騰や将来への不安から、</p><p>「お金を増やすこと」に関する情報がたくさん入ってきます。</p><p>そして、「その流れに乗り遅れてはいけない」という焦燥感を私たちに与えてきます。</p><p>でも、ふと考えます。</p><p>本当に頑張らなきゃいけないのは、「お金を増やすこと」なのかな？</p><p>増やしたお金で、私は何を買いたいんだろう？</p><p><br></p><p>きっと、本当の安心は</p><p>「たくさんのお金を持つこと」ではなく、</p><p>「自分で自分の暮らしを育てていけること」</p><p>なのかもしれません。</p><p><br></p><p>この絵を見るたびに、</p><p>そんなことを思い出していきたい。</p><p>暮らしは、お金に追いかけられるだけのものじゃなくて、</p><p>本当はもっと楽しくて、あたたかいもの。</p><p><br></p><p><a href="https://assets.st-note.com/production/uploads/images/225548540/picture_pc_fe16fdd194f61e70eb817e0fbcaba0dc.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225548540/picture_pc_fe16fdd194f61e70eb817e0fbcaba0dc.png?width=1200" alt="画像" height="465" width="620"></a></p><p>小さな種の中にも、ちゃんと夢がある。</p><p>私の暮らしも、描くことも、</p><p>その夢を少しずつ育てていけたらと思います🍃</p><p>りさこっこについて、自己紹介はこちらからどうぞ♪</p>
+  <div class="article-inner">
+    <div class="article-meta">
+      <span class="article-date">2026.06.16</span>
+      <span class="post-tag">家庭菜園</span> <span class="post-tag">日常</span> <span class="post-tag">絵本のある暮らし</span>
+    </div>
+    <h1 class="article-title">すべての種には夢がある｜暮らしを育てるということ</h1>
+    <img class="article-thumbnail" src="images/IMG_4063.jpg" alt="">
+    <div class="article-body">
+<p>
+    </p><p>この記事は2025年10月のアーカイブとなっています🙏</p><p><br></p><p><a href="https://assets.st-note.com/production/uploads/images/225547127/picture_pc_3de186af5276bd583d78de973f39244c.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225547127/picture_pc_3de186af5276bd583d78de973f39244c.jpg?width=1200" alt="画像" height="465" width="620"></a></p><p>お家で採れたバジルとミントを添えて。</p><p><br></p><p>新しいイラストが完成しました♪</p><p>サッと描くつもりだったのに、意外と時間がかかってしまった一枚でした💦</p><p><br></p><p><a href="https://assets.st-note.com/production/uploads/images/225547324/picture_pc_a87ad03bea570ffbc9384286b3ba7ef4.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225547324/picture_pc_a87ad03bea570ffbc9384286b3ba7ef4.jpg?width=1200" alt="画像" height="465" width="620"></a></p><p>顔彩で新しく描いたこの絵は、「ガーデニング」や「家庭菜園」をテーマにしています。</p><p><br></p><p>いろんな食べ物の値段が上がってきたことがきっかけで、</p><p>「食べ物を育てる」ということに、あらためて興味を持ちました。</p><p><a href="https://assets.st-note.com/production/uploads/images/225547525/picture_pc_cb7aefb731c21a66ecbdb9bd511efd46.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225547525/picture_pc_cb7aefb731c21a66ecbdb9bd511efd46.jpg?width=1200" alt="画像" height="826" width="620"></a></p><p>バジルとローズマリー。ハーブは強いので、初心者でも育てやすくて安心✨</p><p><br></p><p>最初は小さなプランターにタネをまいただけ。</p><p>でもなかなか芽が出なかったり、やっと花が咲いたと思ったら実がつかなかったり、</p><p>虫がびっくりするほど集まってきたり…</p><p>失敗して、ちょっとだけ成功して、</p><p>また失敗して...のくりかえし。</p><p><a href="https://assets.st-note.com/production/uploads/images/225547809/picture_pc_7fa0885ad5b302a443756e8da6e68bfb.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225547809/picture_pc_7fa0885ad5b302a443756e8da6e68bfb.jpg?width=1200" alt="画像" height="826" width="620"></a></p><p>夏に育てたなすび。花はいっぱい咲いたけど、実は二つしかならなかった💦</p><p><br></p><p>それでも、自分で育てたものを食べる瞬間は、なんとも言えない嬉しさがあります。</p><p>たとえ小さな一株でも、「自分で自分の暮らしを作っているんだ」という実感。</p><p>植物を育てることは、大変だけど、やっぱり楽しい。</p><p><a href="https://assets.st-note.com/production/uploads/images/225548596/picture_pc_4c7c814ed98336c31da7b468073f7f9f.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225548596/picture_pc_4c7c814ed98336c31da7b468073f7f9f.png?width=1200" alt="画像" height="826" width="620"></a></p><p>梅シロップを炭酸水で割り、家で採れたローズマリーとミントを浮かべる。簡単だけどめちゃくちゃ美味しい。</p><p><br></p><p>絵を描くことも、日々の暮らしも、きっと同じだなと思います。</p><p><br></p><p>真っ白な紙に、最初の線を引くとき。</p><p>何もないところから、少しずつ形をつくっていく。</p><p>色を重ね、線を描き足し、夢中になって筆を動かしているうちに、</p><p>気づけば一輪の花のような作品がそこに咲いている。</p><p><br></p><p>「うまくいかないかも」「失敗したら無駄になっちゃう」——</p><p>そんな不安は、いつもどこかにあります。</p><p>それでも、希望を持ってタネを植えなければ、夢は始まらない。</p><p><a href="https://assets.st-note.com/production/uploads/images/225556914/picture_pc_9fee5cf656fe7370559afcbcf52b8510.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225556914/picture_pc_9fee5cf656fe7370559afcbcf52b8510.png?width=1200" alt="画像" height="624" width="620"></a></p><p>だからこの絵には、</p><p>“in every seed, there is a dream.”</p><p>——すべての種には夢がある、という言葉を添えました。</p><p><br></p><p>最近は、物価の高騰や将来への不安から、</p><p>「お金を増やすこと」に関する情報がたくさん入ってきます。</p><p>そして、「その流れに乗り遅れてはいけない」という焦燥感を私たちに与えてきます。</p><p>でも、ふと考えます。</p><p>本当に頑張らなきゃいけないのは、「お金を増やすこと」なのかな？</p><p>増やしたお金で、私は何を買いたいんだろう？</p><p><br></p><p>きっと、本当の安心は</p><p>「たくさんのお金を持つこと」ではなく、</p><p>「自分で自分の暮らしを育てていけること」</p><p>なのかもしれません。</p><p><br></p><p>この絵を見るたびに、</p><p>そんなことを思い出していきたい。</p><p>暮らしは、お金に追いかけられるだけのものじゃなくて、</p><p>本当はもっと楽しくて、あたたかいもの。</p><p><br></p><p><a href="https://assets.st-note.com/production/uploads/images/225548540/picture_pc_fe16fdd194f61e70eb817e0fbcaba0dc.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/225548540/picture_pc_fe16fdd194f61e70eb817e0fbcaba0dc.png?width=1200" alt="画像" height="465" width="620"></a></p><p>小さな種の中にも、ちゃんと夢がある。</p><p>私の暮らしも、描くことも、</p><p>その夢を少しずつ育てていけたらと思います🍃</p><p>りさこっこについて、自己紹介はこちらからどうぞ♪</p><p>
+  </p>
+    </div>
+    <nav class="article-nav">
+      <a href="post-20260616-yo6s.html" class="prev">シャッターアート＠平井製作所さん</a>
+      <a href="post-20260616-3921.html" class="next">まちと人がやさしくつながる絵本をつくる〜『まこがもさんの しあわせ じょさんいん』制作のおはなし〜</a>
+    </nav>
   </div>
 </div>
-
-<div class="pager">
-  <a href="post-20260616-yo6s.html" class="pager-link pager-prev">← シャッターアート＠平井製作所さん…</a>
-  <a href="post-20260616-3921.html" class="pager-link pager-next">まちと人がやさしくつながる絵本をつくる〜… →</a>
-</div>
-
 <footer>
   <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
   <p class="footer-copy">&copy; rishjuly</p>
