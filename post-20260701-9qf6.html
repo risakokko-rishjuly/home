@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>“人生”を物語にする⸻りさこっこの ちいさなえほん会 — まちのえほんやさん りさこっこ</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #FDFCFA; --bg2: #F7F4F0; --ink: #1A1714;
+  --ink-mid: #5C5650; --ink-light: #A09890; --line: #E8E2DA;
+  --accent: #7BAF8A;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-main: 'Zen Maru Gothic', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
+nav { position: fixed; top:0; left:0; right:0; z-index:100; background: rgba(253,252,250,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 40px 10px; height: 60px; display: flex; align-items: flex-end; justify-content: space-between; animation: fadeInDown 0.7s ease both; }
+.nav-left { display: flex; flex-direction: column; gap: 1px; }
+.nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: var(--ink); }
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); }
+.footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
+.footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
+.post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
+@keyframes fadeInDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
+.article-wrap { padding-top: 60px; }
+.article-inner { max-width: 680px; margin: 0 auto; padding: 60px 40px 100px; animation: fadeInUp 0.7s ease 0.2s both; }
+.article-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.article-date { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-light); }
+.article-title { font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.article-thumbnail { width: 100%; max-height: 420px; object-fit: cover; border-radius: 2px; margin-bottom: 40px; display: block; }
+.article-body { font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; }
+.article-body h2 { font-size: 19px; font-weight: 500; margin: 36px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 10px; }
+.article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
+.article-body ul, .article-body ol { padding-left: 1.6em; margin-bottom: 10px; }
+.article-body li { margin-bottom: 4px; }
+.article-body strong { font-weight: 500; }
+.article-body a { color: var(--ink-mid); }
+.article-nav { display: flex; justify-content: space-between; gap: 20px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+.article-nav a { font-size: 12px; letter-spacing: 0.14em; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; max-width: 45%; line-height: 1.7; }
+.article-nav a:hover { color: var(--ink); }
+.article-nav .prev::before { content: '← '; }
+.article-nav .next::after  { content: ' →'; }
+.article-nav .next { text-align: right; }
+@media (max-width: 720px) {
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+  .article-inner { padding: 40px 20px 80px; }
+  .article-title { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
+    <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
+  </div>
+  <a href="posts.html" class="nav-back">← ぶろぐ一覧</a>
+</nav>
+<div class="article-wrap">
+  <div class="article-inner">
+    <div class="article-meta">
+      <span class="article-date">2026.07.01</span>
+      
+    </div>
+    <h1 class="article-title">“人生”を物語にする⸻りさこっこの ちいさなえほん会</h1>
+    <img class="article-thumbnail" src="images/IMG_8725.PNG" alt="">
+    <div class="article-body">
+<p>毎月、「りさこっこの ちいさなえほん会」</p><p>というちいさな会を開いています。</p><p><br></p><p>その会では、世界に1つだけの絵本をつくるワークショップを開催しています。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/ちいさな絵本ポスター.PNG"></p><p><br></p><p><br></p><p><strong>「あなたを ちいさな えほんに します」</strong></p><p><br></p><p>まずこんな感じのインタビューシートを</p><p>参加者の方に書いていただきます。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_7865.jpg"></p><p>インタビューシートをもとに、</p><p>夢中になっていることや子どもの頃のことをお話しながら、</p><p>“あなただけが主人公”のちいさな絵本をつくります。</p><p><br></p><p>まるで絵本の世界の動物たちになったみたい。</p><p>あたらしい体験型アートです。</p><p><br></p><p><br></p><p><br></p><p><strong>世界にひとつの えほんたち</strong></p><p><br></p><p>実際にえほん会で生まれた、</p><p>ちいさなえほんたちのご紹介です。<img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_3894.jpg"></p><p>このえほんは、海外旅行や語学、</p><p>異文化を知ることが大好き、という方の</p><p>お話から生まれました。</p><p><br></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_3378.jpg"></p><p>こちらの絵本は、足もみリラクゼーションの方とのお話から。</p><p><br></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_4830.jpg"></p><p>こちらの絵本は、アクセサリー作家さん。</p><p><br></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_6636.jpg"></p><p>この絵本は、柴犬ちゃんとお昼寝するのが大好きなカフェ店主さん。</p><p><br></p><p>絵本の主人公となる動物たちは、</p><p>わたしが一緒にお話する中で</p><p>抱いたイメージから決まっていくことが多いですが、</p><p>リクエストの動物がいれば、それにお応えして描くことも。</p><p><br></p><p>わたしは普段から、</p><p>「この人は動物にたとえると猫かな？」</p><p>「あひるかな？」</p><p>「いやハシビロコウかも」</p><p>と考えてしまうのですが、</p><p>そのちょっと変わった“クセ”を、</p><p>このワークショップでは活かしています。</p><p><br></p><p><br></p><p><br></p><p><strong>“人生”を物語にするアート</strong></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_8723.PNG"></p><p><br></p><p>この“ちいさな えほん”が、</p><p>似顔絵やオーダーイラストとは少しちがうところ。</p><p><br></p><p>それは、参加してくださった方の</p><p>“人生”“想い”を、“絵とことば”にのせて、</p><p>1つの物語にすることです。</p><p><br></p><p>このえほん会に来てくださる方は皆さん、</p><p><br></p><p>「私の話なんかが絵本になりますか」</p><p><br></p><p>とおっしゃるのですが、</p><p>どんな人生にも すばらしい物語があります。</p><p><br></p><p>生きることは、豊かで、刺激的で、未知数で、</p><p>だからこそ大変で、時につらく苦しい冒険です。</p><p><br></p><p>実際　参加者の方とお話する時、楽しいことだけでなく、</p><p>つらいこと、悩みごと、不安なことを話すこともあります。</p><p><br></p><p>それこそが物語なのだと思います。</p><p><br></p><p>それは記録に残るような</p><p>大きな物語ではないかもしれないけれど、</p><p>小さくて、いとおしくて、暮らしに寄り添ってくれる物語こそ、</p><p>今を生きる私たちにとって必要です。</p><p><br></p><p>静かな夜、子どもと寄り添って読みたくなるお話。</p><p>さみしさや不安でつぶれそうな時、</p><p>そっとページをめくりたくなるお話。</p><p>それらはいつだって、ちいさな物語です。</p><p><br></p><p><br></p><p><br></p><p><strong>“物語の原石”を見つける旅</strong></p><p><br></p><p>わたしが大好きな「モンスターズ・インク」や</p><p>「カールじいさんの空飛ぶ家」を生みだした</p><p>「ピクサー」のストーリー論に、こんな言葉があります。</p><p><br></p><p>“世界はアイディアの海だけど、</p><p>気づくことができる人は少ない”</p><p><br></p><p>“物語の原石”はどこにあるのか。</p><p><br></p><p>それはきっと、ありふれた日常の中に、</p><p>ひっそりと見つけられるのを待っているのだ</p><p>と思います。</p><p><br></p><p>台所の棚の中。押し入れの引き出しの中。</p><p>それとも玄関のすみっこかも。</p><p><br></p><p>日々の暮らしの中の、</p><p>ささいな疑問や気づきを見過ごさない感性。</p><p>それこそが、私が絵本を描くために必要なものだと思っています。</p><p><br></p><p>だとしたら、この「ちいさな えほん会」はきっと、</p><p>“物語の原石”を見つける旅にちがいないのです。</p><p><br></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_8724.PNG"></p><p><br></p><p><br></p><p><br></p><p><strong>絵本のようにゆるやかな時間</strong></p><p><br></p><p>このちいさなえほん会、この会の時間そのものが、絵本の世界のようです。</p><p><br></p><p>開催場所は、八尾市にある民間図書室「緒〜いとぐち〜」さんと、尼崎市の「さんとしょ」さん。</p><p>個性豊かな本棚に囲まれた空間で、</p><p>参加者の方と自分の想いやこれまで歩んできた道のりを振り返ります。</p><p><br></p><p>図書館のまわりには素敵なカフェもあり、</p><p>そちらのお茶やコーヒーを飲みながら話すことも。</p><p><br></p><p>絵本の完成を待つ間は、わたしの過去作品を読んでいただいたり、図書室の本を読んでいただくこともできます。</p><p><br></p><p>そしてこのえほん会、</p><p>お客さんが1人もいないことも多い。</p><p>というか、お客さんがいない日のほうが多いのです（笑）</p><p><br></p><p>じゃあやる意味がない？</p><p>お金や、数を求める場所であれば、そうかもしれません。</p><p><br></p><p>でも忘れてはならないのは、ここは「物語の原石」を見つける場所です。</p><p><br></p><p>お客さんがいない日、私は何をしているか。</p><p><br></p><p>自分の過去の作品を読み返したり、図書室の本を読んでみたり…</p><p>図書室のオーナーさんや、遊びに来てくれた方とただおしゃべりしたり…</p><p>新作絵本の感想や意見を伺うこともあります。</p><p><br></p><p>デジタル情報で頭がパンクしそうな最近では、ぜいたくとも言えるような時間です。</p><p><br></p><p>売れなくても、誰も来なくてもいい。</p><p>そんな余白を残しておきたいと思っています。</p><p><br></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_8722.PNG"></p><p><br></p><p>ですから皆さんにも、</p><p>「行ったら何か買わなきゃ」という思いは捨てて、</p><p>ほんとうに気軽に来て頂けたらと思っています。</p><p><br></p><p>「りさこっこの ちいさなえほん会」</p><p>詳細はInstagramをご覧ください。</p><p><br></p><p><br></p><p>完成した絵本は、そのままお持ち帰りいただけます📘</p><p>（所要時間：約30分／1冊 1,000円）</p><p>※ご予約なし、当日参加OK</p><p><br></p><p>📍 図書室 〜緒いとぐち〜</p><p>（大阪府八尾市小阪合町3-3-19）</p><p>Instagram：@bibliothek_itoguchi_</p><p>🗓毎月どこかの火曜日10:00〜12:00</p><p><br></p><p>📍 さんとしょ</p><p>（尼崎市建家町１１４－１三和本通商店街７丁目）</p><p>Instagram：@3tosyo</p><p>🗓 毎月第2土曜日の13:00～16:00</p>
+    </div>
+    <nav class="article-nav">
+      <a href="post-20260616-13vy.html" class="prev">「これ買って！」より「これ作って！」って言ってほしい⸻娘と私のてづくり記録</a>
+      <span></span>
+    </nav>
+  </div>
+</div>
+<footer>
+  <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
+  <p class="footer-copy">&copy; rishjuly</p>
+</footer>
+</body>
+</html>
