@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>余白のあるアトリエにしたら、物語が息をしはじめた — まちのえほんやさん りさこっこ</title>
-<meta name="description" content="この記事は2026年1月のアーカイブです。  2026年が始まりました。 2016年にイラストレーターとして活動を始めてから、この1月で10年を迎えます。  思">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -12,96 +11,53 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #FDFCFA; --bg2: #F7F4F0;
-  --ink: #1A1714; --ink-mid: #5C5650; --ink-light: #A09890;
-  --line: #E8E2DA; --accent: #7BAF8A;
+  --bg: #FDFCFA; --bg2: #F7F4F0; --ink: #1A1714;
+  --ink-mid: #5C5650; --ink-light: #A09890; --line: #E8E2DA;
+  --accent: #7BAF8A;
   --font-serif: 'Libre Baskerville', serif;
   --font-main: 'Zen Maru Gothic', sans-serif;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
-
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(253,252,250,0.92); backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
-  padding: 0 40px 10px; height: 60px;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  animation: fadeInDown 0.7s ease both;
-}
+nav { position: fixed; top:0; left:0; right:0; z-index:100; background: rgba(253,252,250,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 40px 10px; height: 60px; display: flex; align-items: flex-end; justify-content: space-between; animation: fadeInDown 0.7s ease both; }
 .nav-left { display: flex; flex-direction: column; gap: 1px; }
 .nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
-.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; line-height: 1.5; }
-.nav-right { display: flex; gap: 20px; align-items: center; }
-.nav-link { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
-.nav-link:hover { color: var(--ink); }
-
-footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); background: var(--bg); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: var(--ink); }
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); }
 .footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
 .footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
-
 .post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
-
-@keyframes fadeInDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeInUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn     { from { opacity: 0; } to { opacity: 1; } }
-
-@media (max-width: 720px) {
-  nav { padding: 8px 16px; height: auto; min-height: 56px; }
-  .nav-logo { font-size: 12px; }
-}
-
-.article-wrap {
-  max-width: 680px; margin: 0 auto;
-  padding: 100px 40px 80px;
-  animation: fadeInUp 0.8s ease 0.1s both;
-}
-.article-meta {
-  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-.article-date { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-light); }
-.article-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.article-title {
-  font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65;
-  margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--line);
-}
-.article-thumb {
-  width: 100%; max-height: 400px; object-fit: cover;
-  border-radius: 2px; display: block; margin-bottom: 40px;
-}
-.article-body {
-  font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; color: var(--ink);
-}
-.article-body h2 { font-size: 18px; font-weight: 500; letter-spacing: 0.08em; margin: 32px 0 12px; }
-.article-body h3 { font-size: 16px; font-weight: 500; letter-spacing: 0.07em; margin: 28px 0 10px; }
-.article-body p { margin-bottom: 0; }
+@keyframes fadeInDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
+.article-wrap { padding-top: 60px; }
+.article-inner { max-width: 680px; margin: 0 auto; padding: 60px 40px 100px; animation: fadeInUp 0.7s ease 0.2s both; }
+.article-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.article-date { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-light); }
+.article-title { font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.article-thumbnail { width: 100%; max-height: 420px; object-fit: cover; border-radius: 2px; margin-bottom: 40px; display: block; }
+.article-body { font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; }
+.article-body h2 { font-size: 19px; font-weight: 500; margin: 36px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 10px; }
 .article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
-.article-body ul, .article-body ol { padding-left: 1.5em; margin-bottom: 8px; }
+.article-body ul, .article-body ol { padding-left: 1.6em; margin-bottom: 10px; }
 .article-body li { margin-bottom: 4px; }
 .article-body strong { font-weight: 500; }
 .article-body a { color: var(--ink-mid); }
-
-.pager {
-  max-width: 680px; margin: 0 auto;
-  padding: 40px 40px 80px;
-  display: flex; justify-content: space-between; gap: 20px;
-  border-top: 1px solid var(--line);
-}
-.pager-link {
-  font-size: 12px; letter-spacing: 0.1em; color: var(--ink-mid);
-  text-decoration: none; line-height: 1.6; transition: color 0.2s;
-  max-width: 45%;
-}
-.pager-link:hover { color: var(--ink); }
-.pager-prev { text-align: left; }
-.pager-next { text-align: right; }
-
+.article-nav { display: flex; justify-content: space-between; gap: 20px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+.article-nav a { font-size: 12px; letter-spacing: 0.14em; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; max-width: 45%; line-height: 1.7; }
+.article-nav a:hover { color: var(--ink); }
+.article-nav .prev::before { content: '← '; }
+.article-nav .next::after  { content: ' →'; }
+.article-nav .next { text-align: right; }
 @media (max-width: 720px) {
-  .article-wrap { padding: 80px 20px 60px; }
-  .article-title { font-size: 20px; }
-  .pager { padding: 32px 20px 60px; }
-  footer { padding: 32px 20px; }
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+  .article-inner { padding: 40px 20px 80px; }
+  .article-title { font-size: 19px; }
 }
 </style>
 </head>
@@ -111,28 +67,27 @@ footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); b
     <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
     <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
   </div>
-  <div class="nav-right">
-    <a href="posts.html" class="nav-link">← ぶろぐ一覧</a>
-  </div>
+  <a href="posts.html" class="nav-back">← ぶろぐ一覧</a>
 </nav>
-
 <div class="article-wrap">
-  <div class="article-meta">
-    <span class="article-date">2026.06.16</span>
-    <span class="article-tags"><span class="post-tag">日常</span><span class="post-tag">絵本のある暮らし</span><span class="post-tag">余白</span></span>
-  </div>
-  <h1 class="article-title">余白のあるアトリエにしたら、物語が息をしはじめた</h1>
-  <img class="article-thumb" src="images/IMG_8715.PNG" alt="余白のあるアトリエにしたら、物語が息をしはじめた">
-  <div class="article-body">
-    <p>この記事は2026年1月のアーカイブです。</p><p><br></p><p>2026年が始まりました。</p><p>2016年にイラストレーターとして活動を始めてから、この1月で10年を迎えます。</p><p><br></p><p>思っていたよりも長く続けてこられたこの活動を、</p><p>家族や、これまで支えてくださった方々のおかげだと感じています。</p><p>心から感謝しています。</p><p><br></p><p>今年は絵本制作と、ブログでの制作コラムの執筆を中心に活動していく予定です。</p><p>本年もどうぞよろしくお願いいたします。</p><p>年末年始、みなさんはいかがお過ごしでしたか？</p><p>私は夫や娘と過ごしながら、自宅のアトリエの大掃除と模様替えをしていました。</p><p><a href="https://assets.st-note.com/production/uploads/images/242261483/picture_pc_23533b02fc272d31e8ae685596dd6695.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/242261483/picture_pc_23533b02fc272d31e8ae685596dd6695.png?width=1200" alt="画像" height="465" width="620"></a></p><p>「余白」を意識したアトリエに。</p><p><br></p><p>昨年の振り返りで、</p><p>• 創作にも活動にも「余白」を大切にしたいこと</p><p>• 数を手放して、自分の手で作ることを取り戻したいこと</p><p><br></p><p>を書きました。</p><p><br></p><p>ならば、アトリエもその軸に合わせて変えてみよう。</p><p>モノの「数」を手放して、「余白」を意識した空間にすれば、創作も息がしやすくなるのではないか。</p><p>そう思い、10年分のアトリエ大掃除と模様替えをすることにしました。</p><p><br></p><p><br></p><h3>模様替えというより、内側を外に出す作業</h3><p>今回のアトリエの模様替えは、</p><p>家具を動かすというより、自分の中に溜まっていたものを外に出す作業でした。</p><p><br></p><p>出産前に私物はかなり減らしていたので、</p><p>「もう減らすものはない」と思っていたのですが、</p><p>実際に向き合ってみると、仕事道具や制作物の量が多すぎたことに気づきました。</p><p><br></p><p>今の自分の軸とは合っていない画材、</p><p>しっくりこないまま残していた作品、</p><p>もう見返していない資料や什器。</p><p><br></p><p>思っていた以上に、抱え込んでいました。</p><p><br></p><p><br></p><h3>手放せなかった理由</h3><h3><br></h3><p><a href="https://assets.st-note.com/production/uploads/images/242261633/picture_pc_1da00db47733c91d3853302503cc5f21.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/242261633/picture_pc_1da00db47733c91d3853302503cc5f21.png?width=1200" alt="画像" height="465" width="620"></a></p><p>有孔ボードに「今」使う画材だけを掛けました。</p><p><br></p><p>手放せなかった理由は、どれももっともらしいものでした。</p><p>• いただいたものだから</p><p>• 頑張って作ったから</p><p>• 思い出があるから</p><p>• お金を出して買ったからもったいない</p><p>• いつか必要になるかもしれない</p><p><br></p><p>でもこれらは、安心や正しさのようでいて、</p><p>実はスペースや時間、そして頭の中を、想像以上に占領していました。</p><p><br></p><p>使っていないものに、こんなにも場所を取られていたんだという違和感も感じました。</p><p><br></p><p><br></p><h3>創作とのズレ</h3><p>本当はあまり好きではなかった作品も、</p><p>「いつか展示するかもしれない」と残していました。</p><p><br></p><p>期待されて作ったけれど、</p><p>自分の軸とは少し違っていたものもあります。</p><p><br></p><p>でも結局、展示する機会は訪れなかったり、</p><p>画材をくれた人とも、いつの間にか疎遠になっていたり。</p><p><br></p><p>モノだけが、時間の止まったまま残っていました。</p><p><br></p><p><br></p><h3>気づいたこと</h3><p>片付けの途中で、</p><p>「モノの量＝家事の量」という言葉が浮かびました。</p><p><br></p><p>仕事も同じで、</p><p>ものが多いほど、大切なものが見えにくくなり、迷いが増え、</p><p>結果、ひとつの仕事にかかる時間が増えてしまう。</p><p><br></p><p>「いつか必要かも」は、不安とよく似ていて、</p><p>「思い出があるから」「頑張って作ったから」は、寂しさと似ている。</p><p><br></p><p>その感情が、知らないうちに心や身体を重くしていたのかもしれません。</p><p><a href="https://assets.st-note.com/img/1768230192-Mw5IiVQqyKYTS1RDvCdEGfls.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1768230192-Mw5IiVQqyKYTS1RDvCdEGfls.png?width=1200" alt="画像" height="460" width="620"></a></p><h3><br></h3><h3><br></h3><h3>アトリエが完成して</h3><p><a href="https://assets.st-note.com/production/uploads/images/242261907/picture_pc_f367f41160469a445b6d854080b43ff9.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/242261907/picture_pc_f367f41160469a445b6d854080b43ff9.png?width=1200" alt="画像" height="465" width="620"></a></p><p>ゆっくりできるカフェスペースも。</p><p><br></p><p>今のアトリエは、こんなふうになりました。</p><p><br></p><p>• よく使う画材だけを有孔ボードに出す</p><p>• 2軍以降の画材やストックは机の下へ</p><p>• 作った絵本は3冊だけ棚に置く</p><p>• 畳ソファとクッションを配置</p><p>• 読む本やお菓子、ウクレレを置いたカフェスペース</p><p>• 趣味の雑貨は一箇所に、今好きなものだけ少量</p><p><br></p><p><br></p><h3>空間の変化と、心の変化</h3><p>以前のアトリエは、好きなものや思い出がたくさん詰まっていて、</p><p>安心できる場所でしたが、</p><p>過去を振り返る時間が多かったように思います。</p><p><br></p><p>今のアトリエでは、</p><p>ぼーっとしたり、考え込んだりする時間が増えました。</p><p><br></p><p>過去の思い出は大切にしまい、リビングへ。</p><p>アトリエには「今好きなもの」「今大事にしていること」だけが見えるようにしました。</p><p><br></p><p><br></p><h3>創作と暮らしはつながっている</h3><p>「余白があるから、物語が生まれる」</p><p>そんな言葉を思い出します。</p><p><br></p><p>アトリエは仕事場であり、暮らしの延長にある場所。</p><p>大人と子どもを分ける空間ではなく、自然につながる場所でありたいと思っています。</p><p><br></p><p>娘のお絵かき道具や絵本、ぬいぐるみも、同じ空間にあります。</p><p><br></p><p><br></p><h3>これから</h3><p><a href="https://assets.st-note.com/production/uploads/images/242262182/picture_pc_f4b6284d0fe4469193b528df53009ff9.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/242262182/picture_pc_f4b6284d0fe4469193b528df53009ff9.png?width=1200" alt="画像" height="465" width="620"></a></p><p>娘も出入りできる仕事場に。</p><p>ものが減ったことで、娘が自由に動ける場所が増えました。</p><p><br></p><p>先日、アトリエでお昼ご飯を食べたとき、</p><p>「ひろーい！今のアトリエの方がすき！」と言ってくれて、</p><p>それがとても嬉しかったです。</p><p><br></p><p>空間がひらくと、時間や出来事も増えていく気がします。</p><p><br></p><p>余白をつくることは、失うことではなく、</p><p>これから生まれる物語の居場所をつくることなのだと感じた年末年始でした。</p><p><a href="https://assets.st-note.com/img/1768230240-XwyI38CTFf4HoWGNEJnauDzx.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1768230240-XwyI38CTFf4HoWGNEJnauDzx.png?width=1200" alt="画像" height="482" width="620"></a></p><p>大人と子ども、暮らしと仕事を無理に分けない働き方を探っていきます。</p>
+  <div class="article-inner">
+    <div class="article-meta">
+      <span class="article-date">2026.06.16</span>
+      <span class="post-tag">日常</span> <span class="post-tag">余白</span>
+    </div>
+    <h1 class="article-title">余白のあるアトリエにしたら、物語が息をしはじめた</h1>
+    <img class="article-thumbnail" src="images/IMG_8715.PNG" alt="">
+    <div class="article-body">
+<p>
+    </p><p>この記事は2026年1月のアーカイブです。</p><p><br></p><p>2026年が始まりました。</p><p>2016年にイラストレーターとして活動を始めてから、この1月で10年を迎えます。</p><p><br></p><p>思っていたよりも長く続けてこられたこの活動を、</p><p>家族や、これまで支えてくださった方々のおかげだと感じています。</p><p>心から感謝しています。</p><p><br></p><p>今年は絵本制作と、ブログでの制作コラムの執筆を中心に活動していく予定です。</p><p>本年もどうぞよろしくお願いいたします。</p><p>年末年始、みなさんはいかがお過ごしでしたか？</p><p>私は夫や娘と過ごしながら、自宅のアトリエの大掃除と模様替えをしていました。</p><p><a href="https://assets.st-note.com/production/uploads/images/242261483/picture_pc_23533b02fc272d31e8ae685596dd6695.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/242261483/picture_pc_23533b02fc272d31e8ae685596dd6695.png?width=1200" alt="画像" height="465" width="620"></a></p><p>「余白」を意識したアトリエに。</p><p><br></p><p>昨年の振り返りで、</p><p>• 創作にも活動にも「余白」を大切にしたいこと</p><p>• 数を手放して、自分の手で作ることを取り戻したいこと</p><p><br></p><p>を書きました。</p><p><br></p><p>ならば、アトリエもその軸に合わせて変えてみよう。</p><p>モノの「数」を手放して、「余白」を意識した空間にすれば、創作も息がしやすくなるのではないか。</p><p>そう思い、10年分のアトリエ大掃除と模様替えをすることにしました。</p><p><br></p><p><br></p><h3>模様替えというより、内側を外に出す作業</h3><p>今回のアトリエの模様替えは、</p><p>家具を動かすというより、自分の中に溜まっていたものを外に出す作業でした。</p><p><br></p><p>出産前に私物はかなり減らしていたので、</p><p>「もう減らすものはない」と思っていたのですが、</p><p>実際に向き合ってみると、仕事道具や制作物の量が多すぎたことに気づきました。</p><p><br></p><p>今の自分の軸とは合っていない画材、</p><p>しっくりこないまま残していた作品、</p><p>もう見返していない資料や什器。</p><p><br></p><p>思っていた以上に、抱え込んでいました。</p><p><br></p><p><br></p><h3>手放せなかった理由</h3><h3><br></h3><p><a href="https://assets.st-note.com/production/uploads/images/242261633/picture_pc_1da00db47733c91d3853302503cc5f21.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/242261633/picture_pc_1da00db47733c91d3853302503cc5f21.png?width=1200" alt="画像" height="465" width="620"></a></p><p>有孔ボードに「今」使う画材だけを掛けました。</p><p><br></p><p>手放せなかった理由は、どれももっともらしいものでした。</p><p>• いただいたものだから</p><p>• 頑張って作ったから</p><p>• 思い出があるから</p><p>• お金を出して買ったからもったいない</p><p>• いつか必要になるかもしれない</p><p><br></p><p>でもこれらは、安心や正しさのようでいて、</p><p>実はスペースや時間、そして頭の中を、想像以上に占領していました。</p><p><br></p><p>使っていないものに、こんなにも場所を取られていたんだという違和感も感じました。</p><p><br></p><p><br></p><h3>創作とのズレ</h3><p>本当はあまり好きではなかった作品も、</p><p>「いつか展示するかもしれない」と残していました。</p><p><br></p><p>期待されて作ったけれど、</p><p>自分の軸とは少し違っていたものもあります。</p><p><br></p><p>でも結局、展示する機会は訪れなかったり、</p><p>画材をくれた人とも、いつの間にか疎遠になっていたり。</p><p><br></p><p>モノだけが、時間の止まったまま残っていました。</p><p><br></p><p><br></p><h3>気づいたこと</h3><p>片付けの途中で、</p><p>「モノの量＝家事の量」という言葉が浮かびました。</p><p><br></p><p>仕事も同じで、</p><p>ものが多いほど、大切なものが見えにくくなり、迷いが増え、</p><p>結果、ひとつの仕事にかかる時間が増えてしまう。</p><p><br></p><p>「いつか必要かも」は、不安とよく似ていて、</p><p>「思い出があるから」「頑張って作ったから」は、寂しさと似ている。</p><p><br></p><p>その感情が、知らないうちに心や身体を重くしていたのかもしれません。</p><p><a href="https://assets.st-note.com/img/1768230192-Mw5IiVQqyKYTS1RDvCdEGfls.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1768230192-Mw5IiVQqyKYTS1RDvCdEGfls.png?width=1200" alt="画像" height="460" width="620"></a></p><h3><br></h3><h3><br></h3><h3>アトリエが完成して</h3><p><a href="https://assets.st-note.com/production/uploads/images/242261907/picture_pc_f367f41160469a445b6d854080b43ff9.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/242261907/picture_pc_f367f41160469a445b6d854080b43ff9.png?width=1200" alt="画像" height="465" width="620"></a></p><p>ゆっくりできるカフェスペースも。</p><p><br></p><p>今のアトリエは、こんなふうになりました。</p><p><br></p><p>• よく使う画材だけを有孔ボードに出す</p><p>• 2軍以降の画材やストックは机の下へ</p><p>• 作った絵本は3冊だけ棚に置く</p><p>• 畳ソファとクッションを配置</p><p>• 読む本やお菓子、ウクレレを置いたカフェスペース</p><p>• 趣味の雑貨は一箇所に、今好きなものだけ少量</p><p><br></p><p><br></p><h3>空間の変化と、心の変化</h3><p>以前のアトリエは、好きなものや思い出がたくさん詰まっていて、</p><p>安心できる場所でしたが、</p><p>過去を振り返る時間が多かったように思います。</p><p><br></p><p>今のアトリエでは、</p><p>ぼーっとしたり、考え込んだりする時間が増えました。</p><p><br></p><p>過去の思い出は大切にしまい、リビングへ。</p><p>アトリエには「今好きなもの」「今大事にしていること」だけが見えるようにしました。</p><p><br></p><p><br></p><h3>創作と暮らしはつながっている</h3><p>「余白があるから、物語が生まれる」</p><p>そんな言葉を思い出します。</p><p><br></p><p>アトリエは仕事場であり、暮らしの延長にある場所。</p><p>大人と子どもを分ける空間ではなく、自然につながる場所でありたいと思っています。</p><p><br></p><p>娘のお絵かき道具や絵本、ぬいぐるみも、同じ空間にあります。</p><p><br></p><p><br></p><h3>これから</h3><p><a href="https://assets.st-note.com/production/uploads/images/242262182/picture_pc_f4b6284d0fe4469193b528df53009ff9.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/242262182/picture_pc_f4b6284d0fe4469193b528df53009ff9.png?width=1200" alt="画像" height="465" width="620"></a></p><p>娘も出入りできる仕事場に。</p><p>ものが減ったことで、娘が自由に動ける場所が増えました。</p><p><br></p><p>先日、アトリエでお昼ご飯を食べたとき、</p><p>「ひろーい！今のアトリエの方がすき！」と言ってくれて、</p><p>それがとても嬉しかったです。</p><p><br></p><p>空間がひらくと、時間や出来事も増えていく気がします。</p><p><br></p><p>余白をつくることは、失うことではなく、</p><p>これから生まれる物語の居場所をつくることなのだと感じた年末年始でした。</p><p><a href="https://assets.st-note.com/img/1768230240-XwyI38CTFf4HoWGNEJnauDzx.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1768230240-XwyI38CTFf4HoWGNEJnauDzx.png?width=1200" alt="画像" height="482" width="620"></a></p><p>大人と子ども、暮らしと仕事を無理に分けない働き方を探っていきます。</p><p>
+  </p>
+    </div>
+    <nav class="article-nav">
+      <a href="post-20260616-wemn.html" class="prev">“数”を手放し、「作る」を取り戻す —— 創作と暮らしを見つめた2025年</a>
+      <a href="post-20260616-37ps.html" class="next">物語として記録する、りさこっこのグラフィックレコーディング</a>
+    </nav>
   </div>
 </div>
-
-<div class="pager">
-  <a href="post-20260616-wemn.html" class="pager-link pager-prev">← “数”を手放し、「作る」を取り戻す ——…</a>
-  <a href="post-20260616-37ps.html" class="pager-link pager-next">物語として記録する、りさこっこのグラフィ… →</a>
-</div>
-
 <footer>
   <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
   <p class="footer-copy">&copy; rishjuly</p>
