@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>“数”を手放し、「作る」を取り戻す —— 創作と暮らしを見つめた2025年 — まちのえほんやさん りさこっこ</title>
-<meta name="description" content="この記事は2025年12月のアーカイブです。  今年も残すところ、あとわずかとなりました。 記憶が鮮明なうちに、あとから読み返して初心に戻れるよう、2025年の">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -12,96 +11,53 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #FDFCFA; --bg2: #F7F4F0;
-  --ink: #1A1714; --ink-mid: #5C5650; --ink-light: #A09890;
-  --line: #E8E2DA; --accent: #7BAF8A;
+  --bg: #FDFCFA; --bg2: #F7F4F0; --ink: #1A1714;
+  --ink-mid: #5C5650; --ink-light: #A09890; --line: #E8E2DA;
+  --accent: #7BAF8A;
   --font-serif: 'Libre Baskerville', serif;
   --font-main: 'Zen Maru Gothic', sans-serif;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
-
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(253,252,250,0.92); backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
-  padding: 0 40px 10px; height: 60px;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  animation: fadeInDown 0.7s ease both;
-}
+nav { position: fixed; top:0; left:0; right:0; z-index:100; background: rgba(253,252,250,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 40px 10px; height: 60px; display: flex; align-items: flex-end; justify-content: space-between; animation: fadeInDown 0.7s ease both; }
 .nav-left { display: flex; flex-direction: column; gap: 1px; }
 .nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
-.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; line-height: 1.5; }
-.nav-right { display: flex; gap: 20px; align-items: center; }
-.nav-link { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
-.nav-link:hover { color: var(--ink); }
-
-footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); background: var(--bg); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: var(--ink); }
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); }
 .footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
 .footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
-
 .post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
-
-@keyframes fadeInDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeInUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn     { from { opacity: 0; } to { opacity: 1; } }
-
-@media (max-width: 720px) {
-  nav { padding: 8px 16px; height: auto; min-height: 56px; }
-  .nav-logo { font-size: 12px; }
-}
-
-.article-wrap {
-  max-width: 680px; margin: 0 auto;
-  padding: 100px 40px 80px;
-  animation: fadeInUp 0.8s ease 0.1s both;
-}
-.article-meta {
-  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-.article-date { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-light); }
-.article-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.article-title {
-  font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65;
-  margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--line);
-}
-.article-thumb {
-  width: 100%; max-height: 400px; object-fit: cover;
-  border-radius: 2px; display: block; margin-bottom: 40px;
-}
-.article-body {
-  font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; color: var(--ink);
-}
-.article-body h2 { font-size: 18px; font-weight: 500; letter-spacing: 0.08em; margin: 32px 0 12px; }
-.article-body h3 { font-size: 16px; font-weight: 500; letter-spacing: 0.07em; margin: 28px 0 10px; }
-.article-body p { margin-bottom: 0; }
+@keyframes fadeInDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
+.article-wrap { padding-top: 60px; }
+.article-inner { max-width: 680px; margin: 0 auto; padding: 60px 40px 100px; animation: fadeInUp 0.7s ease 0.2s both; }
+.article-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.article-date { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-light); }
+.article-title { font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.article-thumbnail { width: 100%; max-height: 420px; object-fit: cover; border-radius: 2px; margin-bottom: 40px; display: block; }
+.article-body { font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; }
+.article-body h2 { font-size: 19px; font-weight: 500; margin: 36px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 10px; }
 .article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
-.article-body ul, .article-body ol { padding-left: 1.5em; margin-bottom: 8px; }
+.article-body ul, .article-body ol { padding-left: 1.6em; margin-bottom: 10px; }
 .article-body li { margin-bottom: 4px; }
 .article-body strong { font-weight: 500; }
 .article-body a { color: var(--ink-mid); }
-
-.pager {
-  max-width: 680px; margin: 0 auto;
-  padding: 40px 40px 80px;
-  display: flex; justify-content: space-between; gap: 20px;
-  border-top: 1px solid var(--line);
-}
-.pager-link {
-  font-size: 12px; letter-spacing: 0.1em; color: var(--ink-mid);
-  text-decoration: none; line-height: 1.6; transition: color 0.2s;
-  max-width: 45%;
-}
-.pager-link:hover { color: var(--ink); }
-.pager-prev { text-align: left; }
-.pager-next { text-align: right; }
-
+.article-nav { display: flex; justify-content: space-between; gap: 20px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+.article-nav a { font-size: 12px; letter-spacing: 0.14em; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; max-width: 45%; line-height: 1.7; }
+.article-nav a:hover { color: var(--ink); }
+.article-nav .prev::before { content: '← '; }
+.article-nav .next::after  { content: ' →'; }
+.article-nav .next { text-align: right; }
 @media (max-width: 720px) {
-  .article-wrap { padding: 80px 20px 60px; }
-  .article-title { font-size: 20px; }
-  .pager { padding: 32px 20px 60px; }
-  footer { padding: 32px 20px; }
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+  .article-inner { padding: 40px 20px 80px; }
+  .article-title { font-size: 19px; }
 }
 </style>
 </head>
@@ -111,28 +67,27 @@ footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); b
     <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
     <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
   </div>
-  <div class="nav-right">
-    <a href="posts.html" class="nav-link">← ぶろぐ一覧</a>
-  </div>
+  <a href="posts.html" class="nav-back">← ぶろぐ一覧</a>
 </nav>
-
 <div class="article-wrap">
-  <div class="article-meta">
-    <span class="article-date">2026.06.16</span>
-    <span class="article-tags"><span class="post-tag">日常</span><span class="post-tag">絵本のある暮らし</span><span class="post-tag">振り返り</span></span>
-  </div>
-  <h1 class="article-title">“数”を手放し、「作る」を取り戻す —— 創作と暮らしを見つめた2025年</h1>
-  <img class="article-thumb" src="images/IMG_8716.PNG" alt="“数”を手放し、「作る」を取り戻す —— 創作と暮らしを見つめた2025年">
-  <div class="article-body">
-    <p>この記事は2025年12月のアーカイブです。</p><p><br></p><p>今年も残すところ、あとわずかとなりました。</p><p>記憶が鮮明なうちに、あとから読み返して初心に戻れるよう、2025年の振り返りをしておきたいと思います。</p><p><a href="https://assets.st-note.com/production/uploads/images/236391094/picture_pc_44beab41d1d98881cd7cc07e23e56776.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236391094/picture_pc_44beab41d1d98881cd7cc07e23e56776.png?width=1200" alt="画像" height="438" width="620"></a></p><p><br></p><p>今年は、とにかく 「自分の創作と生き方」 について見つめ直し、向き合った一年でした。</p><p><br></p><p>SNSの数字、売上、イベント、完成できた作品の数。</p><p>今までは、数で示される成果にどうしても縛られてしまっていました。</p><p><br></p><p>•&nbsp;「子育てに入る前の自分」と比べて全然できていない</p><p>•&nbsp;「同年代の作家さん」はこんなに活躍しているのに、私はまだ何も残せていない</p><p>•&nbsp;「他のママたち」は仕事も活動も頑張っているのに、私は何もできていない</p><p><br></p><p>いつも基準を外側に置き、誰かと比較しては落ち込み、焦ってばかりでした。</p><p>そんな私の見方が、今年は少しずつ変わりました。</p><p><br></p><p><br></p><h3>「まちの えほん」が教えてくれた、私が本当に描きたかったもの</h3><p><br></p><p>今年もっとも心に残っているのは、<strong>「まちの えほん」シリーズ</strong>の1作目</p><p><strong>『まこがもさんの しあわせ じょさんいん』</strong>を発表できたことです。</p><p><br></p><p>地域の中にある素敵な場所や人を、動物たちの物語にのせて届ける「まちの えほん」。</p><p>この絵本を作ることができたおかげで、私は 自分が本当に描きたかったテーマ に気づくことができました。</p><p><br></p><p>以前私は日記に、こんな言葉を書いていました。</p><p><br></p><blockquote>娘とはベビーカーで、電車で、バスで、車で、おもしろそうなものがあればどこへでも出かけた。</blockquote><blockquote>図書館、おやこの広場、子育て支援センター、近所の小さなカフェやいつもの公園、行きつけのスーパー。</blockquote><blockquote>どこにでもありふれた場所だったけど、ここにしかない特別な場所だったね。</blockquote><p><br></p><p>そこに書かれているものこそ、私が描きたかった世界でした。</p><p><br></p><p>若い頃は、</p><p>「誰もやったことがない表現を見つけなければ作家じゃない」と思い込み、</p><p>できない自分に苦しんだ時期もありました。</p><p><br></p><p>でも、私が描きたかったものは ごくありふれた毎日の中 にありました。</p><p><br></p><p><a href="https://assets.st-note.com/production/uploads/images/236391489/picture_pc_f92e78491caed79f86b383534d18d890.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236391489/picture_pc_f92e78491caed79f86b383534d18d890.png?width=1200" alt="画像" height="294" width="620"></a></p><p><br></p><p>私は</p><p><strong>「誰も見たことがない特別」より、</strong></p><p><strong>「誰もが見た覚えのある特別」を描ける人になりたい。</strong></p><p><br></p><p>その気づきは、私にとって大きな転換点でした。</p><p><br></p><p><br></p><h3>家庭菜園から学んだ、ゆるやかな作品の育て方</h3><p><br></p><p>もう一つ、今年を象徴するのは家庭菜園でした。</p><p><br></p><p>娘が産まれてから少しずつ一緒に楽しんでいた家庭菜園。</p><p>昨年までは失敗続きでしたが、今年は一気に実りの時を迎えました。</p><p><br></p><blockquote>いちご→大成功！</blockquote><blockquote>ミント→大成功！</blockquote><blockquote>バジル→大成功！</blockquote><blockquote>ローズマリー→成功♪</blockquote><blockquote>ミニトマト→大成功！</blockquote><blockquote>オクラ→大成功！</blockquote><blockquote>サニーレタス→失敗...</blockquote><blockquote>ナス...→やや失敗...</blockquote><blockquote>ラディッシュ→大成功！</blockquote><blockquote>小カブ→大成功！</blockquote><blockquote>小松菜→大成功！</blockquote><blockquote>ルッコラ→成功♪</blockquote><blockquote>水菜→成功♪</blockquote><blockquote>ネギ→大成功！</blockquote><blockquote>ブロッコリー→挑戦中...</blockquote><p><br></p><p>家庭菜園の始まりは、いつも不安です。</p><p><br></p><p>種を蒔いた直後は「ちゃんと芽が出るかな…」とソワソワ。</p><p>芽が出ても「ひょろっとして元気がないかも…」とソワソワ。</p><p>でも頼りなかった葉っぱは、いつのまにか青々と育ち、土に根を張り、ぐんぐん大きくなっていました。</p><p><a href="https://assets.st-note.com/production/uploads/images/236392398/picture_pc_308d68ace8b6edbfc419a9feb3caa675.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236392398/picture_pc_308d68ace8b6edbfc419a9feb3caa675.jpg?width=1200" alt="画像" height="826" width="620"></a></p><p><br></p><p>その姿は、どこか子育てにも通じます。</p><p><br></p><p>そして気づきました。</p><p><br></p><p><strong>私の作品もきっと、同じような育ち方が性に合っている。</strong></p><p><br></p><p>SNSでバズるような意外性や瞬発力はないかもしれない。</p><p>でも土に蒔いた種が、気づけば日の光を浴びて大きくなっているように、</p><p>静かに、ゆるやかに、身近なところから広がっていけばいい。</p><p><br></p><p>そう思えるようになって、私は「数」という呪縛から解放されました。</p><p><br></p><p><br></p><h3>ソーシャルスクエアで考えた「心の豊かさ」とは？</h3><p><br></p><p>今年ずっと考えていたことがあります。</p><p><strong>「心の豊かさとは何か」 </strong>という問いです。</p><p><br></p><p>グラフィックレコーディングで参加させていただいた「ソーシャルスクエア尼崎」さんのイベント。</p><p><a href="https://assets.st-note.com/production/uploads/images/236392713/picture_pc_e313519ff97752dbed776fd7268b0284.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236392713/picture_pc_e313519ff97752dbed776fd7268b0284.png?width=1200" alt="画像" height="826" width="620"></a></p><p>トークショーのグラレコをさせて頂きました。</p><p><br></p><p>そのときの登壇者の言葉が深く心に残りました。</p><p><br></p><p>「数字やお金で表せないエピソードや思い出をどれだけ語れるか、それが心の豊かさなのでは」</p><p><br></p><p>それ以来、</p><p>「心の豊かさとは何か。どうすれば心を豊かにできるのか」</p><p>を考え続けています。</p><p><br></p><p><br></p><h3>「暮らしを自分で作る」という生き方</h3><p><br></p><p>家庭菜園以外にも、今年は「自分の暮らしや楽しみを自分で作ること」をたくさんやってみました。</p><p><br></p><p>たとえばお裁縫で娘の服を作ったり…</p><p><br></p><p>娘と「おうちカフェ」を楽しんだり。</p><p><br></p><p>こうした小さな暮らしの中での遊びは、</p><p>数字にならない「心の豊かさ」をくれると感じています。</p><p><br></p><p>物価が上がり、</p><p>「もっとお金がないと安心できない」</p><p>という不安が大きくなりつつある今だからこそ、</p><p><br></p><p>「買う」以外に「作る」選択肢を持つこと。</p><p>自分の暮らしを自分で豊かにできると知ること。</p><p><br></p><p>それが、本当の安心につながるのではないかと思います。</p><p><a href="https://assets.st-note.com/production/uploads/images/236392833/picture_pc_a9ccd35d135006e0756926f33f96d858.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236392833/picture_pc_a9ccd35d135006e0756926f33f96d858.png?width=1200" alt="画像" height="695" width="620"></a></p><p><br></p><p><strong>お金や数字で表せる価値に縛られる生き方から、</strong></p><p><strong>自分の感覚と暮らしを軸にした生き方 へ。</strong></p><p><br></p><p>今年はその第一歩を踏み出せた一年でした。</p><p><br></p><p><br></p><h3>2026年、どんな一年にしたい？</h3><p><br></p><p>来年は、「くらしとまちに、物語を置いていく」 ことをテーマに活動していきます。</p><p><br></p><p>活動の軸は、「モノを売る」から「世界観と体験を届ける」へ。</p><p><br></p><p>❌ <strong>やめること</strong></p><p><br></p><p>まずは、これまで続けてきたけれど、本当にやりたい方向とズレてきたことを手放します。</p><p><br></p><p>・<strong>1点もの原画や雑貨の大量生産</strong></p><p>時代は「物を買う」から、「思い出や経験・自己投資へお金をかける」へ成熟しつつあります。</p><p>単に「物を売る」ことから脱却し、「世界観を育てる」ことに時間と力を使います。</p><p><br></p><p>・<strong>マルシェなど賑やかな場所での出展</strong></p><p>流れが速く賑やかな場所では、世界観をじっくり味わってもらいたい絵本は読まれにくいということに気づきました。地域参加での年1〜2回に抑えます。</p><p><br></p><p>・<strong>オンライン通販など“顔の見えない”販売</strong></p><p>コミュニケーションのある販売へ重心を移します。</p><p><br></p><p>🌈 <strong>やりたいこと</strong></p><p><br></p><p>ここからが本題。</p><p>2026年に重点的に取り組むことです。</p><p><br></p><p>● <strong>世界観の軸となる絵本づくり</strong></p><p>自分の根っこの部分。</p><p>「まちのえほん」はもちろん、「くらしのえほん」という、娘と過ごす毎日から生まれる絵本も新シリーズとして制作していきたいです。</p><p>絵本は「世界そのもの」なので、最優先でじっくり育てていきます。</p><p><br></p><p>● note<strong>でのコラム＋挿絵</strong></p><p>今年から始めたnote。</p><p>自分の気づきを挿絵とともに言葉にして、</p><p>文章から世界観を耕していく一年にします。</p><p>挿絵はイラストACにもアップし、誰かの活動を応援できる素材として広げていきます。</p><p><br></p><p>●<strong> グラフィックレコーディング</strong></p><p>グラレコは、思考の整理や絵本づくりの素材集めにつながる大切な表現。</p><p>仕事として積極的に育てていきます。</p><p><br></p><p>● <strong>絵本の世界を暮らしへ持ち込む “あそび”</strong></p><p>おうちで絵本カフェなど、読んで終わりではなく「暮らしに溶け込む絵本」を目指します。</p><p><br></p><p>● <strong>展示や作品の広め方を探す</strong></p><p>自分の世界観に合うカフェやギャラリー、本屋さんなど、</p><p>作品をそっと“置ける場所”を少しずつ探していきます。</p><p>年に一度はどこかで展示ができたら嬉しいです。</p><p><br></p><p><a href="https://assets.st-note.com/production/uploads/images/236393084/picture_pc_13f8d9dc7382c42973bb2a978f6f1702.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236393084/picture_pc_13f8d9dc7382c42973bb2a978f6f1702.png?width=1200" alt="画像" height="693" width="620"></a></p><p>この一年にありがとう。</p><p><br></p><p>来年も日々の暮らしや町の中で見つけた小さな気づきを大切にしながら、</p><p>自分の世界観を少しずつ形にしていきたいと思っています。</p>
+  <div class="article-inner">
+    <div class="article-meta">
+      <span class="article-date">2026.06.16</span>
+      <span class="post-tag">日常</span> <span class="post-tag">振り返り</span>
+    </div>
+    <h1 class="article-title">“数”を手放し、「作る」を取り戻す —— 創作と暮らしを見つめた2025年</h1>
+    <img class="article-thumbnail" src="images/IMG_8716.PNG" alt="">
+    <div class="article-body">
+<p>
+    </p><p>この記事は2025年12月のアーカイブです。</p><p><br></p><p>今年も残すところ、あとわずかとなりました。</p><p>記憶が鮮明なうちに、あとから読み返して初心に戻れるよう、2025年の振り返りをしておきたいと思います。</p><p><a href="https://assets.st-note.com/production/uploads/images/236391094/picture_pc_44beab41d1d98881cd7cc07e23e56776.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236391094/picture_pc_44beab41d1d98881cd7cc07e23e56776.png?width=1200" alt="画像" height="438" width="620"></a></p><p><br></p><p>今年は、とにかく 「自分の創作と生き方」 について見つめ直し、向き合った一年でした。</p><p><br></p><p>SNSの数字、売上、イベント、完成できた作品の数。</p><p>今までは、数で示される成果にどうしても縛られてしまっていました。</p><p><br></p><p>•&nbsp;「子育てに入る前の自分」と比べて全然できていない</p><p>•&nbsp;「同年代の作家さん」はこんなに活躍しているのに、私はまだ何も残せていない</p><p>•&nbsp;「他のママたち」は仕事も活動も頑張っているのに、私は何もできていない</p><p><br></p><p>いつも基準を外側に置き、誰かと比較しては落ち込み、焦ってばかりでした。</p><p>そんな私の見方が、今年は少しずつ変わりました。</p><p><br></p><p><br></p><h3>「まちの えほん」が教えてくれた、私が本当に描きたかったもの</h3><p><br></p><p>今年もっとも心に残っているのは、<strong>「まちの えほん」シリーズ</strong>の1作目</p><p><strong>『まこがもさんの しあわせ じょさんいん』</strong>を発表できたことです。</p><p><br></p><p>地域の中にある素敵な場所や人を、動物たちの物語にのせて届ける「まちの えほん」。</p><p>この絵本を作ることができたおかげで、私は 自分が本当に描きたかったテーマ に気づくことができました。</p><p><br></p><p>以前私は日記に、こんな言葉を書いていました。</p><p><br></p><blockquote>娘とはベビーカーで、電車で、バスで、車で、おもしろそうなものがあればどこへでも出かけた。</blockquote><blockquote>図書館、おやこの広場、子育て支援センター、近所の小さなカフェやいつもの公園、行きつけのスーパー。</blockquote><blockquote>どこにでもありふれた場所だったけど、ここにしかない特別な場所だったね。</blockquote><p><br></p><p>そこに書かれているものこそ、私が描きたかった世界でした。</p><p><br></p><p>若い頃は、</p><p>「誰もやったことがない表現を見つけなければ作家じゃない」と思い込み、</p><p>できない自分に苦しんだ時期もありました。</p><p><br></p><p>でも、私が描きたかったものは ごくありふれた毎日の中 にありました。</p><p><br></p><p><a href="https://assets.st-note.com/production/uploads/images/236391489/picture_pc_f92e78491caed79f86b383534d18d890.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236391489/picture_pc_f92e78491caed79f86b383534d18d890.png?width=1200" alt="画像" height="294" width="620"></a></p><p><br></p><p>私は</p><p><strong>「誰も見たことがない特別」より、</strong></p><p><strong>「誰もが見た覚えのある特別」を描ける人になりたい。</strong></p><p><br></p><p>その気づきは、私にとって大きな転換点でした。</p><p><br></p><p><br></p><h3>家庭菜園から学んだ、ゆるやかな作品の育て方</h3><p><br></p><p>もう一つ、今年を象徴するのは家庭菜園でした。</p><p><br></p><p>娘が産まれてから少しずつ一緒に楽しんでいた家庭菜園。</p><p>昨年までは失敗続きでしたが、今年は一気に実りの時を迎えました。</p><p><br></p><blockquote>いちご→大成功！</blockquote><blockquote>ミント→大成功！</blockquote><blockquote>バジル→大成功！</blockquote><blockquote>ローズマリー→成功♪</blockquote><blockquote>ミニトマト→大成功！</blockquote><blockquote>オクラ→大成功！</blockquote><blockquote>サニーレタス→失敗...</blockquote><blockquote>ナス...→やや失敗...</blockquote><blockquote>ラディッシュ→大成功！</blockquote><blockquote>小カブ→大成功！</blockquote><blockquote>小松菜→大成功！</blockquote><blockquote>ルッコラ→成功♪</blockquote><blockquote>水菜→成功♪</blockquote><blockquote>ネギ→大成功！</blockquote><blockquote>ブロッコリー→挑戦中...</blockquote><p><br></p><p>家庭菜園の始まりは、いつも不安です。</p><p><br></p><p>種を蒔いた直後は「ちゃんと芽が出るかな…」とソワソワ。</p><p>芽が出ても「ひょろっとして元気がないかも…」とソワソワ。</p><p>でも頼りなかった葉っぱは、いつのまにか青々と育ち、土に根を張り、ぐんぐん大きくなっていました。</p><p><a href="https://assets.st-note.com/production/uploads/images/236392398/picture_pc_308d68ace8b6edbfc419a9feb3caa675.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236392398/picture_pc_308d68ace8b6edbfc419a9feb3caa675.jpg?width=1200" alt="画像" height="826" width="620"></a></p><p><br></p><p>その姿は、どこか子育てにも通じます。</p><p><br></p><p>そして気づきました。</p><p><br></p><p><strong>私の作品もきっと、同じような育ち方が性に合っている。</strong></p><p><br></p><p>SNSでバズるような意外性や瞬発力はないかもしれない。</p><p>でも土に蒔いた種が、気づけば日の光を浴びて大きくなっているように、</p><p>静かに、ゆるやかに、身近なところから広がっていけばいい。</p><p><br></p><p>そう思えるようになって、私は「数」という呪縛から解放されました。</p><p><br></p><p><br></p><h3>ソーシャルスクエアで考えた「心の豊かさ」とは？</h3><p><br></p><p>今年ずっと考えていたことがあります。</p><p><strong>「心の豊かさとは何か」 </strong>という問いです。</p><p><br></p><p>グラフィックレコーディングで参加させていただいた「ソーシャルスクエア尼崎」さんのイベント。</p><p><a href="https://assets.st-note.com/production/uploads/images/236392713/picture_pc_e313519ff97752dbed776fd7268b0284.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236392713/picture_pc_e313519ff97752dbed776fd7268b0284.png?width=1200" alt="画像" height="826" width="620"></a></p><p>トークショーのグラレコをさせて頂きました。</p><p><br></p><p>そのときの登壇者の言葉が深く心に残りました。</p><p><br></p><p>「数字やお金で表せないエピソードや思い出をどれだけ語れるか、それが心の豊かさなのでは」</p><p><br></p><p>それ以来、</p><p>「心の豊かさとは何か。どうすれば心を豊かにできるのか」</p><p>を考え続けています。</p><p><br></p><p><br></p><h3>「暮らしを自分で作る」という生き方</h3><p><br></p><p>家庭菜園以外にも、今年は「自分の暮らしや楽しみを自分で作ること」をたくさんやってみました。</p><p><br></p><p>たとえばお裁縫で娘の服を作ったり…</p><p><br></p><p>娘と「おうちカフェ」を楽しんだり。</p><p><br></p><p>こうした小さな暮らしの中での遊びは、</p><p>数字にならない「心の豊かさ」をくれると感じています。</p><p><br></p><p>物価が上がり、</p><p>「もっとお金がないと安心できない」</p><p>という不安が大きくなりつつある今だからこそ、</p><p><br></p><p>「買う」以外に「作る」選択肢を持つこと。</p><p>自分の暮らしを自分で豊かにできると知ること。</p><p><br></p><p>それが、本当の安心につながるのではないかと思います。</p><p><a href="https://assets.st-note.com/production/uploads/images/236392833/picture_pc_a9ccd35d135006e0756926f33f96d858.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236392833/picture_pc_a9ccd35d135006e0756926f33f96d858.png?width=1200" alt="画像" height="695" width="620"></a></p><p><br></p><p><strong>お金や数字で表せる価値に縛られる生き方から、</strong></p><p><strong>自分の感覚と暮らしを軸にした生き方 へ。</strong></p><p><br></p><p>今年はその第一歩を踏み出せた一年でした。</p><p><br></p><p><br></p><h3>2026年、どんな一年にしたい？</h3><p><br></p><p>来年は、「くらしとまちに、物語を置いていく」 ことをテーマに活動していきます。</p><p><br></p><p>活動の軸は、「モノを売る」から「世界観と体験を届ける」へ。</p><p><br></p><p>❌ <strong>やめること</strong></p><p><br></p><p>まずは、これまで続けてきたけれど、本当にやりたい方向とズレてきたことを手放します。</p><p><br></p><p>・<strong>1点もの原画や雑貨の大量生産</strong></p><p>時代は「物を買う」から、「思い出や経験・自己投資へお金をかける」へ成熟しつつあります。</p><p>単に「物を売る」ことから脱却し、「世界観を育てる」ことに時間と力を使います。</p><p><br></p><p>・<strong>マルシェなど賑やかな場所での出展</strong></p><p>流れが速く賑やかな場所では、世界観をじっくり味わってもらいたい絵本は読まれにくいということに気づきました。地域参加での年1〜2回に抑えます。</p><p><br></p><p>・<strong>オンライン通販など“顔の見えない”販売</strong></p><p>コミュニケーションのある販売へ重心を移します。</p><p><br></p><p>🌈 <strong>やりたいこと</strong></p><p><br></p><p>ここからが本題。</p><p>2026年に重点的に取り組むことです。</p><p><br></p><p>● <strong>世界観の軸となる絵本づくり</strong></p><p>自分の根っこの部分。</p><p>「まちのえほん」はもちろん、「くらしのえほん」という、娘と過ごす毎日から生まれる絵本も新シリーズとして制作していきたいです。</p><p>絵本は「世界そのもの」なので、最優先でじっくり育てていきます。</p><p><br></p><p>● note<strong>でのコラム＋挿絵</strong></p><p>今年から始めたnote。</p><p>自分の気づきを挿絵とともに言葉にして、</p><p>文章から世界観を耕していく一年にします。</p><p>挿絵はイラストACにもアップし、誰かの活動を応援できる素材として広げていきます。</p><p><br></p><p>●<strong> グラフィックレコーディング</strong></p><p>グラレコは、思考の整理や絵本づくりの素材集めにつながる大切な表現。</p><p>仕事として積極的に育てていきます。</p><p><br></p><p>● <strong>絵本の世界を暮らしへ持ち込む “あそび”</strong></p><p>おうちで絵本カフェなど、読んで終わりではなく「暮らしに溶け込む絵本」を目指します。</p><p><br></p><p>● <strong>展示や作品の広め方を探す</strong></p><p>自分の世界観に合うカフェやギャラリー、本屋さんなど、</p><p>作品をそっと“置ける場所”を少しずつ探していきます。</p><p>年に一度はどこかで展示ができたら嬉しいです。</p><p><br></p><p><a href="https://assets.st-note.com/production/uploads/images/236393084/picture_pc_13f8d9dc7382c42973bb2a978f6f1702.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/production/uploads/images/236393084/picture_pc_13f8d9dc7382c42973bb2a978f6f1702.png?width=1200" alt="画像" height="693" width="620"></a></p><p>この一年にありがとう。</p><p><br></p><p>来年も日々の暮らしや町の中で見つけた小さな気づきを大切にしながら、</p><p>自分の世界観を少しずつ形にしていきたいと思っています。</p><p>
+  </p>
+    </div>
+    <nav class="article-nav">
+      <a href="post-20260616-3921.html" class="prev">まちと人がやさしくつながる絵本をつくる〜『まこがもさんの しあわせ じょさんいん』制作のおはなし〜</a>
+      <a href="post-20260616-1pgx.html" class="next">余白のあるアトリエにしたら、物語が息をしはじめた</a>
+    </nav>
   </div>
 </div>
-
-<div class="pager">
-  <a href="post-20260616-3921.html" class="pager-link pager-prev">← まちと人がやさしくつながる絵本をつくる〜…</a>
-  <a href="post-20260616-1pgx.html" class="pager-link pager-next">余白のあるアトリエにしたら、物語が息をし… →</a>
-</div>
-
 <footer>
   <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
   <p class="footer-copy">&copy; rishjuly</p>
