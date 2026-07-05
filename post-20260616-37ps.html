@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>物語として記録する、りさこっこのグラフィックレコーディング — まちのえほんやさん りさこっこ</title>
-<meta name="description" content="この記事は2026年1月のアーカイブです。  今回の記事では、 私が描いている「グラフィックレコーディング（グラレコ）」についてご紹介します。   グラフィック">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -12,96 +11,53 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #FDFCFA; --bg2: #F7F4F0;
-  --ink: #1A1714; --ink-mid: #5C5650; --ink-light: #A09890;
-  --line: #E8E2DA; --accent: #7BAF8A;
+  --bg: #FDFCFA; --bg2: #F7F4F0; --ink: #1A1714;
+  --ink-mid: #5C5650; --ink-light: #A09890; --line: #E8E2DA;
+  --accent: #7BAF8A;
   --font-serif: 'Libre Baskerville', serif;
   --font-main: 'Zen Maru Gothic', sans-serif;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
-
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(253,252,250,0.92); backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
-  padding: 0 40px 10px; height: 60px;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  animation: fadeInDown 0.7s ease both;
-}
+nav { position: fixed; top:0; left:0; right:0; z-index:100; background: rgba(253,252,250,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 40px 10px; height: 60px; display: flex; align-items: flex-end; justify-content: space-between; animation: fadeInDown 0.7s ease both; }
 .nav-left { display: flex; flex-direction: column; gap: 1px; }
 .nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
-.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; line-height: 1.5; }
-.nav-right { display: flex; gap: 20px; align-items: center; }
-.nav-link { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
-.nav-link:hover { color: var(--ink); }
-
-footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); background: var(--bg); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: var(--ink); }
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); }
 .footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
 .footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
-
 .post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
-
-@keyframes fadeInDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeInUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn     { from { opacity: 0; } to { opacity: 1; } }
-
-@media (max-width: 720px) {
-  nav { padding: 8px 16px; height: auto; min-height: 56px; }
-  .nav-logo { font-size: 12px; }
-}
-
-.article-wrap {
-  max-width: 680px; margin: 0 auto;
-  padding: 100px 40px 80px;
-  animation: fadeInUp 0.8s ease 0.1s both;
-}
-.article-meta {
-  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-.article-date { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-light); }
-.article-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.article-title {
-  font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65;
-  margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--line);
-}
-.article-thumb {
-  width: 100%; max-height: 400px; object-fit: cover;
-  border-radius: 2px; display: block; margin-bottom: 40px;
-}
-.article-body {
-  font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; color: var(--ink);
-}
-.article-body h2 { font-size: 18px; font-weight: 500; letter-spacing: 0.08em; margin: 32px 0 12px; }
-.article-body h3 { font-size: 16px; font-weight: 500; letter-spacing: 0.07em; margin: 28px 0 10px; }
-.article-body p { margin-bottom: 0; }
+@keyframes fadeInDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
+.article-wrap { padding-top: 60px; }
+.article-inner { max-width: 680px; margin: 0 auto; padding: 60px 40px 100px; animation: fadeInUp 0.7s ease 0.2s both; }
+.article-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.article-date { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-light); }
+.article-title { font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.article-thumbnail { width: 100%; max-height: 420px; object-fit: cover; border-radius: 2px; margin-bottom: 40px; display: block; }
+.article-body { font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; }
+.article-body h2 { font-size: 19px; font-weight: 500; margin: 36px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 10px; }
 .article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
-.article-body ul, .article-body ol { padding-left: 1.5em; margin-bottom: 8px; }
+.article-body ul, .article-body ol { padding-left: 1.6em; margin-bottom: 10px; }
 .article-body li { margin-bottom: 4px; }
 .article-body strong { font-weight: 500; }
 .article-body a { color: var(--ink-mid); }
-
-.pager {
-  max-width: 680px; margin: 0 auto;
-  padding: 40px 40px 80px;
-  display: flex; justify-content: space-between; gap: 20px;
-  border-top: 1px solid var(--line);
-}
-.pager-link {
-  font-size: 12px; letter-spacing: 0.1em; color: var(--ink-mid);
-  text-decoration: none; line-height: 1.6; transition: color 0.2s;
-  max-width: 45%;
-}
-.pager-link:hover { color: var(--ink); }
-.pager-prev { text-align: left; }
-.pager-next { text-align: right; }
-
+.article-nav { display: flex; justify-content: space-between; gap: 20px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+.article-nav a { font-size: 12px; letter-spacing: 0.14em; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; max-width: 45%; line-height: 1.7; }
+.article-nav a:hover { color: var(--ink); }
+.article-nav .prev::before { content: '← '; }
+.article-nav .next::after  { content: ' →'; }
+.article-nav .next { text-align: right; }
 @media (max-width: 720px) {
-  .article-wrap { padding: 80px 20px 60px; }
-  .article-title { font-size: 20px; }
-  .pager { padding: 32px 20px 60px; }
-  footer { padding: 32px 20px; }
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+  .article-inner { padding: 40px 20px 80px; }
+  .article-title { font-size: 19px; }
 }
 </style>
 </head>
@@ -111,28 +67,27 @@ footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); b
     <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
     <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
   </div>
-  <div class="nav-right">
-    <a href="posts.html" class="nav-link">← ぶろぐ一覧</a>
-  </div>
+  <a href="posts.html" class="nav-back">← ぶろぐ一覧</a>
 </nav>
-
 <div class="article-wrap">
-  <div class="article-meta">
-    <span class="article-date">2026.06.16</span>
-    <span class="article-tags"><span class="post-tag">グラレコ</span><span class="post-tag">物語のグラレコ</span></span>
-  </div>
-  <h1 class="article-title">物語として記録する、りさこっこのグラフィックレコーディング</h1>
-  <img class="article-thumb" src="images/IMG_8714.PNG" alt="物語として記録する、りさこっこのグラフィックレコーディング">
-  <div class="article-body">
-    <p>この記事は2026年1月のアーカイブです。</p><p><br></p><p>今回の記事では、</p><p>私が描いている「グラフィックレコーディング（グラレコ）」についてご紹介します。</p><p><br></p><p><br></p><h3>グラフィックレコーディング（グラレコ）とは？</h3><p>会議や講座、対話の場などで生まれた</p><p><strong>言葉・流れ・関係性を、絵と言葉で記録する技術</strong>です。</p><p>グラレコがあることで、その場での理解や共有がしやすくなり、</p><p>また、あとから振り返ったり、</p><p>その場にいなかった人と内容を共有する際にも役立ちます。</p><p><br></p><p><a href="https://assets.st-note.com/img/1768707885-woYD80TdlvZ5ng2mBHK1zP6y.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1768707885-woYD80TdlvZ5ng2mBHK1zP6y.png?width=1200" alt="画像" height="445" width="620"></a></p><h3><br></h3><h3><br></h3><h3>なぜグラレコを書いているのか</h3><p><br></p><p>もともとは、育児の日々を</p><p>絵日記のように、イラストと言葉で記録していました。</p><p><br></p><p>あるとき夫に</p><p>「これ、形を整えたらグラレコになるんじゃない？」</p><p>と言われたことがきっかけで、</p><p>はじめて「グラフィックレコーディング」という言葉を知りました。</p><p><br></p><p>そこから勉強し、練習を重ね、</p><p>少しずつ仕事として描くようになりましたが、</p><p>やっていることの根っこは、今も変わっていません。</p><p><br></p><p>人の話を聞くのが好き。</p><p>聞いたこと、体験したことを、</p><p>絵と言葉で残すのが好き。</p><p>その場で生まれた感情や空気を、</p><p>あとからもう一度思い出せる形にしたい。</p><p><br></p><p>私にとってのグラレコは、</p><p>「会議の記録」というより、</p><p><strong>出来事を絵本のように残す記録</strong>なのだと思っています。</p><p><br></p><p><br></p><h3>「物語のグラレコ」という考え方</h3><p><br></p><p>こちらは、私が描く</p><p>「物語のグラレコ」についてまとめたセルフグラレコです。</p><p><a href="https://assets.st-note.com/img/1768707464-9Gzl3r4moZFsO5hdnMay8vNY.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1768707464-9Gzl3r4moZFsO5hdnMay8vNY.jpg?width=1200" alt="画像" height="435" width="620"></a></p><p>私のグラレコは、</p><p>一般的なグラレコとは少し違った特徴を持っています。</p><p><br></p><p>一般的なグラレコでは、</p><p>• 数字や結論、ロジックの整理</p><p>• 大人数・遠くからでも一瞬で把握できる視認性</p><p><br></p><p>が重視されることが多いですが、</p><p><br></p><p>絵本作家であるりさこっこのグラレコでは、</p><p>• その場の言葉・感情・空気を残す「絵本的な記録」</p><p>• 結論を急がず、何度も見返したくなる余韻</p><p>• 議題を「物語」として受け取り、流れや関係性を大切にする</p><p><br></p><p>ことに重きを置いています。</p><p><br></p><p><br></p><h3>表現・画材について</h3><p><br></p><p>一般的なグラレコでは、</p><p>大きな模造紙に、太線・原色で描かれることが多いですが、</p><p><br></p><p>私の「物語のグラレコ」では、</p><p>• A4〜A3の手に取りやすいサイズ</p><p>• 筆の呼吸を感じる線</p><p>• やさしいニュアンスカラー</p><p><br></p><p>を用います。</p><p><br></p><p>「読みやすさ」よりも、</p><p><br></p><p><strong>感情や空気を共有できる居心地の良さ</strong></p><p><strong>絵本のように読み返したくなる余韻</strong></p><p><br></p><p>を大切にする場面もあります。</p><p><br></p><p><br></p><h3>実例：民間図書館「さんとしょ」のグラレコ</h3><p><br></p><p>月に一度ほどイベントに参加させていただいている</p><p>民間図書館「さんとしょ」さんについて、</p><p>この場所がどのような場なのかを</p><p>グラレコにまとめました。</p><p><a href="https://assets.st-note.com/img/1768707555-4GjbkrxEptKyNnUI1HOYVi8S.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1768707555-4GjbkrxEptKyNnUI1HOYVi8S.jpg?width=1200" alt="画像" height="435" width="620"></a></p><p><a href="https://assets.st-note.com/img/1768707579-i5AguCfm3yHhGWPlkq7YEK9z.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1768707579-i5AguCfm3yHhGWPlkq7YEK9z.jpg?width=1200" alt="画像" height="435" width="620"></a></p><p>実際のグラレコの一例としてご覧ください。</p><p><br></p><p><br></p><h3>りさこっこの得意なこと</h3><p><br></p><p>私のグラレコが特に力を発揮しやすい場は、次のようなところです。</p><p>• 少人数の対話・ワークショップ・座談会</p><p>• A4〜A3サイズを複数枚つなげる構成</p><p>• 近くでじっくり読む・味わう鑑賞スタイル</p><p>• 感情や人の関係性の可視化</p><p>• やさしく、絵本のようなタッチ</p><p>• 言葉を削ぎ落としすぎず、余白を残すまとめ方</p><p><br></p><p><strong>相性の良い分野</strong></p><p>• 福祉</p><p>• 教育</p><p>• 子育て・家族・地域活動</p><p>• 心理・対話・ケアの現場</p><p>• 「正解」より「納得」や「共有」を大切にする場</p><p><br></p><p><strong>あえて△としていること</strong></p><p>• 大人数向けの大型模造紙一枚構成</p><p>• 遠くからの視認性最優先</p><p>• 数字・結論・ロジック中心の会議</p><p>• 原色・太線による強い情報整理</p><p><br></p><p><br></p><h3>現在の活動スタイルについて</h3><p><br></p><p>りさこっこは、現在小さな娘を育てながら活動しています。</p><p>そのため、今は外部からのご依頼よりも、</p><p>自主制作のグラフィックレコーディングを中心に描いています。</p><p><br></p><p>日々の対話や、地域での小さな集まり、</p><p>自分自身が大切にしたいテーマを題材にしながら、</p><p>「物語として記録するグラレコ」を、少しずつ育てているところです。</p><p><br></p><p>ご依頼については、</p><p>日程や時間帯によっては難しい場合もありますが、</p><p>内容や条件によって、無理のない範囲で調整しながら</p><p>お受けできればと考えています。</p><p><br></p><p>今の生活やペースを大切にしながら、</p><p>一つひとつの場と丁寧に向き合っていけたら嬉しいです。</p><p><br></p><p><br></p><h3>さいごに</h3><p><br></p><p>私のグラレコは、</p><p>その場で生まれた気持ちや関係性を、</p><p>あとからもう一度呼吸できる形にするためのものです。</p><p><br></p><p>現在は育児中のため、</p><p>自主制作を中心に描いていますが、</p><p>グラレコを通して出会える人や場が、</p><p>これからの創作に新しい種を運んでくれると感じています。</p><p><br></p><p>少し「ふつう」とは違うかもしれませんが、</p><p>この描き方やペースに共感してくださる方と、</p><p>ご一緒できる機会があればとても嬉しいです。</p><p><a href="https://assets.st-note.com/img/1768707960-OlHmBYRrCa692Nb4WEneuFJf.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1768707960-OlHmBYRrCa692Nb4WEneuFJf.jpg?width=1200" alt="画像" height="465" width="620"></a></p><h3><br></h3><h3><br></h3><h3>ご相談はお気軽に</h3><p><br></p><p>グラレコのご依頼・ご相談は、</p><p>InstagramのDM、または公式LINEからどうぞ。</p>
+  <div class="article-inner">
+    <div class="article-meta">
+      <span class="article-date">2026.06.16</span>
+      <span class="post-tag">グラレコ</span> <span class="post-tag">物語のグラレコ</span>
+    </div>
+    <h1 class="article-title">物語として記録する、りさこっこのグラフィックレコーディング</h1>
+    <img class="article-thumbnail" src="images/IMG_8714.PNG" alt="">
+    <div class="article-body">
+<p>
+    </p><p>この記事は2026年1月のアーカイブです。</p><p><br></p><p>今回の記事では、</p><p>私が描いている「グラフィックレコーディング（グラレコ）」についてご紹介します。</p><p><br></p><p><br></p><h3>グラフィックレコーディング（グラレコ）とは？</h3><p>会議や講座、対話の場などで生まれた</p><p><strong>言葉・流れ・関係性を、絵と言葉で記録する技術</strong>です。</p><p>グラレコがあることで、その場での理解や共有がしやすくなり、</p><p>また、あとから振り返ったり、</p><p>その場にいなかった人と内容を共有する際にも役立ちます。</p><p><br></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_8459.PNG"></p><h3><br></h3><h3><br></h3><h3>なぜグラレコを書いているのか</h3><p><br></p><p>もともとは、育児の日々を</p><p>絵日記のように、イラストと言葉で記録していました。</p><p><br></p><p>あるとき夫に</p><p>「これ、形を整えたらグラレコになるんじゃない？」</p><p>と言われたことがきっかけで、</p><p>はじめて「グラフィックレコーディング」という言葉を知りました。</p><p><br></p><p>そこから勉強し、練習を重ね、</p><p>少しずつ仕事として描くようになりましたが、</p><p>やっていることの根っこは、今も変わっていません。</p><p><br></p><p>人の話を聞くのが好き。</p><p>聞いたこと、体験したことを、</p><p>絵と言葉で残すのが好き。</p><p>その場で生まれた感情や空気を、</p><p>あとからもう一度思い出せる形にしたい。</p><p><br></p><p>私にとってのグラレコは、</p><p>「会議の記録」というより、</p><p><strong>出来事を絵本のように残す記録</strong>なのだと思っています。</p><p><br></p><p><br></p><h3>「物語のグラレコ」という考え方</h3><p><br></p><p>こちらは、私が描く</p><p>「物語のグラレコ」についてまとめたセルフグラレコです。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/20260115234242_001.jpg"></p><p>私のグラレコは、</p><p>一般的なグラレコとは少し違った特徴を持っています。</p><p><br></p><p>一般的なグラレコでは、</p><p>• 数字や結論、ロジックの整理</p><p>• 大人数・遠くからでも一瞬で把握できる視認性</p><p><br></p><p>が重視されることが多いですが、</p><p><br></p><p>絵本作家であるりさこっこのグラレコでは、</p><p>• その場の言葉・感情・空気を残す「絵本的な記録」</p><p>• 結論を急がず、何度も見返したくなる余韻</p><p>• 議題を「物語」として受け取り、流れや関係性を大切にする</p><p><br></p><p>ことに重きを置いています。</p><p><br></p><p><br></p><h3>表現・画材について</h3><p><br></p><p>一般的なグラレコでは、</p><p>大きな模造紙に、太線・原色で描かれることが多いですが、</p><p><br></p><p>私の「物語のグラレコ」では、</p><p>• A4〜A3の手に取りやすいサイズ</p><p>• 筆の呼吸を感じる線</p><p>• やさしいニュアンスカラー</p><p><br></p><p>を用います。</p><p><br></p><p>「読みやすさ」よりも、</p><p><br></p><p><strong>感情や空気を共有できる居心地の良さ</strong></p><p><strong>絵本のように読み返したくなる余韻</strong></p><p><br></p><p>を大切にする場面もあります。</p><p><br></p><p><br></p><h3>実例：民間図書館「さんとしょ」のグラレコ</h3><p><br></p><p>月に一度ほどイベントに参加させていただいている</p><p>民間図書館「さんとしょ」さんについて、</p><p>この場所がどのような場なのかを</p><p>グラレコにまとめました。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/1.jpg"><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2.jpg"></p><p>実際のグラレコの一例としてご覧ください。</p><p><br></p><p><br></p><h3>りさこっこの得意なこと</h3><p><br></p><p>私のグラレコが特に力を発揮しやすい場は、次のようなところです。</p><p>• 少人数の対話・ワークショップ・座談会</p><p>• A4〜A3サイズを複数枚つなげる構成</p><p>• 近くでじっくり読む・味わう鑑賞スタイル</p><p>• 感情や人の関係性の可視化</p><p>• やさしく、絵本のようなタッチ</p><p>• 言葉を削ぎ落としすぎず、余白を残すまとめ方</p><p><br></p><p><strong>相性の良い分野</strong></p><p>• 福祉</p><p>• 教育</p><p>• 子育て・家族・地域活動</p><p>• 心理・対話・ケアの現場</p><p>• 「正解」より「納得」や「共有」を大切にする場</p><p><br></p><p><strong>あえて△としていること</strong></p><p>• 大人数向けの大型模造紙一枚構成</p><p>• 遠くからの視認性最優先</p><p>• 数字・結論・ロジック中心の会議</p><p>• 原色・太線による強い情報整理</p><p><br></p><p><br></p><h3>現在の活動スタイルについて</h3><p><br></p><p>りさこっこは、現在小さな娘を育てながら活動しています。</p><p>そのため、今は外部からのご依頼よりも、</p><p>自主制作のグラフィックレコーディングを中心に描いています。</p><p><br></p><p>日々の対話や、地域での小さな集まり、</p><p>自分自身が大切にしたいテーマを題材にしながら、</p><p>「物語として記録するグラレコ」を、少しずつ育てているところです。</p><p><br></p><p>ご依頼については、</p><p>日程や時間帯によっては難しい場合もありますが、</p><p>内容や条件によって、無理のない範囲で調整しながら</p><p>お受けできればと考えています。</p><p><br></p><p>今の生活やペースを大切にしながら、</p><p>一つひとつの場と丁寧に向き合っていけたら嬉しいです。</p><p><br></p><p><br></p><h3>さいごに</h3><p><br></p><p>私のグラレコは、</p><p>その場で生まれた気持ちや関係性を、</p><p>あとからもう一度呼吸できる形にするためのものです。</p><p><br></p><p>現在は育児中のため、</p><p>自主制作を中心に描いていますが、</p><p>グラレコを通して出会える人や場が、</p><p>これからの創作に新しい種を運んでくれると感じています。</p><p><br></p><p>少し「ふつう」とは違うかもしれませんが、</p><p>この描き方やペースに共感してくださる方と、</p><p>ご一緒できる機会があればとても嬉しいです。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_5705.JPG"></p><h3><br></h3><h3><br></h3><h3>ご相談はお気軽に</h3><p><br></p><p>グラレコのご依頼・ご相談は、</p><p>InstagramのDM、または公式LINEからどうぞ。</p><p>
+  </p>
+    </div>
+    <nav class="article-nav">
+      <a href="post-20260616-1pgx.html" class="prev">余白のあるアトリエにしたら、物語が息をしはじめた</a>
+      <a href="post-20260616-kqzq.html" class="next">生きることは育てること──ラディッシュ収穫から感じたこと</a>
+    </nav>
   </div>
 </div>
-
-<div class="pager">
-  <a href="post-20260616-1pgx.html" class="pager-link pager-prev">← 余白のあるアトリエにしたら、物語が息をし…</a>
-  <a href="post-20260616-kqzq.html" class="pager-link pager-next">生きることは育てること──ラディッシュ収… →</a>
-</div>
-
 <footer>
   <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
   <p class="footer-copy">&copy; rishjuly</p>
