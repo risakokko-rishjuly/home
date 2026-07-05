@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>シャッターアート「太陽が似合う町、太陽が似合う家族」 — まちのえほんやさん りさこっこ</title>
-<meta name="description" content="この記事は2018年5月のアーカイブとなっています🙏  大阪城東区、南鴫野商店街でシャッターアート🐧🎨 描かせて頂きました😊😊！！ 人生で一番大きい絵だったので">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -12,96 +11,53 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #FDFCFA; --bg2: #F7F4F0;
-  --ink: #1A1714; --ink-mid: #5C5650; --ink-light: #A09890;
-  --line: #E8E2DA; --accent: #7BAF8A;
+  --bg: #FDFCFA; --bg2: #F7F4F0; --ink: #1A1714;
+  --ink-mid: #5C5650; --ink-light: #A09890; --line: #E8E2DA;
+  --accent: #7BAF8A;
   --font-serif: 'Libre Baskerville', serif;
   --font-main: 'Zen Maru Gothic', sans-serif;
 }
 html { scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
-
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(253,252,250,0.92); backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
-  padding: 0 40px 10px; height: 60px;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  animation: fadeInDown 0.7s ease both;
-}
+nav { position: fixed; top:0; left:0; right:0; z-index:100; background: rgba(253,252,250,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 40px 10px; height: 60px; display: flex; align-items: flex-end; justify-content: space-between; animation: fadeInDown 0.7s ease both; }
 .nav-left { display: flex; flex-direction: column; gap: 1px; }
 .nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
-.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; line-height: 1.5; }
-.nav-right { display: flex; gap: 20px; align-items: center; }
-.nav-link { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
-.nav-link:hover { color: var(--ink); }
-
-footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); background: var(--bg); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: var(--ink); }
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); }
 .footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
 .footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
-
 .post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
-
-@keyframes fadeInDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeInUp   { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn     { from { opacity: 0; } to { opacity: 1; } }
-
-@media (max-width: 720px) {
-  nav { padding: 8px 16px; height: auto; min-height: 56px; }
-  .nav-logo { font-size: 12px; }
-}
-
-.article-wrap {
-  max-width: 680px; margin: 0 auto;
-  padding: 100px 40px 80px;
-  animation: fadeInUp 0.8s ease 0.1s both;
-}
-.article-meta {
-  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-.article-date { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-light); }
-.article-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.article-title {
-  font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65;
-  margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--line);
-}
-.article-thumb {
-  width: 100%; max-height: 400px; object-fit: cover;
-  border-radius: 2px; display: block; margin-bottom: 40px;
-}
-.article-body {
-  font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; color: var(--ink);
-}
-.article-body h2 { font-size: 18px; font-weight: 500; letter-spacing: 0.08em; margin: 32px 0 12px; }
-.article-body h3 { font-size: 16px; font-weight: 500; letter-spacing: 0.07em; margin: 28px 0 10px; }
-.article-body p { margin-bottom: 0; }
+@keyframes fadeInDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
+.article-wrap { padding-top: 60px; }
+.article-inner { max-width: 680px; margin: 0 auto; padding: 60px 40px 100px; animation: fadeInUp 0.7s ease 0.2s both; }
+.article-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.article-date { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-light); }
+.article-title { font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.article-thumbnail { width: 100%; max-height: 420px; object-fit: cover; border-radius: 2px; margin-bottom: 40px; display: block; }
+.article-body { font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; }
+.article-body h2 { font-size: 19px; font-weight: 500; margin: 36px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 10px; }
 .article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
-.article-body ul, .article-body ol { padding-left: 1.5em; margin-bottom: 8px; }
+.article-body ul, .article-body ol { padding-left: 1.6em; margin-bottom: 10px; }
 .article-body li { margin-bottom: 4px; }
 .article-body strong { font-weight: 500; }
 .article-body a { color: var(--ink-mid); }
-
-.pager {
-  max-width: 680px; margin: 0 auto;
-  padding: 40px 40px 80px;
-  display: flex; justify-content: space-between; gap: 20px;
-  border-top: 1px solid var(--line);
-}
-.pager-link {
-  font-size: 12px; letter-spacing: 0.1em; color: var(--ink-mid);
-  text-decoration: none; line-height: 1.6; transition: color 0.2s;
-  max-width: 45%;
-}
-.pager-link:hover { color: var(--ink); }
-.pager-prev { text-align: left; }
-.pager-next { text-align: right; }
-
+.article-nav { display: flex; justify-content: space-between; gap: 20px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+.article-nav a { font-size: 12px; letter-spacing: 0.14em; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; max-width: 45%; line-height: 1.7; }
+.article-nav a:hover { color: var(--ink); }
+.article-nav .prev::before { content: '← '; }
+.article-nav .next::after  { content: ' →'; }
+.article-nav .next { text-align: right; }
 @media (max-width: 720px) {
-  .article-wrap { padding: 80px 20px 60px; }
-  .article-title { font-size: 20px; }
-  .pager { padding: 32px 20px 60px; }
-  footer { padding: 32px 20px; }
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+  .article-inner { padding: 40px 20px 80px; }
+  .article-title { font-size: 19px; }
 }
 </style>
 </head>
@@ -111,28 +67,25 @@ footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); b
     <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
     <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
   </div>
-  <div class="nav-right">
-    <a href="posts.html" class="nav-link">← ぶろぐ一覧</a>
-  </div>
+  <a href="posts.html" class="nav-back">← ぶろぐ一覧</a>
 </nav>
-
 <div class="article-wrap">
-  <div class="article-meta">
-    <span class="article-date">2026.06.16</span>
-    <span class="article-tags"><span class="post-tag">シャッターアート</span></span>
-  </div>
-  <h1 class="article-title">シャッターアート「太陽が似合う町、太陽が似合う家族」</h1>
-  <img class="article-thumb" src="images/親ペンギン仕上げ3.jpg" alt="シャッターアート「太陽が似合う町、太陽が似合う家族」">
-  <div class="article-body">
-    <p>この記事は2018年5月のアーカイブとなっています🙏</p><p><br></p><p>大阪城東区、南鴫野商店街でシャッターアート🐧🎨</p><p>描かせて頂きました😊😊！！</p><p>人生で一番大きい絵だったので、描く前からワクワクドキドキでした！</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/1760973764-kvZc0GFUmCgsr2loVHLzNPaf.png"></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">こちらがプロット（下絵）でした。</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">ペンギンの子どもになった気分で、写真を撮れるシャッターを作りたい！</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">という気持ちで描きました☆</span></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-05-02 10.59.42.jpg"></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">制作時間が限られていたため、お家でおっきーい型紙を作って行きました！</span></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-05-06 16.50.50.jpg"></p><p>現場到着、1日目！まず型紙を貼り貼りしています。</p><p><a href="https://assets.st-note.com/img/1760973823-H8lGqbJujatd0AW2L4Qyzfpi.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760973823-H8lGqbJujatd0AW2L4Qyzfpi.jpg?width=1200" alt="画像" height="620" width="620"></a>型紙を貼ったら、スプレーでざざーっと下地塗りです。</p><p><a href="https://assets.st-note.com/img/1760973847-0N2gq1AQYVvo4IJ9ZijSWx6C.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760973847-0N2gq1AQYVvo4IJ9ZijSWx6C.jpg?width=1200" alt="画像" height="620" width="620"></a></p><p>上の方は届かないので脚立を使って…</p><p><a href="https://assets.st-note.com/img/1760973862-ICj96yPDfgqh5vXM2nac4b3Q.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760973862-ICj96yPDfgqh5vXM2nac4b3Q.jpg?width=1200" alt="画像" height="827" width="620"></a></p><p>下塗り完了！ここで1日目は終了しました☆</p><p>この後シャッターの下側には、地元のお子さんたちが手形スタンプを付けてくれました！</p><p><br></p><p><a href="https://assets.st-note.com/img/1760973886-2HcZYJndpoiAyhtXus4lDqkN.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760973886-2HcZYJndpoiAyhtXus4lDqkN.jpg?width=1200" alt="画像" height="349" width="620"></a></p><p>2日目スタート！この日はスプレーではなく絵具を使って描きました。</p><p>親ペンギンさんからぬりぬり。</p><p><a href="https://assets.st-note.com/img/1760973907-WaE7XDh8dZObjSA5MCkRrBfL.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760973907-WaE7XDh8dZObjSA5MCkRrBfL.jpg?width=1200" alt="画像" height="349" width="620"></a></p><p><a href="https://assets.st-note.com/img/1760973907-yTY2akVJNudemAg0PGbpSqz6.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760973907-yTY2akVJNudemAg0PGbpSqz6.jpg?width=1200" alt="画像" height="349" width="620"></a></p><p>いろんな色を使いました！</p><p><a href="https://assets.st-note.com/img/1760973927-gCPadNp0FE2bOsK6XqLQkifo.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760973927-gCPadNp0FE2bOsK6XqLQkifo.jpg?width=1200" alt="画像" height="349" width="620"></a></p><p>そして最後はこぺんぎんをぬりぬり。</p><p>手形スタンプは傷つけないように養生テープで保護してもらいました！</p><p>そして…</p><p><a href="https://assets.st-note.com/img/1760973946-lOhKwsjapZiBd602g8LIPk4x.png?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760973946-lOhKwsjapZiBd602g8LIPk4x.png?width=1200" alt="画像" height="855" width="620"></a></p><p>完成しました～！「太陽が似合う町、太陽が似合う家族」！</p><p><a href="https://assets.st-note.com/img/1760973975-lkn6mCgdeMVTatp2wr3oUN4D.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760973975-lkn6mCgdeMVTatp2wr3oUN4D.jpg?width=1200" alt="画像" height="827" width="620"></a></p><p><a href="https://assets.st-note.com/img/1760973988-Yvs0FqJ1QRtgIfAucCiZoLSp.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760973988-Yvs0FqJ1QRtgIfAucCiZoLSp.jpg?width=1200" alt="画像" height="465" width="620"></a></p><p>子どもさんたちのかわいい手形スタンプ♡</p><p><a href="https://assets.st-note.com/img/1760974009-IXG521n8QFqkYg9sWfB0PALe.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760974009-IXG521n8QFqkYg9sWfB0PALe.jpg?width=1200" alt="画像" height="465" width="620"></a></p><p><a href="https://assets.st-note.com/img/1760974010-CvEI7muQz0ynfNkBaKTw6hZ8.jpg?width=2000&amp;height=2000&amp;fit=bounds&amp;quality=85" rel="noopener noreferrer" target="_blank" style="color: inherit; background-color: initial;"><img src="https://assets.st-note.com/img/1760974010-CvEI7muQz0ynfNkBaKTw6hZ8.jpg?width=1200" alt="画像" height="988" width="620"></a></p><p>雨女なのか、2日目の制作時はたいへんな大雨でした…</p><p>が、鴫野活性化プロジェクトの方と</p><p>手伝いに来てくれた旦那さんのお陰で、完成できました✨</p><p>とっても楽しかったです！ありがとうございました^^</p><p><br></p><p>シャッターの場所は</p><p>大阪市城東区鴫野東３丁目２－２０</p><p>「杜のおかしやさん」</p><p>というお店のシャッターです❣</p><p>シャッターが見られるのはお店がお休みの日曜だけですが、</p><p>ぜひペンギン🐧ポーズで写真を撮ってみてください✨</p><p>お菓子屋さんもとっても可愛くて素敵なお店です😊😊</p>
+  <div class="article-inner">
+    <div class="article-meta">
+      <span class="article-date">2026.06.16</span>
+      <span class="post-tag">シャッターアート</span>
+    </div>
+    <h1 class="article-title">シャッターアート「太陽が似合う町、太陽が似合う家族」</h1>
+    <img class="article-thumbnail" src="images/親ペンギン仕上げ3.jpg" alt="">
+    <div class="article-body">
+<p>この記事は2018年5月のアーカイブとなっています🙏</p><p><br></p><p>大阪城東区、南鴫野商店街でシャッターアート🐧🎨</p><p>描かせて頂きました😊😊！！</p><p>人生で一番大きい絵だったので、描く前からワクワクドキドキでした！</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-04-27 09.29.17.png"></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">こちらがプロット（下絵）でした。</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">ペンギンの子どもになった気分で、写真を撮れるシャッターを作りたい！</span></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">という気持ちで描きました☆</span></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-05-02 10.59.42.jpg"></p><p><span style="background-color: rgb(255, 255, 255); color: rgb(8, 19, 26);">制作時間が限られていたため、お家でおっきーい型紙を作って行きました！</span></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-05-06 16.50.50.jpg"></p><p>現場到着、1日目！まず型紙を貼り貼りしています。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-05-06 14.33.53.jpg">型紙を貼ったら、スプレーでざざーっと下地塗りです。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-05-06 16.51.13.jpg"></p><p>上の方は届かないので脚立を使って…</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-05-06 13.01.35.jpg"></p><p>下塗り完了！ここで1日目は終了しました☆</p><p>この後シャッターの下側には、地元のお子さんたちが手形スタンプを付けてくれました！</p><p><br></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/見つめる.jpg"></p><p>2日目スタート！この日はスプレーではなく絵具を使って描きました。</p><p>親ペンギンさんからぬりぬり。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/親ペンギン仕上げ.jpg"></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/親ペンギン仕上げ2.jpg"></p><p>いろんな色を使いました！</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/ポノ下地.jpg"></p><p>そして最後はこぺんぎんをぬりぬり。</p><p>手形スタンプは傷つけないように養生テープで保護してもらいました！</p><p>そして…</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_2484.png"></p><p>完成しました～！「太陽が似合う町、太陽が似合う家族」！</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-05-13 20.57.23.jpg"></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-05-13 15.32.38.jpg"></p><p>子どもさんたちのかわいい手形スタンプ♡</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/2018-05-13 15.32.46.jpg"></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_2485.JPG"></p><p>雨女なのか、2日目の制作時はたいへんな大雨でした…</p><p>が、鴫野活性化プロジェクトの方と</p><p>手伝いに来てくれた旦那さんのお陰で、完成できました✨</p><p>とっても楽しかったです！ありがとうございました^^</p><p><br></p><p>シャッターの場所は</p><p>大阪市城東区鴫野東３丁目２－２０</p><p>「杜のおかしやさん」</p><p>というお店のシャッターです❣</p><p>シャッターが見られるのはお店がお休みの日曜だけですが、</p><p>ぜひペンギン🐧ポーズで写真を撮ってみてください✨</p><p>お菓子屋さんもとっても可愛くて素敵なお店です</p>
+    </div>
+    <nav class="article-nav">
+      <a href="post-20260608-99yv.html" class="prev">はじめまして 〜 about me 〜</a>
+      <a href="post-20260616-snqa.html" class="next">シャッターアート「ペガサス」</a>
+    </nav>
   </div>
 </div>
-
-<div class="pager">
-  <a href="post-20260608-99yv.html" class="pager-link pager-prev">← はじめまして 〜 about me 〜…</a>
-  <a href="post-20260616-snqa.html" class="pager-link pager-next">シャッターアート「ペガサス」… →</a>
-</div>
-
 <footer>
   <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
   <p class="footer-copy">&copy; rishjuly</p>
