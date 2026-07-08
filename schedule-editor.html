@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>よてい編集 | りさこっこ</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white: #FFFFFF;
+  --bg: #FDFCFA;
+  --bg2: #F7F4F0;
+  --ink: #1A1714;
+  --ink-mid: #5C5650;
+  --ink-light: #A09890;
+  --line: #E8E2DA;
+  --accent: #7BAF8A;
+  --danger: #B9695A;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-main: 'Zen Maru Gothic', sans-serif;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-main);
+  font-weight: 300;
+  line-height: 1.8;
+  min-height: 100vh;
+}
+
+/* ---------- ロック画面 ---------- */
+#lockScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.lock-box {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+}
+.lock-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  margin-bottom: 24px;
+}
+.lock-box input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: var(--font-main);
+  margin-bottom: 14px;
+  background: var(--bg);
+}
+.lock-box button {
+  width: 100%;
+  padding: 12px;
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  border-radius: 3px;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  font-family: var(--font-main);
+}
+.lock-box button:hover { opacity: 0.85; }
+#lockError { color: var(--danger); font-size: 12px; margin-top: 10px; min-height: 16px; }
+
+/* ---------- 編集画面 ---------- */
+#editorScreen { display: none; max-width: 760px; margin: 0 auto; padding: 48px 24px 100px; }
+.editor-header { margin-bottom: 36px; }
+.editor-kicker {
+  font-size: 11px; letter-spacing: 0.2em; color: var(--ink-light); margin-bottom: 8px;
+}
+.editor-title {
+  font-family: var(--font-serif); font-size: 26px; letter-spacing: 0.04em;
+}
+.editor-sub { font-size: 13px; color: var(--ink-mid); margin-top: 10px; line-height: 1.9; }
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 28px;
+  margin-bottom: 24px;
+}
+.card h2 {
+  font-size: 14px; font-weight: 500; letter-spacing: 0.1em;
+  margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--line);
+}
+
+/* イベント一覧 */
+.event-row {
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 18px;
+  margin-bottom: 14px;
+  position: relative;
+}
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.field-grid.full { grid-template-columns: 1fr; }
+.field label {
+  display: block; font-size: 11px; color: var(--ink-light);
+  letter-spacing: 0.06em; margin-bottom: 5px;
+}
+.field input {
+  width: 100%; padding: 9px 10px; border: 1px solid var(--line);
+  border-radius: 3px; font-size: 13px; font-family: var(--font-main); background: var(--bg);
+}
+.event-row-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 6px; }
+.btn-mini {
+  font-size: 11px; letter-spacing: 0.08em; border: 1px solid var(--line);
+  background: var(--white); padding: 6px 14px; border-radius: 20px; cursor: pointer;
+  color: var(--ink-mid); font-family: var(--font-main);
+}
+.btn-mini:hover { border-color: var(--ink-mid); color: var(--ink); }
+.btn-mini.danger { color: var(--danger); border-color: var(--danger); }
+.btn-mini.danger:hover { background: var(--danger); color: var(--white); }
+
+.btn-add {
+  width: 100%; padding: 14px; border: 1px dashed var(--line); border-radius: 3px;
+  background: none; color: var(--ink-mid); font-size: 13px; letter-spacing: 0.08em;
+  cursor: pointer; font-family: var(--font-main);
+}
+.btn-add:hover { border-color: var(--accent); color: var(--accent); }
+
+/* 出力エリア */
+.output-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.btn-main {
+  padding: 11px 22px; border: none; border-radius: 3px; font-size: 13px;
+  letter-spacing: 0.08em; cursor: pointer; font-family: var(--font-main);
+  background: var(--ink); color: var(--white);
+}
+.btn-main:hover { opacity: 0.85; }
+.btn-main.secondary { background: var(--white); color: var(--ink); border: 1px solid var(--line); }
+textarea#jsonOutput {
+  width: 100%; min-height: 220px; padding: 14px; border: 1px solid var(--line);
+  border-radius: 3px; font-family: 'Courier New', monospace; font-size: 12px;
+  background: var(--bg2); color: var(--ink-mid); line-height: 1.6; resize: vertical;
+}
+.copy-msg { font-size: 12px; color: var(--accent); margin-top: 8px; height: 16px; }
+
+.import-toggle { font-size: 12px; color: var(--ink-light); text-decoration: underline; cursor: pointer; background:none; border:none; font-family: var(--font-main); }
+.help-text { font-size: 12px; color: var(--ink-mid); line-height: 2; }
+.help-text ol { padding-left: 1.4em; margin-top: 6px; }
+
+/* GitHub連携 */
+.gh-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; letter-spacing: 0.06em; padding: 4px 12px;
+  border-radius: 20px; background: var(--bg2); color: var(--ink-mid); margin-bottom: 16px;
+}
+.gh-status.connected { background: rgba(123,175,138,0.15); color: var(--accent); }
+.gh-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-light); }
+.gh-status.connected .gh-dot { background: var(--accent); }
+.checkbox-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-mid); margin: 10px 0 16px; }
+.checkbox-row input { width: auto; }
+.gh-warning {
+  font-size: 11px; color: var(--danger); line-height: 1.8; margin-top: 10px;
+  background: rgba(185,105,90,0.08); padding: 10px 12px; border-radius: 3px;
+}
+.push-result { font-size: 12px; margin-top: 10px; min-height: 16px; line-height: 1.8; }
+.push-result.ok { color: var(--accent); }
+.push-result.err { color: var(--danger); }
+details.gh-help { margin-top: 14px; }
+details.gh-help summary {
+  font-size: 12px; color: var(--ink-light); cursor: pointer; text-decoration: underline;
+}
+details.gh-help .help-text { margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<!-- ロック画面 -->
+<div id="lockScreen">
+  <div class="lock-box">
+    <p class="lock-title">よてい編集</p>
+    <input type="password" id="pwInput" placeholder="パスワード" autocomplete="off">
+    <button onclick="tryUnlock()">開く</button>
+    <p id="lockError"></p>
+  </div>
+</div>
+
+<!-- 編集画面 -->
+<div id="editorScreen">
+  <div class="editor-header">
+    <p class="editor-kicker">よてい へんしゅう</p>
+    <h1 class="editor-title">Schedule Editor</h1>
+    <p class="editor-sub">
+      予定を追加・編集したら、下の「JSONを書き出す」で内容を更新し、
+      コピーまたはダウンロードした内容で <b>schedule.json</b> を GitHub 上で上書きしてください。
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>読み込み</h2>
+    <div class="output-actions">
+      <button class="btn-main secondary" onclick="loadFromLive()">公開中のschedule.jsonを読み込む</button>
+      <button class="import-toggle" onclick="toggleImport()">うまく読み込めない時は、貼り付けて読み込む</button>
+    </div>
+    <div id="importBox" style="display:none; margin-top:12px;">
+      <textarea id="importInput" placeholder="ここに既存のschedule.jsonの中身を貼り付け" style="width:100%; min-height:120px; padding:12px; border:1px solid var(--line); border-radius:3px; font-family:'Courier New',monospace; font-size:12px;"></textarea>
+      <div style="margin-top:10px;">
+        <button class="btn-mini" onclick="importPasted()">この内容を読み込む</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>よていリスト</h2>
+    <div id="eventList"></div>
+    <button class="btn-add" onclick="addEvent()">＋ 予定を追加する</button>
+  </div>
+
+  <div class="card">
+    <h2>GitHub連携</h2>
+    <span class="gh-status" id="ghStatus"><span class="gh-dot"></span><span id="ghStatusText">未接続</span></span>
+    <div class="field-grid">
+      <div class="field">
+        <label>GitHubユーザー名 (owner)</label>
+        <input type="text" id="ghOwner" placeholder="例: tomorrow0127">
+      </div>
+      <div class="field">
+        <label>リポジトリ名 (repo)</label>
+        <input type="text" id="ghRepo" placeholder="例: risakokko">
+      </div>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label>ブランチ</label>
+        <input type="text" id="ghBranch" placeholder="main" value="main">
+      </div>
+      <div class="field">
+        <label>ファイルパス</label>
+        <input type="text" id="ghPath" placeholder="schedule.json" value="schedule.json">
+      </div>
+    </div>
+    <div class="field-grid full">
+      <div class="field">
+        <label>Personal Access Token</label>
+        <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxx" autocomplete="off">
+      </div>
+    </div>
+    <div class="checkbox-row">
+      <input type="checkbox" id="ghSaveToken">
+      <label for="ghSaveToken">このブラウザにトークンを保存する(次回から入力不要になります)</label>
+    </div>
+    <div class="output-actions">
+      <button class="btn-main secondary" onclick="saveGithubConfig()">設定を保存</button>
+    </div>
+    <p class="gh-warning">
+      トークンはこの端末のブラウザ内にのみ保存され、GitHub以外には送信されません。ただし共有・公共のパソコンでは「保存する」にチェックを入れないことをおすすめします。
+    </p>
+    <details class="gh-help">
+      <summary>トークンの作り方</summary>
+      <div class="help-text">
+        <ol>
+          <li>GitHubにログイン → 右上のアイコン → Settings</li>
+          <li>左メニュー下部の Developer settings</li>
+          <li>Personal access tokens → Fine-grained tokens → Generate new token</li>
+          <li>Repository access で対象のリポジトリだけを選択</li>
+          <li>Permissions → Contents を「Read and write」に設定</li>
+          <li>Generate token でできた文字列(ghp_...)を上の欄に貼り付け</li>
+        </ol>
+      </div>
+    </details>
+  </div>
+
+  <div class="card">
+    <h2>JSONを書き出す・反映する</h2>
+    <div class="output-actions">
+      <button class="btn-main" onclick="generateJson()">JSONを書き出す</button>
+      <button class="btn-main secondary" onclick="copyJson()">コピーする</button>
+      <button class="btn-main secondary" onclick="downloadJson()">ダウンロード</button>
+    </div>
+    <textarea id="jsonOutput" readonly placeholder="「JSONを書き出す」を押すと、ここに内容が表示されます"></textarea>
+    <p class="copy-msg" id="copyMsg"></p>
+    <div class="output-actions" style="margin-top:18px; border-top:1px solid var(--line); padding-top:18px;">
+      <button class="btn-main" id="pushBtn" onclick="pushToGithub()" style="background:var(--accent);">GitHubに直接反映する</button>
+    </div>
+    <p class="push-result" id="pushMsg"></p>
+  </div>
+
+  <div class="card">
+    <h2>手動で反映する場合(設定なしでもOK)</h2>
+    <p class="help-text">
+      GitHub連携を設定しない場合は、これまで通り「コピー」または「ダウンロード」した内容を、GitHubのWeb画面で schedule.json を開いて貼り付け→Commit changes、で反映できます。
+    </p>
+  </div>
+</div>
+
+<script>
+const PASSWORD = 'tomo1026';
+let events = [];
+
+function tryUnlock() {
+  const val = document.getElementById('pwInput').value;
+  if (val === PASSWORD) {
+    document.getElementById('lockScreen').style.display = 'none';
+    document.getElementById('editorScreen').style.display = 'block';
+    loadFromLive();
+    loadGithubConfigIntoForm();
+  } else {
+    document.getElementById('lockError').textContent = 'パスワードが違います';
+  }
+}
+document.getElementById('pwInput').addEventListener('keydown', function(e){
+  if (e.key === 'Enter') tryUnlock();
+});
+
+function toggleImport() {
+  const box = document.getElementById('importBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+}
+
+async function loadFromLive() {
+  try {
+    const res = await fetch('schedule.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+    events = Array.isArray(data) ? data : [];
+    renderEvents();
+  } catch (e) {
+    // 読み込めない場合は空のまま。手動貼り付けを促す。
+    if (events.length === 0) renderEvents();
+  }
+}
+
+function importPasted() {
+  try {
+    const data = JSON.parse(document.getElementById('importInput').value);
+    events = Array.isArray(data) ? data : [];
+    renderEvents();
+    document.getElementById('importBox').style.display = 'none';
+  } catch (e) {
+    alert('JSONの読み込みに失敗しました。内容を確認してください。');
+  }
+}
+
+function dayOfWeek(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d)) return '';
+  return ['日','月','火','水','木','金','土'][d.getDay()];
+}
+
+function addEvent() {
+  events.push({ date: '', day: '', title: '', place: '', time: '', zip: '', address: '' });
+  renderEvents();
+}
+function removeEvent(i) {
+  events.splice(i, 1);
+  renderEvents();
+}
+function updateField(i, key, value) {
+  events[i][key] = value;
+  if (key === 'date') {
+    events[i].day = dayOfWeek(value);
+    renderEvents();
+  }
+}
+
+function renderEvents() {
+  const list = document.getElementById('eventList');
+  if (events.length === 0) {
+    list.innerHTML = '<p style="font-size:13px; color:var(--ink-light);">まだ予定がありません。「＋ 予定を追加する」から始めてください。</p>';
+    return;
+  }
+  list.innerHTML = events.map((ev, i) => `
+    <div class="event-row">
+      <div class="field-grid">
+        <div class="field">
+          <label>日付</label>
+          <input type="date" value="${ev.date || ''}" onchange="updateField(${i},'date',this.value)">
+        </div>
+        <div class="field">
+          <label>曜日(自動)</label>
+          <input type="text" value="${ev.day || ''}" readonly style="color:var(--ink-light)">
+        </div>
+      </div>
+      <div class="field-grid full">
+        <div class="field">
+          <label>予定名</label>
+          <input type="text" value="${escAttr(ev.title)}" placeholder="例: ちいさなえほん会" onchange="updateField(${i},'title',this.value)">
+        </div>
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label>場所</label>
+          <input type="text" value="${escAttr(ev.place)}" placeholder="例: さんとしょ" onchange="updateField(${i},'place',this.value)">
+        </div>
+        <div class="field">
+          <label>時間</label>
+          <input type="text" value="${escAttr(ev.time)}" placeholder="例: 13:00〜16:00" onchange="updateField(${i},'time',this.value)">
+        </div>
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label>郵便番号</label>
+          <input type="text" value="${escAttr(ev.zip)}" placeholder="例: 660-0000" onchange="updateField(${i},'zip',this.value)">
+        </div>
+        <div class="field">
+          <label>住所</label>
+          <input type="text" value="${escAttr(ev.address)}" placeholder="任意" onchange="updateField(${i},'address',this.value)">
+        </div>
+      </div>
+      <div class="event-row-actions">
+        <button class="btn-mini danger" onclick="removeEvent(${i})">削除</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function escAttr(s) {
+  return String(s == null ? '' : s).replace(/"/g, '&quot;');
+}
+
+function generateJson() {
+  const cleaned = events
+    .filter(ev => ev.date || ev.title)
+    .sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+  document.getElementById('jsonOutput').value = JSON.stringify(cleaned, null, 2);
+  document.getElementById('copyMsg').textContent = '';
+}
+
+function copyJson() {
+  const ta = document.getElementById('jsonOutput');
+  if (!ta.value) generateJson();
+  navigator.clipboard.writeText(document.getElementById('jsonOutput').value).then(() => {
+    document.getElementById('copyMsg').textContent = 'コピーしました。GitHubのschedule.jsonに貼り付けてください。';
+  }).catch(() => {
+    document.getElementById('copyMsg').textContent = 'コピーに失敗しました。手動で選択してコピーしてください。';
+  });
+}
+
+function downloadJson() {
+  const ta = document.getElementById('jsonOutput');
+  if (!ta.value) generateJson();
+  const blob = new Blob([document.getElementById('jsonOutput').value], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'schedule.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  document.getElementById('copyMsg').textContent = 'ダウンロードしました。GitHubでschedule.jsonを置き換えてください。';
+}
+
+// ===================== GitHub連携 =====================
+const GH_CONFIG_KEY = 'scheduleEditorGithubConfig';
+
+function utf8ToBase64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+function loadGithubConfigIntoForm() {
+  let cfg = {};
+  try { cfg = JSON.parse(localStorage.getItem(GH_CONFIG_KEY) || '{}'); } catch (e) { cfg = {}; }
+  document.getElementById('ghOwner').value = cfg.owner || '';
+  document.getElementById('ghRepo').value = cfg.repo || '';
+  document.getElementById('ghBranch').value = cfg.branch || 'main';
+  document.getElementById('ghPath').value = cfg.path || 'schedule.json';
+  if (cfg.token) {
+    document.getElementById('ghToken').value = cfg.token;
+    document.getElementById('ghSaveToken').checked = true;
+  }
+  updateGhStatus();
+}
+
+function getGithubConfig() {
+  return {
+    owner: document.getElementById('ghOwner').value.trim(),
+    repo: document.getElementById('ghRepo').value.trim(),
+    branch: document.getElementById('ghBranch').value.trim() || 'main',
+    path: document.getElementById('ghPath').value.trim() || 'schedule.json',
+    token: document.getElementById('ghToken').value.trim()
+  };
+}
+
+function saveGithubConfig() {
+  const cfg = getGithubConfig();
+  const saveToken = document.getElementById('ghSaveToken').checked;
+  const toStore = {
+    owner: cfg.owner, repo: cfg.repo, branch: cfg.branch, path: cfg.path,
+    token: saveToken ? cfg.token : ''
+  };
+  localStorage.setItem(GH_CONFIG_KEY, JSON.stringify(toStore));
+  updateGhStatus();
+  document.getElementById('pushMsg').className = 'push-result ok';
+  document.getElementById('pushMsg').textContent = '設定を保存しました。';
+}
+
+function updateGhStatus() {
+  const cfg = getGithubConfig();
+  const el = document.getElementById('ghStatus');
+  const text = document.getElementById('ghStatusText');
+  if (cfg.owner && cfg.repo && cfg.token) {
+    el.classList.add('connected');
+    text.textContent = cfg.owner + '/' + cfg.repo + ' に接続準備OK';
+  } else {
+    el.classList.remove('connected');
+    text.textContent = '未接続(オーナー名・リポジトリ名・トークンを入力してください)';
+  }
+}
+
+async function pushToGithub() {
+  const cfg = getGithubConfig();
+  const msgEl = document.getElementById('pushMsg');
+  if (!cfg.owner || !cfg.repo || !cfg.token) {
+    msgEl.className = 'push-result err';
+    msgEl.textContent = 'オーナー名・リポジトリ名・トークンを入力し、「設定を保存」を押してから実行してください。';
+    return;
+  }
+  generateJson();
+  const content = document.getElementById('jsonOutput').value;
+  if (!content) {
+    msgEl.className = 'push-result err';
+    msgEl.textContent = '書き出す内容がありません。';
+    return;
+  }
+
+  const pushBtn = document.getElementById('pushBtn');
+  pushBtn.disabled = true;
+  pushBtn.textContent = '反映中…';
+  msgEl.className = 'push-result';
+  msgEl.textContent = '';
+
+  const apiUrl = 'https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) + '/contents/' + cfg.path.split('/').map(encodeURIComponent).join('/');
+  const headers = {
+    'Authorization': 'token ' + cfg.token,
+    'Accept': 'application/vnd.github+json'
+  };
+
+  try {
+    // 既存ファイルのSHAを取得(新規作成の場合は無し)
+    let sha = null;
+    const getRes = await fetch(apiUrl + '?ref=' + encodeURIComponent(cfg.branch), { headers });
+    if (getRes.ok) {
+      const getData = await getRes.json();
+      sha = getData.sha;
+    } else if (getRes.status !== 404) {
+      const err = await getRes.json().catch(() => ({}));
+      throw new Error(err.message || ('ファイル取得エラー (' + getRes.status + ')'));
+    }
+
+    const body = {
+      message: 'よてい更新 (' + new Date().toLocaleString('ja-JP') + ')',
+      content: utf8ToBase64(content),
+      branch: cfg.branch
+    };
+    if (sha) body.sha = sha;
+
+    const putRes = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: Object.assign({ 'Content-Type': 'application/json' }, headers),
+      body: JSON.stringify(body)
+    });
+
+    if (!putRes.ok) {
+      const err = await putRes.json().catch(() => ({}));
+      throw new Error(err.message || ('保存エラー (' + putRes.status + ')'));
+    }
+
+    msgEl.className = 'push-result ok';
+    msgEl.textContent = 'GitHubに反映しました。数分でサイトに反映されます。';
+  } catch (e) {
+    msgEl.className = 'push-result err';
+    let hint = '';
+    if (/401/.test(e.message) || /Bad credentials/i.test(e.message)) hint = '(トークンが正しいか確認してください)';
+    if (/404/.test(e.message)) hint = '(オーナー名・リポジトリ名・パスを確認してください)';
+    if (/403/.test(e.message)) hint = '(トークンの権限(Contents: Read and write)を確認してください)';
+    msgEl.textContent = 'エラー: ' + e.message + ' ' + hint;
+  } finally {
+    pushBtn.disabled = false;
+    pushBtn.textContent = 'GitHubに直接反映する';
+  }
+}
+
+['ghOwner','ghRepo','ghBranch','ghPath','ghToken'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', updateGhStatus);
+});
+
+</script>
+</body>
+</html>
