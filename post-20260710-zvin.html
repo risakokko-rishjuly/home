@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>“人”としてともに生きる時間⸻イラストレーターがいる日 — まちのえほんやさん りさこっこ</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #FDFCFA; --bg2: #F7F4F0; --ink: #1A1714;
+  --ink-mid: #5C5650; --ink-light: #A09890; --line: #E8E2DA;
+  --accent: #7BAF8A;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-main: 'Zen Maru Gothic', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
+nav { position: fixed; top:0; left:0; right:0; z-index:100; background: rgba(253,252,250,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 40px 10px; height: 60px; display: flex; align-items: flex-end; justify-content: space-between; animation: fadeInDown 0.7s ease both; }
+.nav-left { display: flex; flex-direction: column; gap: 1px; }
+.nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: var(--ink); }
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); }
+.footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
+.footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
+.post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
+@keyframes fadeInDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
+.article-wrap { padding-top: 60px; }
+.article-inner { max-width: 680px; margin: 0 auto; padding: 60px 40px 100px; animation: fadeInUp 0.7s ease 0.2s both; }
+.article-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.article-date { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-light); }
+.article-title { font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.article-thumbnail { width: 100%; max-height: 420px; object-fit: cover; border-radius: 2px; margin-bottom: 40px; display: block; }
+.article-body { font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; }
+.article-body h2 { font-size: 19px; font-weight: 500; margin: 36px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 10px; }
+.article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
+.article-body ul, .article-body ol { padding-left: 1.6em; margin-bottom: 10px; }
+.article-body li { margin-bottom: 4px; }
+.article-body strong { font-weight: 500; }
+.article-body a { color: var(--ink-mid); }
+.article-nav { display: flex; justify-content: space-between; gap: 20px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+.article-nav a { font-size: 12px; letter-spacing: 0.14em; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; max-width: 45%; line-height: 1.7; }
+.article-nav a:hover { color: var(--ink); }
+.article-nav .prev::before { content: '← '; }
+.article-nav .next::after  { content: ' →'; }
+.article-nav .next { text-align: right; }
+@media (max-width: 720px) {
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+  .article-inner { padding: 40px 20px 80px; }
+  .article-title { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
+    <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
+  </div>
+  <a href="posts.html" class="nav-back">← ぶろぐ一覧</a>
+</nav>
+<div class="article-wrap">
+  <div class="article-inner">
+    <div class="article-meta">
+      <span class="article-date">2026.07.10</span>
+      <span class="post-tag">余白</span> <span class="post-tag">イラストの日</span>
+    </div>
+    <h1 class="article-title">“人”としてともに生きる時間⸻イラストレーターがいる日</h1>
+    <img class="article-thumbnail" src="images/IMG_8742.PNG" alt="">
+    <div class="article-body">
+<p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_8734.PNG"></p><p>月に一度、「イラストレーターがいる日」というちいさな会を開催しています。</p><p><br></p><p><br></p><p><strong>「イラストレーターがいる日」とは？</strong></p><p><br></p><p>りさこっこが小さな娘といっしょに、いろんな画材を持ってきて、</p><p>参加者の方と一緒に過ごす日です。</p><p>長いので、「イラストの日」と呼んでいます。</p><p><br></p><p>同じ空間でそれぞれが作業したり、おしゃべりしたり、</p><p>静かに過ごしたりできる、ゆるやかなアートの時間です。</p><p><br></p><p><br></p><p><strong>この時間にできること</strong></p><p><br></p><p>・今描いている絵を見てもらう</p><p>・絵や画材のちょっとした相談</p><p>・イラストを仕事にする／しないも含めた、ゆるいお話</p><p>・これまでの体験談を少し聞いてみる</p><p>・「描くことと暮らし」の話</p><p>・試し描き</p><p>・そのほかいろいろ</p><p>思いつきでクロッキーの練習をしたり、消しゴムハンコもやったこともあります。</p><p><br></p><p><br></p><p><strong>どんな画材があるの？</strong></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_1248.jpg"></p><p>・色えんぴつ</p><p>・クレパス</p><p>・コピック</p><p>・水彩絵の具（小学校で使われるもの）</p><p>・透明水彩</p><p>・iPad　などなど</p><p><br></p><p><br></p><p><strong>参加するのにお金はいる？</strong></p><p><br></p><p>お金はいりません。</p><p>「絵が好きな気持ち」、または「だれかと心地よく過ごしたい気持ち」があればどなたでも。</p><p><br></p><p>お子様連れでも大丈夫。予約も不要です。</p><p>行きたいと思ったときにお気軽に。</p><p><br></p><p><br></p><p><strong>ごちゃまぜで余白のある場所</strong></p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_5175.jpeg"></p><p>もちろん絵が好きで、絵をたくさん描きにくる参加者の方もおられますが、</p><p><br></p><p>「今日は何もしなかったね」と笑い合う日もあれば、</p><p>描かないで本を読んでいる人も、編み物や刺しゅうをしている人もいます。</p><p><br></p><p>私の娘は、そこらじゅうにおもちゃを出して遊んでいます。</p><p>（少し騒がしい日もあります。すみません）</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_1252.jpg"></p><p><br></p><p><br></p><p><strong>教える人・教えられる人が存在しない場所</strong></p><p><br></p><p>私はこの「イラストの日」を始めた者ですが、私は”先生”ではありません。</p><p>時には私が新しいことを教えていただくこともあります。</p><p>私もこの日の一人の参加者であると思っています。</p><p><br></p><p>もちろん、絵についてご相談を頂いたら、</p><p>私の感想や経験をお話しすることはありますが、</p><p><br></p><p>「こんなふうに描きましょう」</p><p>「こうすればうまくいきますよ」</p><p><br></p><p>という”正解”を提示する言い方は、</p><p>できるだけしないよう心がけています。</p><p><br></p><p>なぜなら本来、人が楽しんで描く絵</p><p>（仕事としてのイラストではなく、もっと本質的な、感性の表現としての絵）に、</p><p>上手も下手も、正解も不正解もないと私は思うからです。</p><p><br></p><p>「イラストの日」は、絵画教室やワークショップとは少し違います。</p><p><br></p><p>「上達すること」が目的ではなく、</p><p>お互いの表現を同じ空間で目にして、受けとめあうこと、</p><p>一種の対話がこの日の肝です。</p><p><br></p><p>そしてその「表現」には、「描かないこと」、</p><p>「ただその場にいること」も含まれています。</p><p><br></p><p><br></p><p><strong>結局、「イラストの日」ってなんなの？</strong></p><p><br></p><p>なんでしょうか（笑）</p><p>私もずっと模索中です。</p><p>きっとそれにも正解はないし、人によって見え方はちがうのだと思います。</p><p><br></p><p>が、しいて言えば、</p><p><br></p><p><strong>「一人の”人”として、ともに生きる時間」</strong></p><p><br></p><p>かもしれません。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_8733.PNG"></p><p>職業や肩書き、役割というフィルターを通さず、</p><p>相手をただ一人の”人”として見る時間。</p><p><br></p><p>正解がない中で、それでも一緒に過ごす時間。</p><p><br></p><p>この「イラストの日」では、最後に必ず、</p><p><br></p><p>「その絵とてもすてきです」</p><p>「私もそんなふうに描いてみたい」</p><p>「それ、どうやって描いたんですか？」</p><p><br></p><p>と、大人も子どもも、いろんな属性の方が入り交じって、</p><p>お互いの表現を受けとめあう様子が見られます。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_7320.jpg"><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_7319.jpg"><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_1255.jpg"></p><p>そこには大人・子ども、経験の有無、</p><p>技術の上手・下手という壁はありません。</p><p><br></p><p>この光景を見ると、私はいつも、</p><p>「美術教育は平和教育である」</p><p>という、いつか聞いた言葉を思い出します。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_8735.PNG"></p><p>また来月も、一人の”人”として、</p><p>誰かと同じ時間を過ごせたら嬉しいです。</p><p><br></p><p><br></p><p>「イラストレーターがいる日」は、</p><p>大阪府八尾市の民間図書室で</p><p>（ほぼ）毎月開催中。</p><p><br></p><p>次回の日程は、HPトップの”よてい”に書いています。</p><p><br></p><p>📍 図書室〜緒いとぐち〜</p><p>（大阪府八尾市小阪合町3-3-19）</p><p>Instagram : @bibliothek_itoguchi_&nbsp;</p><p>🗓️ 毎月どこかの金曜日16:00〜18:00</p><p><br></p><p>📌 参加費：無料</p><p>予約不要／お子さま連れ歓迎</p><p>（私の娘も同伴します👧）</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_1250.jpg"></p>
+    </div>
+    <nav class="article-nav">
+      <a href="post-20260701-9qf6.html" class="prev">“人生”を物語にする⸻りさこっこの ちいさなえほん会</a>
+      <span></span>
+    </nav>
+  </div>
+</div>
+<footer>
+  <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
+  <p class="footer-copy">&copy; rishjuly</p>
+</footer>
+</body>
+</html>
