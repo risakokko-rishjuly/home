@@ -790,9 +790,73 @@ async function deletePost() {
   }
 }
 
+// IMAGE COMPRESSION
+// 一定サイズ以上の画像は、アップロード前に自動でリサイズ・圧縮する
+const COMPRESS_THRESHOLD = 800 * 1024; // これ以上のファイルサイズなら圧縮対象
+const COMPRESS_MAX_DIM = 1600;         // 長辺の最大ピクセル数
+const COMPRESS_QUALITY = 0.82;         // JPEG品質（0〜1）
+
+function compressImage(file, { maxDim = COMPRESS_MAX_DIM, quality = COMPRESS_QUALITY } = {}) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxDim || height > maxDim) {
+          const ratio = Math.min(maxDim / width, maxDim / height);
+          width = Math.round(width * ratio);
+          height = Math.round(height * ratio);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // 透過が必要なPNGはPNGのまま（リサイズのみ）、それ以外はJPEGに変換して圧縮
+        const isPng = file.type === 'image/png';
+        const outType = isPng ? 'image/png' : 'image/jpeg';
+        const outExt = isPng ? '.png' : '.jpg';
+
+        canvas.toBlob((blob) => {
+          if (!blob) { reject(new Error('画像の圧縮に失敗しました')); return; }
+          const baseName = file.name.replace(/\.[^.]+$/, '');
+          const newFile = new File([blob], baseName + outExt, { type: outType, lastModified: Date.now() });
+          resolve(newFile);
+        }, outType, isPng ? undefined : quality);
+      };
+      img.onerror = () => reject(new Error('画像の読み込みに失敗しました'));
+      img.src = e.target.result;
+    };
+    reader.onerror = () => reject(new Error('ファイルの読み込みに失敗しました'));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function maybeCompressImage(file) {
+  if (!file || !file.type || !file.type.startsWith('image/')) return file;
+  if (file.type === 'image/gif') return file; // アニメーションGIFは劣化を避けてスキップ
+  if (file.size <= COMPRESS_THRESHOLD) return file; // すでに十分小さい
+  try {
+    const compressed = await compressImage(file);
+    if (compressed.size < file.size) {
+      const beforeKB = Math.round(file.size / 1024);
+      const afterKB = Math.round(compressed.size / 1024);
+      showToast(`画像を圧縮しました（${beforeKB}KB → ${afterKB}KB）`);
+      return compressed;
+    }
+    return file; // 圧縮しても小さくならなければ元のまま使う
+  } catch (e) {
+    console.warn('画像圧縮に失敗したため、元のファイルを使用します', e);
+    return file;
+  }
+}
+
 // THUMBNAIL
-function handleThumb(file) {
+async function handleThumb(file) {
   if (!file) return;
+  file = await maybeCompressImage(file);
   thumbFile = file;
   thumbFileName = 'images/' + file.name;
   const reader = new FileReader();
@@ -833,6 +897,7 @@ async function insertBodyImage(file) {
 
   showToast('画像をアップロード中...');
   try {
+    file = await maybeCompressImage(file);
     const base64 = await fileToBase64(file);
     const fileName = 'images/' + file.name;
     const ok = await pushFile(fileName, base64, `Add image: ${file.name}`);
