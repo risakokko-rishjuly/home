@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>透明水彩ミニパレットを作る会⸻今日からはじめられる透明水彩の第一歩 — まちのえほんやさん りさこっこ</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #FDFCFA; --bg2: #F7F4F0; --ink: #1A1714;
+  --ink-mid: #5C5650; --ink-light: #A09890; --line: #E8E2DA;
+  --accent: #7BAF8A;
+  --font-serif: 'Libre Baskerville', serif;
+  --font-main: 'Zen Maru Gothic', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-main); font-weight: 300; line-height: 1.8; }
+nav { position: fixed; top:0; left:0; right:0; z-index:100; background: rgba(253,252,250,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding: 0 40px 10px; height: 60px; display: flex; align-items: flex-end; justify-content: space-between; animation: fadeInDown 0.7s ease both; }
+.nav-left { display: flex; flex-direction: column; gap: 1px; }
+.nav-kicker { font-size: 9px; letter-spacing: 0.22em; color: var(--ink-light); }
+.nav-logo { font-family: var(--font-main); font-size: 14px; font-weight: 400; letter-spacing: 0.18em; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mid); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+.nav-back:hover { color: var(--ink); }
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--line); }
+.footer-notice { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-light); line-height: 2; margin-bottom: 8px; }
+.footer-copy { font-family: var(--font-serif); font-size: 11px; color: var(--ink-light); letter-spacing: 0.12em; }
+.post-tag { font-size: 10px; letter-spacing: 0.1em; color: var(--accent); border: 1px solid var(--accent); padding: 1px 8px; border-radius: 99px; opacity: 0.8; display: inline-block; }
+@keyframes fadeInDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn     { from { opacity:0; } to { opacity:1; } }
+.article-wrap { padding-top: 60px; }
+.article-inner { max-width: 680px; margin: 0 auto; padding: 60px 40px 100px; animation: fadeInUp 0.7s ease 0.2s both; }
+.article-meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+.article-date { font-size: 11px; letter-spacing: 0.12em; color: var(--ink-light); }
+.article-title { font-size: 24px; font-weight: 500; letter-spacing: 0.07em; line-height: 1.65; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.article-thumbnail { width: 100%; max-height: 420px; object-fit: cover; border-radius: 2px; margin-bottom: 40px; display: block; }
+.article-body { font-size: 15px; line-height: 2.2; letter-spacing: 0.055em; }
+.article-body h2 { font-size: 19px; font-weight: 500; margin: 36px 0 12px; }
+.article-body h3 { font-size: 16px; font-weight: 500; margin: 28px 0 10px; }
+.article-body p { margin-bottom: 10px; }
+.article-body img { max-width: 100%; border-radius: 2px; margin: 16px 0; display: block; }
+.article-body ul, .article-body ol { padding-left: 1.6em; margin-bottom: 10px; }
+.article-body li { margin-bottom: 4px; }
+.article-body strong { font-weight: 500; }
+.article-body a { color: var(--ink-mid); }
+.article-nav { display: flex; justify-content: space-between; gap: 20px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
+.article-nav a { font-size: 12px; letter-spacing: 0.14em; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; max-width: 45%; line-height: 1.7; }
+.article-nav a:hover { color: var(--ink); }
+.article-nav .prev::before { content: '← '; }
+.article-nav .next::after  { content: ' →'; }
+.article-nav .next { text-align: right; }
+@media (max-width: 720px) {
+  nav { padding: 8px 16px; height: auto; min-height: 56px; }
+  .nav-logo { font-size: 12px; }
+  .article-inner { padding: 40px 20px 80px; }
+  .article-title { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <span class="nav-kicker">暮 ら し に 寄 り 添 う 絵 本 の 世 界</span>
+    <a href="index.html" class="nav-logo">まちのえほんやさん りさこっこ</a>
+  </div>
+  <a href="posts.html" class="nav-back">← ぶろぐ一覧</a>
+</nav>
+<div class="article-wrap">
+  <div class="article-inner">
+    <div class="article-meta">
+      <span class="article-date">2026.07.14</span>
+      
+    </div>
+    <h1 class="article-title">透明水彩ミニパレットを作る会⸻今日からはじめられる透明水彩の第一歩</h1>
+    <img class="article-thumbnail" src="images/IMG_8281.jpg" alt="">
+    <div class="article-body">
+<p>夏休み企画「透明水彩ミニパレットを作る会」を開催します。</p><p><br></p><p>「透明水彩をやってみたいけれど、何を買えばいいのかわからない。」</p><p>そんな方に向けた夏休み企画です。</p><p><br></p><p>その名前どおり、</p><p>透明感があり涼しげな滲みが特徴の透明水彩は、</p><p>夏に始めるのにぴったりです。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_8284.jpg"></p><p>でも、どこで買えるの？</p><p>何色 買えばいいの？</p><p>絵の具の他にどんな道具が必要？</p><p>値段もけっこう高い...</p><p><br></p><p>初めて絵の具を買う方にとっては、</p><p>こういったハードルもあるのではないでしょうか？</p><p><br></p><p>私も絵を描き始めた頃は、</p><p>そんなハードルに悩まされていました。</p><p>お金は無駄にできない、</p><p>でも本格的な画材も触ってみたいですよね。</p><p><br></p><p>そんな第一歩を踏み出すハードル。</p><p>みんなで集まれば、低くできるのではないか、</p><p>と考えました。</p><p><br></p><p>1人で全部を揃えると高い...</p><p>でもみんなで分ければ？</p><p>値段もその分お手頃になります。</p><p><br></p><p>「これさえあれば、透明水彩がはじめられる」</p><p>そんな手のひらサイズの</p><p>ミニパレットを作る会です。</p><p><img src="https://raw.githubusercontent.com/risakokko-rishjuly/home/main/images/IMG_8283.jpg"></p><p>パレットに入っているもの</p><p>・缶（パレットの本体）</p><p>・透明水彩絵の具5〜6色少量</p><p>・水筆</p><p>・ペットボトルの蓋（筆洗代わり）</p><p>・台所用スポンジの切れ端（タオル代わり）</p><p>・マグネットシート（缶の蓋の裏に貼り付けて、調色パレット代わりに）</p><p>・水彩紙の切れ端数枚</p><p><br></p><p>どれも高価ではありませんが、</p><p>「必要なものだけをぎゅっと詰め込んだセット」</p><p>になっています。</p><p><br></p><p>初めて透明水彩に触れる方にも、</p><p>家で一つパレットを持っているけど、</p><p>持ち歩き用パレットも作ってみたい、</p><p>という方にもおすすめです。</p><p><br></p><p>この夏、小さなパレットと一緒に、</p><p>透明水彩を始めてみませんか？</p><p><br></p><p>🗓️2026/7/31(金)15:00〜16:00</p><p><br></p><p>⚠️要予約、前日までに</p><p>公式LINE（HPトップにリンクあり）またはInstagramのDM（@rishjuly）</p><p>へご連絡ください。</p><p><br></p><p>💰1,000円（材料費込）</p><p><br></p><p>📍 図書室 〜緒いとぐち〜</p><p>（大阪府八尾市小阪合町3-3-19）</p><p>Instagram：@bibliothek_itoguchi_</p><p><br></p><p>※16:00～いつもの「イラストレーターがいる日」も開催します。</p><p>お時間が許せば、ぜひ続けてご参加ください。</p>
+    </div>
+    <div class="article-nav">
+      <a href="post-20260710-zvin.html" class="prev">“人”としてともに生きる時間⸻イラストレーターがいる日</a>
+      <span></span>
+    </div>
+  </div>
+</div>
+<footer>
+  <p class="footer-notice">作品の無断転載・AI学習はおやめください。<br>Do not repost or use for AI training.</p>
+  <p class="footer-copy">&copy; rishjuly</p>
+</footer>
+</body>
+</html>
