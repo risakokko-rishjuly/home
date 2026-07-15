@@ -1011,6 +1011,15 @@ async function publish() {
 const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">`;
 
+const GA_ADSENSE = `<script async src="https://www.googletagmanager.com/gtag/js?id=G-92C6ZBE7JR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-92C6ZBE7JR');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9083419778990136" crossorigin="anonymous"></script>`;
+
 const COMMON_CSS = `
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -1072,6 +1081,7 @@ function buildArticleHtml(post, allPosts) {
 <title>${post.title} — まちのえほんやさん りさこっこ</title>
 <link rel="icon" type="image/png" href="favicon.png">
 ${FONTS}
+${GA_ADSENSE}
 <style>
 ${COMMON_CSS}
 .article-wrap { padding-top: 60px; }
@@ -1159,6 +1169,7 @@ function buildPostsHtml(allPosts) {
 <title>ぶろぐ — まちのえほんやさん りさこっこ</title>
 <link rel="icon" type="image/png" href="favicon.png">
 ${FONTS}
+${GA_ADSENSE}
 <style>
 ${COMMON_CSS}
 .nav-right { display: flex; gap: 20px; align-items: center; }
