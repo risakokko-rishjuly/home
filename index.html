@@ -165,7 +165,7 @@ nav {
 
 /* ===================== NOTICE（原画展のお知らせ） ===================== */
 #notice { padding: 56px 40px 8px; }
-.notice-inner { max-width: 640px; margin: 0 auto; }
+.notice-inner { max-width: 720px; margin: 0 auto; }
 .notice-label {
   text-align: center;
   font-size: 13px;
@@ -176,8 +176,9 @@ nav {
 .notice-card {
   display: flex;
   align-items: center;
-  gap: 28px;
-  padding: 24px 28px;
+  justify-content: center;
+  gap: 44px;
+  padding: 32px 36px;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -187,13 +188,15 @@ nav {
 }
 .notice-card:hover { opacity: 0.7; }
 .notice-thumb {
-  flex: 0 0 120px;
-  width: 120px;
-  height: 120px;
+  flex: 0 0 200px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
   aspect-ratio: 1 / 1;
   display: block;
+  background: var(--white);
+  box-shadow: 0 4px 16px rgba(26,23,20,0.12);
 }
 .notice-text { min-width: 0; }
 .notice-title {
